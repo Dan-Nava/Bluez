@@ -1,14 +1,11 @@
 import './App.css';
+import AdminDashboard from './admin-components/AdminDashboard';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit src/App.js and save to reload.
-        </p>
-      </header>
-    </div>
+    <>
+    <AdminDashboard/>
+    </>
   );
 }
 
