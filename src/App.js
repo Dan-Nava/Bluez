@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import Home from "./react-components/Landing/landing";
 import {Route, Switch, BrowserRouter} from 'react-router-dom';
+import Login from "./react-components/Auth";
 
 class App extends React.Component {
     state = {}
@@ -9,14 +9,12 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <header className="App-header">
                     <BrowserRouter>
                         <Switch>
-                            <Route exact path='/' render={() =>
-                                (<Home appState={this.state}/>)}/>
+                            <Route exact path='/login' render={() =>
+                                (<Login/>)}/>
                         </Switch>
                     </BrowserRouter>
-                </header>
             </div>
         );
     }
