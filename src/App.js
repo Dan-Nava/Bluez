@@ -16,7 +16,7 @@ class App extends React.Component {
                         <Route exact path='/profile' render={() =>
                             (<Profile appState={this.state}/>)}/>
                         <Route exact path='/' render={() =>
-                            (<p>abc</p>)}/>
+                            (<p>Home Page</p>)}/>
                     </Switch>
                 </BrowserRouter>
             </div>

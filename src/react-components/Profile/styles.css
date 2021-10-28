@@ -1,8 +1,32 @@
-.profile{
-
+.profile {
+    display: flex;
+    flex-flow: column;
 }
-#banner{
+
+#banner {
     width: 100%;
-    display: block;
-    top:0;
+    /*float: top;*/
+    top: 0;
+}
+
+#avatar {
+    position: absolute;
+    top: 230px;
+    left: 100px;
+    width: 200px;
+    border-radius: 50%;
+    border: 4px white solid;
+}
+
+#add_friend {
+    position: absolute;
+    top: 230px;
+    left: 100px;
+}
+
+.content {
+    background-color: red;
+    float: bottom;
+    width: 100%;
+    height: 100%;
 }
