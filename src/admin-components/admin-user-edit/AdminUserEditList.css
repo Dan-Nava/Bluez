@@ -1,6 +1,7 @@
 .user-list{
     margin-top: 2%;
-    max-width: 800px;   
+    max-width: 800px;  
+    table-layout: fixed; 
 }
 
 

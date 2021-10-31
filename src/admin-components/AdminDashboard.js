@@ -21,14 +21,14 @@ export default class AdminDashboard extends React.Component {
     }
 
     //handler for edit user button
-    handleUserEditPress = (event) => {
+    handleUserEditPress = () => {
         this.setState({
             currentView: 'USER_EDIT'
         })
     }
 
     //callback for return button from any child views
-    returnCallback = (event) => this.setState({currentView: event})
+    returnCallback = (newView) => this.setState({currentView: newView})
 
     render() {
 
@@ -45,10 +45,6 @@ export default class AdminDashboard extends React.Component {
                 return null;    
         }
 
-        return (
-            <div>
-                {view}
-            </div>
-        )
+        return (<div>{view}</div>)
     }
 }

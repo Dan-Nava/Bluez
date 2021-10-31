@@ -6,30 +6,46 @@ import ListRow from './AdminUserEditListRow.js'
 /* Component for the list of User accounts in Admin's User Edit view */
 export default class AdminUserEditList extends React.Component {
 
-    //instead of this data, this component will acquire all user account data from the server and store it in an array.
-    // It'll then create the row components for each account
     state={
-        users:[
-            {uID: 1, userName: "info2", password: "info3", type:"admin"}, 
-            {uID: 2, userName: "info2", password: "info3", type:"regular"},
-            {uID: 3, userName: "info2", password: "info3", type:"regular"},
-            {uID: 4, userName: "info2", password: "info3", type:"regular"}]
+        accountList:this.props.accountData
     }
 
-    banCallback = (user) =>{
-        //creates a list of accounts that is missing the banned account
-         const newList = this.state.users.filter((u) =>{
-             return u !== user;
-         })
+    componentDidUpdate(prevProps) {
+        //if search input is changed then the list must be re-rendered
+        if (prevProps.searchValue !== this.props.searchValue){
+           this.setState({accountList: this.search()});
+        }
+    }
 
-        //updates list of user accounts so it doesn't include banned account
-         this.setState({
-             users: newList
-         })
+    search(){
+        //if the search input is empty, then just return the full list
+        if(!this.props.searchValue){
+            return this.props.accountData
+        }
+        //otherwise return a filtered list based on the search input
+        else{
+            return this.props.accountData.filter((u) => {return u.userName.includes(this.props.searchValue)})
+        }
+    }
+
+    //at the moment this just outright deletes the user account, but that will change
+    // once the database is implemented. (in that scenario a banned user will be a special type of user account
+    // that still exists in the database but cannot be accessed by anyone but an admin).
+    banCallback = (user) =>{
+        if (user.banned){
+            //sets the accounts banned property to true
+            user.banned = false;
+        }
+        else{
+            user.banned = true;
+        }
+        //forces re-render
+        this.setState({accountList: this.props.accountData});
+       
     }
 
     renderTableHeader(){
-        const tableHeaders = ["uID", "User Name", "Password", "Account Type", "", ""]
+        const tableHeaders = ["User Name", "Password", "Account Type", "UID", "", ""]
         const cellHeaders = [];
         for (let i = 0; i < tableHeaders.length; i++){
             cellHeaders.push(<TableCell width="80" sx={{fontWeight: 'bold'}}>{tableHeaders[i]}</TableCell>)
@@ -38,16 +54,15 @@ export default class AdminUserEditList extends React.Component {
     }
 
     render() {
-      
         return (
             <div>
                 <Table className="user-list" align="center">
-                <TableHead className="table-head" >
-                        <TableRow> {this.renderTableHeader()} </TableRow>
+                <TableHead className="table-head">
+                        <TableRow>{this.renderTableHeader()}</TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.state.users.map((userAcc) => (
-                            <ListRow user={userAcc} banCallback={this.banCallback} />
+                        {this.state.accountList.map((userAcc) => (
+                            <ListRow user={userAcc} banCallback={this.banCallback} editCallback={this.props.editCallback}/>
                         ))}
                     </TableBody>
                 </Table>
