@@ -1,15 +1,23 @@
 import './App.css';
+import React from 'react';
+import {Route, Switch, BrowserRouter} from 'react-router-dom';
+import Login from "./react-components/Auth";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit src/App.js and save to reload.
-        </p>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    state = {}
+
+    render() {
+        return (
+            <div className="App">
+                    <BrowserRouter>
+                        <Switch>
+                            <Route exact path='/login' render={() =>
+                                (<Login/>)}/>
+                        </Switch>
+                    </BrowserRouter>
+            </div>
+        );
+    }
 }
 
 export default App;
