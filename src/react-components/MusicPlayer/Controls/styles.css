@@ -1,0 +1,37 @@
+.controlButtons {
+	border-radius: 50%;
+	list-style: none;
+	height: 50px;
+	width: 50px;
+}
+#loopButton {
+	display: inline;
+}
+
+#decreaseVolButton {
+	display: inline;
+}
+
+#goBackwardButton {
+	display: inline;
+}
+
+#playButton {
+	display: inline;
+}
+
+#stopButton {
+	display: inline;
+}
+
+#increaseVolButton {
+	display: inline;
+}
+
+#goForwardButton {
+	display: inline;
+}
+
+#muteButton {
+	display: inline;
+}

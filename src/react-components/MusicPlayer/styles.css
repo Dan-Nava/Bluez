@@ -1,0 +1,12 @@
+.mediaPlayer {
+	display: inline;
+}
+.toggleLeft {
+	float: left;
+	margin-left: 10px;
+}
+
+.toggleRight {
+	float: right;
+	margin-right: 10px;
+}

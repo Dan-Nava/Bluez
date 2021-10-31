@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Controls from './ControlComponent/Controls';
-import LyricMode from './LyricModeComponent/LyricMode';
-import MusicianMode from './MusicianModeComponent/MusicianMode';
-import SocialMode from './SocialModeComponent/SocialMode';
-import VideoMode from './VideoModeComponent/VideoMode';
+import Controls from './Controls';
+import LyricMode from './LyricMode';
+import MusicianMode from './MusicianMode';
+import SocialMode from './SocialMode';
+import VideoMode from './VideoMode';
+import Button from "@material-ui/core/Button";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 import './styles.css';
 
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
@@ -18,7 +22,7 @@ export default class MusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
 		
-		const modes = ["Video", "Lyric", "Musician", "Social"];
+		this.modes = ["Video", "Lyric", "Musician", "Social"];
 	}
 
 	playScreen() {
@@ -45,16 +49,12 @@ export default class MusicPlayer extends React.Component {
 
 	render() {
 		return (<div>
-				<div className='player'>
+				<div className='mediaPlayer'>
 					<VideoMode music={this.state.song} />
+					<Button size='large' variant='outlined' startIcon={<ArrowBackIosIcon/>} className="toggleLeft" color="secondary" onClick={(e) => this.clickChangeModeLeft(e)}>{this.modes[(this.state.idx+3)%4]}</Button>
+					<Button size='large' variant='outlined' endIcon={<ArrowForwardIosIcon/>} className="toggleRight" color="secondary" onClick={(e) => this.clickChangeModeRight(e)}>{this.modes[(this.state.idx+1)%4]}</Button>
 				</div>
-				<div>
-					<button type="button" className="changeModeButtonLeft" onClick={(e) => this.clickChangeModeLeft(e)}></button>
-					<button type="button" className="changeModeButtonRight" onClick={(e) => this.clickChangeModeRight(e)}></button>
-				</div>
-				<div>
-					<Controls version={this.state.mode} music={this.state.song} />
-				</div>
+				<Controls version={this.state.mode} music={this.state.song} />
 			</div>)
 	}
 }
