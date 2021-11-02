@@ -47,17 +47,15 @@ class App extends React.Component {
             <div className="App">
                 <BrowserRouter>
                     <Switch>
-                        <Route exact path='/profile' render={() =>
-                            (<Profile appState={this.state}/>)}/>
                         <Route exact path='/' render={() =>
                             (<p>Home Page</p>)}/>
+                        <Route exact path='/profile' render={() =>
+                            (<Profile appState={this.state}/>)}/>
                         <Route exact path='/login' render={() =>
                             (<Login/>)}/>
-
                         <Route exact path='/MusicPlayer' render={() =>
                             (<MusicPlayer state={this.state} stateFunc={this.stateFunc}/>)}/>
                     </Switch>
-
                 </BrowserRouter>
 
                 {/* This creates a button that when pressed goes to the Music Player, just putting it here if needed */}
