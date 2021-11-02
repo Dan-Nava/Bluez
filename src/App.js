@@ -2,7 +2,6 @@ import './App.css';
 import React from 'react';
 import {Route, Switch, BrowserRouter} from 'react-router-dom';
 import Login from "./react-components/Auth";
-import Button from "@material-ui/core/Button";
 import MusicPlayer from './react-components/MusicPlayer';
 
 class App extends React.Component {
@@ -49,8 +48,8 @@ class App extends React.Component {
                             <Route exact path='/login' render={() =>
                                 (<Login/>)}/>
 			
-			    <Route exact path='/MusicPlayer' render={() => 
-      					(<MusicPlayer state={this.state} stateFunc={this.stateFunc}/>)}/>
+			                <Route exact path='/MusicPlayer' render={() =>
+      					        (<MusicPlayer state={this.state} stateFunc={this.stateFunc}/>)}/>
                         </Switch>
 			
                     </BrowserRouter>
