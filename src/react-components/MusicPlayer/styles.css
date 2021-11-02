@@ -1,0 +1,15 @@
+.mediaPlayer {
+	margin: auto;
+	min-width: 1000px;
+	height: 500px;
+	background-color: black;
+}
+.toggleLeft {
+	float: left;
+	margin-left: 10px;
+}
+
+.toggleRight {
+	float: right;
+	margin-right: 10px;
+}
