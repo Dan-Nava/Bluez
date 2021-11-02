@@ -6,7 +6,40 @@ import Button from "@material-ui/core/Button";
 import MusicPlayer from './react-components/MusicPlayer';
 
 class App extends React.Component {
-    state = {}
+    constructor(props) {
+	super(props);
+    	this.state = {mode: "Video",
+		      modeList: ["Video", "Lyric", "Musician", "Social"],
+		      favList: [],
+		      song: "",
+	     	      songMap: (new Map())
+	    	      };
+
+        this.stateFunc = {
+         	setMode: (modeName) => function(modeName) {
+			this.setState({mode: modeName});
+    		},
+
+    		setSong: (songName) => function(songName) {
+			this.setState({song: songName});
+    		},
+
+    		addSong: (songName) => function(songName) {
+			this.state.songMap.set(songName, this.state.songMap.size);
+    		},
+
+    		delSong: (songName) => function(songName) {
+			this.state.songMap.delete(songName);
+    		},
+
+    		hasSong: (songName) => function(songName) {
+			return this.state.songMap.has(songName);
+    		},
+    	};
+
+    	this.stateFunc.setSong("SoundHelix-Song-1.mp3");
+    	this.stateFunc.addSong("SoundHelix-Song-1.mp3");
+    };
 
     render() {
         return (
@@ -17,7 +50,7 @@ class App extends React.Component {
                                 (<Login/>)}/>
 			
 			    <Route exact path='/MusicPlayer' render={() => 
-      					(<MusicPlayer />)}/>
+      					(<MusicPlayer state={this.state} stateFunc={this.stateFunc}/>)}/>
                         </Switch>
 			
                     </BrowserRouter>

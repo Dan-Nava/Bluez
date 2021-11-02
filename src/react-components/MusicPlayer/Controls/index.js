@@ -19,7 +19,7 @@ class Controls extends React.Component {
 	constructor(props) {
 		super(props);
 		const {version, music} = this.props;
-	}
+	};
 
 	state = {
 		playState: false,
@@ -106,20 +106,24 @@ class Controls extends React.Component {
 	render() {
 		return (
 			<div>
-				<LinearProgress variant="determinate" value={this.audio_object.currentTime * 100 / this.audio_object.duration)} />
-				<ul className="controlButtons">
-					<li><Button variant="contained" color="primary" startIcon={<ReplayIcon />} id="loopButton" onClick={(e) => this.clickLoop(e)}></Button></li>
-					<li><Button variant="contained" color="primary" startIcon={<VolumeDownIcon />} id="decreaseVolButton" onClick={(e) => this.clickDecreaseVol(e)}></Button></li>
-					<li><Button variant="contained" color="primary" startIcon={<FastRewindIcon />} id="goBackwardButton" onClick={(e) => this.clickBack(e)}></Button></li>
-					<li><Button variant="contained" color="primary" startIcon={this.getPlayIcon()} id={this.state.toggleButton} onClick={(e) => this.clickToggle(e)}></Button></li>
-					<li><Button variant="contained" color="primary" startIcon={<FastForwardIcon />} id="goForwardButton" onClick={(e) => this.clickForward(e)}></Button></li>
-					<li><Button variant="contained" color="primary" startIcon={<VolumeUpIcon />} id="increaseVolButton" onClick={(e) => this.clickIncreaseVol(e)}></Button></li>
-					<li><Button variant="contained" color="primary" startIcon={<VolumeOffIcon />} id="muteButton" onClick={(e) => this.clickMute(e)}></Button></li>
-				</ul>
+				<div>
+					<LinearProgress variant="determinate" value={this.audio_object.currentTime} />
+				</div>
+				<div>
+					<ul id="controlButtons">
+						<li><Button variant="contained" color="primary" startIcon={<ReplayIcon />} onClick={(e) => this.clickLoop(e)}></Button></li>
+						<li><Button variant="contained" color="primary" startIcon={<VolumeDownIcon />} onClick={(e) => this.clickDecreaseVol(e)}></Button></li>
+						<li><Button variant="contained" color="primary" startIcon={<FastRewindIcon />} onClick={(e) => this.clickBack(e)}></Button></li>
+						<li><Button variant="contained" color="primary" startIcon={this.getPlayIcon()} onClick={(e) => this.clickToggle(e)}></Button></li>
+						<li><Button variant="contained" color="primary" startIcon={<FastForwardIcon />} onClick={(e) => this.clickForward(e)}></Button></li>
+						<li><Button variant="contained" color="primary" startIcon={<VolumeUpIcon />} onClick={(e) => this.clickIncreaseVol(e)}></Button></li>
+						<li><Button variant="contained" color="primary" startIcon={<VolumeOffIcon />} onClick={(e) => this.clickMute(e)}></Button></li>
+					</ul>
+				</div>
 			</div>
 		)
 
-	}
+	};
 }
 
 export default Controls;

@@ -14,15 +14,11 @@ import './styles.css';
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
 export default class MusicPlayer extends React.Component {
-	state = {
-		mode: "Video",
-		song: "SoundHelix-Song-1.mp3",
-		idx: 0
-	};
 	constructor(props) {
 		super(props);
-		
-		this.modes = ["Video", "Lyric", "Musician", "Social"];
+		this.state = this.props.state;
+		this.stateFunc = this.props.stateFunc;
+		this.mode_idx = this.state.modeList.indexOf(this.state.mode, 0);
 	}
 
 	playScreen() {
@@ -38,22 +34,22 @@ export default class MusicPlayer extends React.Component {
 	}
 
 	clickChangeModeLeft(e) {
-		this.setState({mode: this.modes[(this.state.idx+4-1)%4]});
-		this.setState({idx: (this.state.idx+4-1)%4});
+		this.setState({mode: this.state.modeList[(this.mode_idx+4-1)%4]});
+		this.mode_idx = (this.mode_idx+4-1)%4;
 	}
 
 	clickChangeModeRight(e) {
-		this.setState({mode: this.modes[(this.state.idx+1)%4]});
-		this.setState({idx: (this.state.idx+1)%4});
+		this.setState({mode: this.state.modeList[(this.mode_idx+1)%4]});
+		this.mode_idx = (this.mode_idx+1)%4;
 	}
 
 	render() {
 		return (<div>
 				<div className='mediaPlayer'>
 					<VideoMode music={this.state.song} />
-					<Button size='large' variant='outlined' startIcon={<ArrowBackIosIcon/>} className="toggleLeft" color="secondary" onClick={(e) => this.clickChangeModeLeft(e)}>{this.modes[(this.state.idx+3)%4]}</Button>
-					<Button size='large' variant='outlined' endIcon={<ArrowForwardIosIcon/>} className="toggleRight" color="secondary" onClick={(e) => this.clickChangeModeRight(e)}>{this.modes[(this.state.idx+1)%4]}</Button>
 				</div>
+				<Button size='large' variant='outlined' startIcon={<ArrowBackIosIcon/>} className="toggleLeft" color="secondary" onClick={(e) => this.clickChangeModeLeft(e)}>{this.state.modeList[(this.mode_idx+3)%4]}</Button>
+				<Button size='large' variant='outlined' endIcon={<ArrowForwardIosIcon/>} className="toggleRight" color="secondary" onClick={(e) => this.clickChangeModeRight(e)}>{this.state.modeList[(this.mode_idx+1)%4]}</Button>
 				<Controls version={this.state.mode} music={this.state.song} />
 			</div>)
 	}

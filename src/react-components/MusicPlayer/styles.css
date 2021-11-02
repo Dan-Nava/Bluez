@@ -1,5 +1,8 @@
 .mediaPlayer {
-	display: inline;
+	margin: auto;
+	min-width: 1000px;
+	height: 500px;
+	background-color: black;
 }
 .toggleLeft {
 	float: left;
