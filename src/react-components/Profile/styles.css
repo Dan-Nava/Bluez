@@ -1,0 +1,58 @@
+.profile {
+    justify-content: center;
+    display: flex;
+}
+
+.hero {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.avatar {
+    border-radius: 50%;
+    border: darkgray solid 0.2em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.25),
+    0 0.5em 0.5em rgba(0, 0, 0, 0.25);
+    margin: 1em;
+    width: 10em;
+    height: 10em;
+}
+
+.card {
+    border: darkgray solid 0.1em;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5em;
+    cursor: pointer;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.25),
+    0 0.5em 0.5em rgba(0, 0, 0, 0.25);
+    width: 50em;
+}
+
+.info_container {
+    padding: 0 3em 3em;
+}
+
+.description {
+    font-size: 0.8em;
+}
+
+.favs {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 3em;
+    padding-top: 1em;
+}
+
+.song_cover {
+    height: 10em;
+    width: 8em;
+    border-radius: 0.5em;
+    border: darkgray solid 0.1em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.25),
+    0 0.5em 0.5em rgba(0, 0, 0, 0.25);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
