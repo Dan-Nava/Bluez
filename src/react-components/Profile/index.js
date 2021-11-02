@@ -12,7 +12,6 @@ class Profile extends React.Component {
         return (
             <div className="profile">
                 <div className="card">
-                    {/*<img src={banner} className="banner" alt=""/>*/}
                     <div className="hero" style={{backgroundImage: 'url(' + hero + ')'}}>
                         <img src={avatar} className="avatar" alt=""/>
                         <h1>NAME</h1>
