@@ -15,9 +15,23 @@ export default class AdminDashboard extends React.Component {
     //base view for admin dashboard
     defaultView() {
         return(
-            <div>
-                <Button variant="outlined" className='admin-db-button' onClick={this.handleUserEditPress}>Manage Users</Button>
-                <Button variant="outlined" className='admin-db-button' onClick={this.handleMusicEditPress}>Manage Music</Button>
+            <div className='admin-db-button-div'>
+                <Button 
+                    variant="outlined" 
+                    className='admin-db-button' 
+                    sx={{margin: '1em'}} 
+                    onClick={this.handleUserEditPress}
+                >
+                    Manage Users
+                </Button>
+                <Button 
+                    variant="outlined" 
+                    className='admin-db-button' 
+                    sx={{margin: '1em'}} 
+                    onClick={this.handleMusicEditPress}
+                >
+                    Manage Music
+                </Button>
             </div>
         )
     }

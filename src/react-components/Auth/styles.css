@@ -1,24 +1,4 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    margin: 0;
-}
-
-h1 {
-    font-weight: bold;
-    margin: 0;
-}
-
-a {
-    color: #282c34;
-    font-size: 0.8em;
-    margin: 1em 0;
-}
-
-form {
+.auth-form {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,10 +8,10 @@ form {
     text-align: center;
 }
 
-.container {
+.auth-container {
     border-radius: 0.5em;
-    box-shadow: 0 0.5em 1em rgba(0,0,0,0.25),
-    0 0.5em 0.5em rgba(0,0,0,0.25);
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.25),
+    0 0.5em 0.5em rgba(0, 0, 0, 0.25);
     position: relative;
     overflow: hidden;
     width: 50em;
