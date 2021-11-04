@@ -1,0 +1,17 @@
+.admin-db-button {
+    width: 10em;
+    height: 8em;
+    margin: 1em;
+   margin-top: 11.5em;
+}
+
+.admin-container {
+    border-radius: 0.5em;
+    box-shadow: 0 0.5em 1em rgba(0,0,0,0.25),
+    0 0.5em 0.5em rgba(0,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+    width: 60em;
+    max-width: 100%;
+    height: 35em;
+}

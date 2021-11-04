@@ -1,9 +1,9 @@
 import React from 'react'
-import './AdminUserEditList.css'
 import {Table, TableBody, TableRow, TableCell, TableHead} from '@mui/material'
-import ListRow from './AdminUserEditListRow.js'
+import ListRow from './AdminUserEditListRow'
+import './styles.css'
 
-/* Component for the list of User accounts in Admin's User Edit view */
+/* Component for the list of all accounts in Admin's User Edit view */
 export default class AdminUserEditList extends React.Component {
 
     state={
@@ -17,6 +17,7 @@ export default class AdminUserEditList extends React.Component {
         }
     }
 
+    //DATABASE CALL: returns a list of users based on the filtering specifications
     search(){
         //if the search input is empty, then just return the full list
         if(!this.props.searchValue){
@@ -28,9 +29,7 @@ export default class AdminUserEditList extends React.Component {
         }
     }
 
-    //at the moment this just outright deletes the user account, but that will change
-    // once the database is implemented. (in that scenario a banned user will be a special type of user account
-    // that still exists in the database but cannot be accessed by anyone but an admin).
+    //DATABASE CALL: changes the banned property of a user
     banCallback = (user) =>{
         if (user.banned){
             //sets the accounts banned property to true
@@ -55,14 +54,20 @@ export default class AdminUserEditList extends React.Component {
 
     render() {
         return (
-            <div>
-                <Table className="user-list" align="center">
-                <TableHead className="table-head">
-                        <TableRow>{this.renderTableHeader()}</TableRow>
-                    </TableHead>
+            <div className='user-list'>
+                <Table >
+                <TableHead className='table-head'>
+                    <TableRow>
+                        {this.renderTableHeader()}
+                    </TableRow>
+                </TableHead>
                     <TableBody>
                         {this.state.accountList.map((userAcc) => (
-                            <ListRow user={userAcc} banCallback={this.banCallback} editCallback={this.props.editCallback}/>
+                            <ListRow 
+                                user={userAcc} 
+                                banCallback={this.banCallback} 
+                                editCallback={this.props.editCallback}
+                            />
                         ))}
                     </TableBody>
                 </Table>

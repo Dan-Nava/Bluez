@@ -2,11 +2,12 @@ import React from 'react'
 import {TableCell, TableRow} from '@mui/material'
 import Button from '@mui/material/Button'
 
+/* Component for a single row in the list of user accounts in admin edit user menu
+    each row represents one account */
 export default class AdminUserEditListRow extends React.Component {
 
     //handles user ban
     handleBan = () => this.props.banCallback(this.props.user);
-
 
     handleEdit = () => {
         //open user profile
@@ -27,7 +28,7 @@ export default class AdminUserEditListRow extends React.Component {
                 <TableCell> 
                     <Button 
                         className='edit-button' 
-                        variant="contained" 
+                        variant="outlined" 
                         onClick={this.handleEdit}
                         color='primary'> 
                         EDIT     
@@ -36,10 +37,10 @@ export default class AdminUserEditListRow extends React.Component {
                 <TableCell>
                     <Button 
                         className='ban-button' 
-                        variant="contained" 
+                        variant="outlined" 
                         onClick={this.handleBan}
                         color='secondary'> 
-                        <b>{user.banned ? 'UNBAN' : 'BAN'}</b>
+                        {user.banned ? 'UNBAN' : 'BAN'}
                     </Button>
                 </TableCell>
             </TableRow>

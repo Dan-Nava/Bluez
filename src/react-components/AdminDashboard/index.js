@@ -1,6 +1,8 @@
 import React from 'react'
-import AdminUserEdit from './admin-user-edit/AdminUserEdit'
+import AdminUserEdit from './AdminUserEdit'
+import AdminMusicEdit from './AdminMusicEdit'
 import Button from '@mui/material/Button'
+import './styles.css'
 
 /* Component for Admin Dashboard */
 export default class AdminDashboard extends React.Component {
@@ -13,19 +15,18 @@ export default class AdminDashboard extends React.Component {
     //base view for admin dashboard
     defaultView() {
         return(
-            <>
-                <Button className='userEditButton' onClick={this.handleUserEditPress}> User Edit </Button>
-                <Button className='MusicEditButton'> Music Edit </Button>
-            </>
+            <div>
+                <Button variant="outlined" className='admin-db-button' onClick={this.handleUserEditPress}>Manage Users</Button>
+                <Button variant="outlined" className='admin-db-button' onClick={this.handleMusicEditPress}>Manage Music</Button>
+            </div>
         )
     }
 
     //handler for edit user button
-    handleUserEditPress = () => {
-        this.setState({
-            currentView: 'USER_EDIT'
-        })
-    }
+    handleUserEditPress = () => {this.setState({currentView: 'USER_EDIT'})}
+
+    //handler for edit user button
+    handleMusicEditPress = () => {this.setState({currentView: 'MUSIC_EDIT'})}
 
     //callback for return button from any child views
     returnCallback = (newView) => this.setState({currentView: newView})
@@ -41,10 +42,12 @@ export default class AdminDashboard extends React.Component {
             case 'USER_EDIT':
                 view = <AdminUserEdit returnCallback={this.returnCallback}/>;
                 break; 
+            case 'MUSIC_EDIT':
+                view = <AdminMusicEdit returnCallback={this.returnCallback}/>;
+                break;
             default:
                 return null;    
         }
-
-        return (<div>{view}</div>)
+        return (<div  className='admin-container'>{view}</div>)
     }
 }
