@@ -1,0 +1,38 @@
+.add-music-input {
+    max-width: 15em;
+}
+
+#add-music-grid{
+    margin-top: 1em;
+    margin-left: 10%;
+}
+
+#add-music-image{
+    width: 10em;
+    height: 10em;
+    margin-left: 3em;
+}
+
+#add-music-placeholder{
+    transform: scale(8);
+}
+
+#upload-image-file{
+    display: none;
+}
+
+#upload-music-file{
+    display: none;
+}
+
+#upload-lyric-file{
+    display: none;
+}
+
+#add-music-button{
+    width: 10.5em;
+}
+
+.stack-row{
+    align-items: center;
+}

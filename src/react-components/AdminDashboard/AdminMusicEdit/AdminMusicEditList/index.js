@@ -25,18 +25,19 @@ export default class AdminMusicEditList extends React.Component {
         }
         //otherwise return a filtered list based on the search input and filter option
         else {
+            const search = this.props.searchValue.toLowerCase();
             return this.props.songData.filter((u) => {
                 switch(this.props.filterValue){
                     case 'title':
-                        return u.title.includes(this.props.searchValue);
+                        return u.title.toLowerCase().includes(search);
                     case 'artist':
-                        return u.artist.includes(this.props.searchValue);
+                        return u.artist.toLowerCase().includes(search);
                     case 'album':
-                        return u.album.includes(this.props.searchValue);
+                        return u.album.toLowerCase().includes(search);
                     case 'genre':
-                        return u.genre.includes(this.props.searchValue);
+                        return u.genre.toLowerCase().includes(search);
                     case 'year':
-                        return u.year.includes(this.props.searchValue);
+                        return u.year.toLowerCase().includes(search);
                     default:
                         return null;
                 } 
@@ -54,7 +55,7 @@ export default class AdminMusicEditList extends React.Component {
     }
 
     renderTableHeader(){
-        const tableHeaders = ["Title", "Artist", "Album", "Genre", "Year", " ", " "]
+        const tableHeaders = [" ", "Title", "Artist", "Album", "Genre", "Year", " ", " "]
         const cellHeaders = [];
         for (let i = 0; i < tableHeaders.length; i++){
             cellHeaders.push(<TableCell width="100" sx={{fontWeight: 'bold'}}>{tableHeaders[i]}</TableCell>)

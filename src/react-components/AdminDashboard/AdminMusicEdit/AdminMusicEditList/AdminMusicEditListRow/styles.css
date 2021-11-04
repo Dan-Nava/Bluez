@@ -1,0 +1,7 @@
+
+.music-edit-cell{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 8em;
+}

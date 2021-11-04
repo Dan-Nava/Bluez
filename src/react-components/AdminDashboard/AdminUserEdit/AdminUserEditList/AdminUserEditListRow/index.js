@@ -1,6 +1,7 @@
 import React from 'react'
 import {TableCell, TableRow} from '@mui/material'
 import Button from '@mui/material/Button'
+import Avatar from '@mui/material/Avatar'
 
 /* Component for a single row in the list of user accounts in admin edit user menu
     each row represents one account */
@@ -20,7 +21,8 @@ export default class AdminUserEditListRow extends React.Component {
         const {user} = this.props;
 
         return (
-            <TableRow key = {user.uID}> 
+            <TableRow key = {user.uID}>
+                <TableCell><Avatar></Avatar></TableCell>
                 <TableCell>{user.userName}</TableCell>
                 <TableCell>{user.password}</TableCell>
                 <TableCell>{user.type}</TableCell>

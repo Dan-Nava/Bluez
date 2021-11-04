@@ -1,6 +1,9 @@
 import React from 'react'
 import {TableCell, TableRow} from '@mui/material'
 import Button from '@mui/material/Button'
+import Avatar from '@mui/material/Avatar'
+import AlbumIcon from '@mui/icons-material/Album'
+import './styles.css'
 
 /* Component for a single row in the list of songs in admin edit music menu
     each row represents one song */
@@ -17,12 +20,13 @@ export default class AdminMusicEditListRow extends React.Component {
         const {song} = this.props;
 
         return (
-            <TableRow key = {song.sID}> 
-                <TableCell>{song.title}</TableCell>
-                <TableCell>{song.artist}</TableCell>
-                <TableCell>{song.album}</TableCell>
-                <TableCell>{song.genre}</TableCell>
-                <TableCell>{song.year}</TableCell>
+            <TableRow key={song.sID}>
+                <TableCell><Avatar variant="square"><AlbumIcon/></Avatar></TableCell>
+                <TableCell className="music-edit-cell">{song.title}</TableCell>
+                <TableCell className="music-edit-cell">{song.artist}</TableCell>
+                <TableCell className="music-edit-cell">{song.album}</TableCell>
+                <TableCell className="music-edit-cell">{song.genre}</TableCell>
+                <TableCell className="music-edit-cell">{song.year}</TableCell>
                 <TableCell> 
                     <Button 
                         className='edit-button' 

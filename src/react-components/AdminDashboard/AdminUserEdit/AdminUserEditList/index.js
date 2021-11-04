@@ -44,7 +44,7 @@ export default class AdminUserEditList extends React.Component {
     }
 
     renderTableHeader(){
-        const tableHeaders = ["User Name", "Password", "Account Type", "UID", "", ""]
+        const tableHeaders = ["", "User Name", "Password", "Account Type", "UID", "", ""]
         const cellHeaders = [];
         for (let i = 0; i < tableHeaders.length; i++){
             cellHeaders.push(<TableCell width="80" sx={{fontWeight: 'bold'}}>{tableHeaders[i]}</TableCell>)

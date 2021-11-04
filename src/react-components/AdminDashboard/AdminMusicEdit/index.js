@@ -15,9 +15,9 @@ export default class AdminMusicEdit extends React.Component {
     
     //hardcoded data, won't exist in phase 2
     songData=[
-        {sID: '1', title: "Stayin Alive", artist: "Bee Gees", album:"How Can You Mend A Broken Heart", genre:"pop", year: '1971'}, 
-        {sID: '2', title: "Secrets", artist: "The Weeknd", album:"Starboy", genre:"new wave, R&B", year: '2016'},
-        {sID: '3', title: "musicfan44", artist: "oval45", album:"shoebox", genre:"tree", year: '2012'},
+        {sID: '1', title: "Stayin Alive", artist: "Bee Gees", album:"How Can You Mend A Broken Heart", genre:"Pop", year: '1971'}, 
+        {sID: '2', title: "Secrets", artist: "The Weeknd", album:"Starboy", genre:"New Wave, R&B", year: '2016'},
+        {sID: '3', title: "Midnight City", artist: "M83", album:"Hurry Up, We're Dreaming", genre:"Pop", year: '2011'},
         {sID: '4', title: "seesaw68", artist: "info3", album:"nuts", genre:"chicken", year: '1998'},
         {sID: '5', title: "Stayin Alive", artist: "Bee Gees", album:"How Can You Mend A Broken Heart", genre:"pop", year: '1971'}, 
         {sID: '6', title: "Secrets", artist: "The Weeknd", album:"Starboy", genre:"new wave, R&B", year: '2016'},
@@ -42,6 +42,9 @@ export default class AdminMusicEdit extends React.Component {
        const newlist = this.songData.filter((s) => s !== song);
        this.songData = newlist;
     }
+
+    //callback for return button from any child views
+    returnCallback = (newView) => this.setState({currentView: newView})
 
     //return button handler
     handleReturn = () => this.props.returnCallback("DEFAULT");
@@ -126,7 +129,7 @@ export default class AdminMusicEdit extends React.Component {
 
     addMusic() {
         console.log("should open song add profile page");
-        return(<AddMusic/>)
+        return(<AddMusic returnCallback={this.returnCallback}/>)
     }
 
     render() {
