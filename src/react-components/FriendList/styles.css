@@ -1,0 +1,31 @@
+#friend-list-container {
+    border-radius: 0.5em;
+    box-shadow: 0 0.5em 1em rgba(0,0,0,0.25),
+    0 0.5em 0.5em rgba(0,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+    width: 23em;
+    max-width: 100%;
+    height: 28em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#friend-list{
+    overflow-y: auto;
+    height: 23em;
+    width: 21em;
+}
+
+.friends-user-name{
+    font-size: 0.8em;
+}
+
+.friends-song-info{
+    font-size: 0.7em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 16em;
+}
