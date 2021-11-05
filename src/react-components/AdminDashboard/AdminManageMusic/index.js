@@ -1,17 +1,17 @@
-import React from 'react'
-import Button from '@mui/material/Button'
-import Input from '@mui/material/Input'
+import React from 'react';
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
 import FormLabel from "@mui/material/FormLabel";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-import AdminMusicEditList from './AdminMusicEditList';
-import AddMusic from './AddMusic';
-import './styles.css'
+import AdminMMList from './AdminMMList';
+import EditAddMusic from './EditAddMusic';
+import './styles.css';
 
 /* Component for Admin's Music Edit view*/
-export default class AdminMusicEdit extends React.Component {
+export default class AdminManagemusic extends React.Component {
     
     //hardcoded data, won't exist in phase 2
     songData=[
@@ -33,8 +33,8 @@ export default class AdminMusicEdit extends React.Component {
     }
 
     //edit button callback
-    editCallback = (newView, song) => {
-        this.setState({songToBeEdited: song, currentView: newView});
+    editCallback = (song) => {
+        this.setState({songToBeEdited: song, currentView: 'EDIT_SONG'});
     }
 
     //DATABASE CALL: deletes song from the database
@@ -97,7 +97,7 @@ export default class AdminMusicEdit extends React.Component {
                     </FormControl>
                 </div>
                 <div>
-                    <AdminMusicEditList 
+                    <AdminMMList 
                         songData={this.songData} 
                         searchValue={this.state.searchValue}
                         filterValue={this.state.filterValue}
@@ -109,27 +109,8 @@ export default class AdminMusicEdit extends React.Component {
         )
     }
 
-    //DATABASE CALL: will modify the given song
-    editMusic() {
-        console.log("should open song edit profile page");
-        return(
-            <>
-                <div>
-                    <Button 
-                        className='return' 
-                        variant="contained"
-                        onClick={e => this.setState({currentView: 'DEFAULT', songToBeEdited: null})}
-                    >
-                        Return
-                    </Button>
-                </div>
-            </>
-        )
-    }
-
-    addMusic() {
-        console.log("should open song add profile page");
-        return(<AddMusic returnCallback={this.returnCallback}/>)
+    EditAddMusic(song, edit) {
+        return(<EditAddMusic returnCallback={this.returnCallback} song={song} edit={edit}/>)
     }
 
     render() {
@@ -141,10 +122,10 @@ export default class AdminMusicEdit extends React.Component {
                 view = this.defaultView();
                 break;
             case 'EDIT_SONG':
-                view = this.editMusic();
+                view = this.EditAddMusic(this.state.songToBeEdited, true);
                 break;
             case 'ADD_SONG':
-                view = this.addMusic();
+                view = this.EditAddMusic(null, false);
                 break;
             default:
                 return null;     

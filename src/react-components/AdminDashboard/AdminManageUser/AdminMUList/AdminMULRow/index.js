@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar'
 
 /* Component for a single row in the list of user accounts in admin edit user menu
     each row represents one account */
-export default class AdminUserEditListRow extends React.Component {
+export default class AdminMULRow extends React.Component {
 
     //handles user ban
     handleBan = () => this.props.banCallback(this.props.user);

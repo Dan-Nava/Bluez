@@ -1,6 +1,6 @@
 import React from 'react'
-import AdminUserEdit from './AdminUserEdit'
-import AdminMusicEdit from './AdminMusicEdit'
+import AdminManageUser from './AdminManageUser'
+import AdminManageMusic from './AdminManageMusic'
 import Button from '@mui/material/Button'
 import './styles.css'
 
@@ -8,7 +8,7 @@ import './styles.css'
 export default class AdminDashboard extends React.Component {
 
     state = {
-        // all possible states = DEFAULT, USER_EDIT, MUSIC_EDIT
+        // all possible states = DEFAULT, MANAGE_USER, MANAGE_MUSIC
         currentView: 'DEFAULT'
     }
 
@@ -37,10 +37,10 @@ export default class AdminDashboard extends React.Component {
     }
 
     //handler for edit user button
-    handleUserEditPress = () => {this.setState({currentView: 'USER_EDIT'})}
+    handleUserEditPress = () => {this.setState({currentView: 'MANAGE_USER'})}
 
     //handler for edit user button
-    handleMusicEditPress = () => {this.setState({currentView: 'MUSIC_EDIT'})}
+    handleMusicEditPress = () => {this.setState({currentView: 'MANAGE_MUSIC'})}
 
     //callback for return button from any child views
     returnCallback = (newView) => this.setState({currentView: newView})
@@ -53,11 +53,11 @@ export default class AdminDashboard extends React.Component {
             case 'DEFAULT':
                 view = this.defaultView();
                 break;
-            case 'USER_EDIT':
-                view = <AdminUserEdit returnCallback={this.returnCallback}/>;
+            case 'MANAGE_USER':
+                view = <AdminManageUser returnCallback={this.returnCallback}/>;
                 break; 
-            case 'MUSIC_EDIT':
-                view = <AdminMusicEdit returnCallback={this.returnCallback}/>;
+            case 'MANAGE_MUSIC':
+                view = <AdminManageMusic returnCallback={this.returnCallback}/>;
                 break;
             default:
                 return null;    

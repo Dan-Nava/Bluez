@@ -1,10 +1,10 @@
 import React from 'react'
 import {Table, TableBody, TableRow, TableCell, TableHead} from '@mui/material'
-import ListRow from './AdminMusicEditListRow'
+import ListRow from './AdminMMLRow'
 import './styles.css'
 
 /* Component for the list of User accounts in Admin's User Edit view */
-export default class AdminMusicEditList extends React.Component {
+export default class AdminMMList extends React.Component {
 
     state={
         songList:this.props.songData

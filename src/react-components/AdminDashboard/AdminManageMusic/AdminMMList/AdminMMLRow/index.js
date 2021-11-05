@@ -7,13 +7,12 @@ import './styles.css'
 
 /* Component for a single row in the list of songs in admin edit music menu
     each row represents one song */
-export default class AdminMusicEditListRow extends React.Component {
+export default class AdminMMLRow extends React.Component {
 
     //handles song delete
     handleDelete = () => this.props.deleteCallback(this.props.song);
 
-
-    handleEdit = () => this.props.editCallback('EDIT_SONG', this.props.song);
+    handleEdit = () => this.props.editCallback(this.props.song);
 
     render() {
 

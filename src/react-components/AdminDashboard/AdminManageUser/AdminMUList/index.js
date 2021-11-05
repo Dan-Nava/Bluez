@@ -1,10 +1,10 @@
 import React from 'react'
 import {Table, TableBody, TableRow, TableCell, TableHead} from '@mui/material'
-import ListRow from './AdminUserEditListRow'
+import ListRow from './AdminMULRow'
 import './styles.css'
 
 /* Component for the list of all accounts in Admin's User Edit view */
-export default class AdminUserEditList extends React.Component {
+export default class AdminMUList extends React.Component {
 
     state={
         accountList:this.props.accountData

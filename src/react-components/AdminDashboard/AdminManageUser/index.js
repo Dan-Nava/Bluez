@@ -1,11 +1,12 @@
 import React from 'react'
-import AdminUserEditList from './AdminUserEditList';
 import Button from '@mui/material/Button'
 import Input from '@mui/material/Input'
+import AdminMUList from './AdminMUList';
+import EditUser from './EditUser';
 import './styles.css';
 
 /* Component for Admin's User Edit view*/
-export default class AdminUserEdit extends React.Component {
+export default class AdminManageUser extends React.Component {
 
     //hardcoded data, will not exist in phase 2
     accountData = [
@@ -26,6 +27,9 @@ export default class AdminUserEdit extends React.Component {
 
     //edit button callback - returns user account object of user being edited
     editCallback = (newView, user) => {this.setState({userToBeEdited: user, currentView: newView});}
+
+    //callback for return button from any child views
+    returnCallback = (newView) => this.setState({currentView: newView})
 
     //return button handler
     handleReturn = () => this.props.returnCallback("DEFAULT");
@@ -51,7 +55,7 @@ export default class AdminUserEdit extends React.Component {
                     /> 
                 </div>
                 <div>
-                    <AdminUserEditList 
+                    <AdminMUList 
                         accountData={this.accountData}
                         searchValue={this.state.searchValue} 
                         editCallback={this.editCallback}
@@ -66,15 +70,7 @@ export default class AdminUserEdit extends React.Component {
     editUserProfile() {
         console.log("should open user edit profile page");
         return(
-            <div>
-                <Button 
-                    className='return' 
-                    variant="contained"
-                    onClick={e => this.setState({currentView: 'DEFAULT', userToBeEdited: null})}
-                >
-                    Return
-                </Button>
-            </div>
+            <EditUser returnCallback={this.returnCallback}/>
         )
     }
 
