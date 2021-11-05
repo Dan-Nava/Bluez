@@ -1,14 +1,12 @@
 import React from 'react';
+import './styles.css';
 import Controls from './Controls';
 import LyricMode from './LyricMode';
 import MusicianMode from './MusicianMode';
 import SocialMode from './SocialMode';
 import VideoMode from './VideoMode';
-import Button from "@mui/material/Button";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import InfoPanel from "./InfoPanel";
 
-import './styles.css';
 import song from "./Controls/static/SoundHelix-Song-1.mp3";
 
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
@@ -82,17 +80,19 @@ export default class MusicPlayer extends React.Component {
     }
 
     render() {
-        return (<div>
-            <div className='mediaPlayer'>
-                <SocialMode state={this.state} ref={this.mode_comp} audio_object={this.audio_object}/>
+        return (
+            <div className="musicPlayer">
+                <div className='mediaPlayer'>
+                    <SocialMode state={this.state} ref={this.mode_comp} audio_object={this.audio_object}/>
+                </div>
+                <div className='leftPanel'>
+                </div>
+                <div className='rightPanel'>
+                    <InfoPanel/>
+                </div>
+                <Controls state={this.state} audio_object={this.audio_object}
+                          stateChangeHandler={this.stateChangeHandler.bind(this)}/>
             </div>
-            <Button size='large' variant='outlined' startIcon={<ArrowBackIosIcon/>} className="toggleLeft"
-                    color="secondary"
-                    onClick={(e) => this.clickChangeModeLeft(e)}>{this.state.modeList[(this.mode_idx + 3) % 4]}</Button>
-            <Button size='large' variant='outlined' endIcon={<ArrowForwardIosIcon/>} className="toggleRight"
-                    color="secondary"
-                    onClick={(e) => this.clickChangeModeRight(e)}>{this.state.modeList[(this.mode_idx + 1) % 4]}</Button>
-            <Controls state={this.state} audio_object={this.audio_object} stateChangeHandler={this.stateChangeHandler.bind(this)}/>
-        </div>)
+        );
     }
 }
