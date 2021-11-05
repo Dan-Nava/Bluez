@@ -97,7 +97,7 @@ class Controls extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="controlBar">
                 <div>
                     <LinearProgress variant="determinate" value={this.props.audio_object.currentTime}/>
                 </div>
