@@ -10,14 +10,14 @@ export default class AdminManageUser extends React.Component {
 
     //hardcoded data, will not exist in phase 2
     accountData = [
-        {uID: '1', userName: "user1", password: "info3", type:"admin", banned: false}, 
-        {uID: '2', userName: "elephant", password: "info3", type:"regular", banned: false},
-        {uID: '3', userName: "shoe", password: "info3", type:"regular", banned: true},
-        {uID: '4', userName: "walnut34", password: "info3", type:"regular", banned: false},
-        {uID: '5', userName: "user1", password: "info3", type:"admin", banned: false}, 
-        {uID: '6', userName: "elephant", password: "info3", type:"regular", banned: false},
+        {uID: '1', userName: "admin1", password: "asdf23", type:"admin", banned: false}, 
+        {uID: '2', userName: "elephant", password: "12312owoe", type:"regular", banned: false},
+        {uID: '3', userName: "shoe", password: "Ape334", type:"regular", banned: true},
+        {uID: '4', userName: "walnut34", password: "sadfvmk21", type:"regular", banned: false},
+        {uID: '5', userName: "admin2", password: "info3", type:"admin", banned: false}, 
+        {uID: '6', userName: "giraffe12", password: "safariTime98", type:"regular", banned: false},
         {uID: '7', userName: "bigman123", password: "cheese3", type:"regular", banned: true},
-        {uID: '8', userName: "walnut34", password: "info3", type:"regular", banned: false}]
+        {uID: '8', userName: "musicMan34", password: "info3", type:"regular", banned: false}]
 
     state={
         searchValue: '',
@@ -70,7 +70,7 @@ export default class AdminManageUser extends React.Component {
     editUserProfile() {
         console.log("should open user edit profile page");
         return(
-            <EditUser returnCallback={this.returnCallback}/>
+            <EditUser returnCallback={this.returnCallback} user={this.state.userToBeEdited}/>
         )
     }
 

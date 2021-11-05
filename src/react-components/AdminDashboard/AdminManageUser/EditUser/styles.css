@@ -1,0 +1,14 @@
+#edit-user-stack{
+    align-items: center;
+    margin-top: 2.5em;
+}
+
+#upload-userimg-file{
+    display: none;
+}
+
+#add-user-image{
+    height:10em;
+    width: 10em;
+
+}
