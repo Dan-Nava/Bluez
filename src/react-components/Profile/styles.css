@@ -1,4 +1,5 @@
 .profile {
+    background-color: antiquewhite;
     justify-content: center;
     display: flex;
 }
@@ -27,7 +28,7 @@
     cursor: pointer;
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.25),
     0 0.5em 0.5em rgba(0, 0, 0, 0.25);
-    width: 50em;
+    width: 100%;
 }
 
 .info_container {
