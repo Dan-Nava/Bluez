@@ -8,6 +8,9 @@ import VideoMode from './VideoMode';
 import InfoPanel from "./InfoPanel";
 
 import song from "./Controls/static/SoundHelix-Song-1.mp3";
+import Login from "../Auth";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Profile from "../Profile";
 
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
@@ -52,43 +55,59 @@ export default class MusicPlayer extends React.Component {
         return this.state.songMap.has(songName);
     }
 
-    playScreen() {
-        if (this.state.mode === "Video") {
-            return <VideoMode music={this.state.song}/>
-        } else if (this.state.mode === "Lyric") {
-            return <LyricMode music={this.state.song}/>
-        } else if (this.state.mode === "Musician") {
-            return <MusicianMode music={this.state.song}/>
-        } else {
-            return <SocialMode music={this.state.song}/>
-        }
-    }
-
     stateChangeHandler(playState) {
         this.setState({playState: playState})
-        this.mode_comp.current.stateChangeHandler(playState)
+        this.mode_comp.current?.stateChangeHandler(playState)
     }
 
-    clickChangeModeLeft(e) {
-        this.setState({mode: this.state.modeList[(this.mode_idx + 4 - 1) % 4]});
-        this.mode_idx = (this.mode_idx + 4 - 1) % 4;
+    playScreenRouting() {
+        return (
+            <Switch>
+                <Route exact path='/' render={() =>
+                    (<p>Home Page</p>)}/>
+                <Route exact path='/profile' render={() =>
+                    (<Profile/>)}/>
+                <Route exact path='/login' render={() =>
+                    (<Login/>)}/>
+                <Route exact path='/social' render={() =>
+                    (<SocialMode state={this.state} ref={this.mode_comp}
+                                 audio_object={this.audio_object}/>)}/>
+                <Route exact path='/lyric' render={() =>
+                    (<LyricMode music={this.state.song}/>)}/>
+                <Route exact path='/musician' render={() =>
+                    (<MusicianMode music={this.state.song}/>)}/>
+                <Route exact path='/video' render={() =>
+                    (<VideoMode music={this.state.song}/>)}/>
+            </Switch>);
     }
 
-    clickChangeModeRight(e) {
-        this.setState({mode: this.state.modeList[(this.mode_idx + 1) % 4]});
-        this.mode_idx = (this.mode_idx + 1) % 4;
+    leftPanelRouting() {
+        return (
+            <Switch>
+
+            </Switch>
+        );
+    }
+
+    rightPanelRouting() {
+        return (
+            <Switch>
+                <InfoPanel/>
+            </Switch>
+        );
     }
 
     render() {
         return (
             <div className="musicPlayer">
                 <div className='mediaPlayer'>
-                    <SocialMode state={this.state} ref={this.mode_comp} audio_object={this.audio_object}/>
+                    {this.playScreenRouting()}
                 </div>
                 <div className='leftPanel'>
+                    {this.leftPanelRouting()}
                 </div>
                 <div className='rightPanel'>
-                    <InfoPanel/>
+                    {this.rightPanelRouting()}
                 </div>
                 <Controls state={this.state} audio_object={this.audio_object}
                           stateChangeHandler={this.stateChangeHandler.bind(this)}/>
