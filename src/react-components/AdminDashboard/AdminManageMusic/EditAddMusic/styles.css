@@ -4,13 +4,12 @@
 
 #add-music-grid{
     margin-top: 1em;
-    margin-left: 10%;
+    margin-left: 15%;
 }
 
 #add-music-image{
     width: 10em;
     height: 10em;
-    margin-left: 2em;
 }
 
 #add-music-placeholder{
@@ -34,6 +33,10 @@
 }
 
 .stack-row-upload{
+    align-items: center;
+}
+
+#music-upload-stack{
     align-items: center;
 }
 

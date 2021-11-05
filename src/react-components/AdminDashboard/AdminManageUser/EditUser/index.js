@@ -38,7 +38,7 @@ export default class EditUser extends React.Component {
 
     render() {
         return (
-            <Stack spacing={2} id='edit-user-stack'>
+            <Stack spacing={3} id='edit-user-stack'>
                 <label htmlFor='upload-userimg-file' id='user-image-input-label'>
                     <Input 
                         id='upload-userimg-file' 

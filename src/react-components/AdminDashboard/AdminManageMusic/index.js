@@ -15,14 +15,22 @@ export default class AdminManagemusic extends React.Component {
     
     //hardcoded data, won't exist in phase 2
     songData=[
-        {sID: '1', title: "Stayin Alive", artist: "Bee Gees", album:"How Can You Mend A Broken Heart", genre:"Pop", year: '1971'}, 
-        {sID: '2', title: "Secrets", artist: "The Weeknd", album:"Starboy", genre:"New Wave, R&B", year: '2016'},
-        {sID: '3', title: "Midnight City", artist: "M83", album:"Hurry Up, We're Dreaming", genre:"Pop", year: '2011'},
-        {sID: '4', title: "seesaw68", artist: "info3", album:"nuts", genre:"chicken", year: '1998'},
-        {sID: '5', title: "Stayin Alive", artist: "Bee Gees", album:"How Can You Mend A Broken Heart", genre:"pop", year: '1971'}, 
-        {sID: '6', title: "Secrets", artist: "The Weeknd", album:"Starboy", genre:"new wave, R&B", year: '2016'},
-        {sID: '7', title: "musicfan44", artist: "oval45", album:"shoebox", genre:"tree", year: '2012'},
-        {sID: '8', title: "seesaw68", artist: "info3", album:"nuts", genre:"chicken", year: '1998'}]
+        {sID: '1', title: "Stayin Alive", artist: "Bee Gees", 
+            album:"How Can You Mend A Broken Heart", genre:"Pop", year: '1971'}, 
+        {sID: '2', title: "Secrets", artist: "The Weeknd", 
+            album:"Starboy", genre:"New Wave, R&B", year: '2016'},
+        {sID: '3', title: "Midnight City", artist: "M83", 
+            album:"Hurry Up, We're Dreaming", genre:"Pop", year: '2011'},
+        {sID: '4', title: "Amor a Primera Vista", artist: "Belinda, Los Angeles Azules", 
+            album:"Single", genre:"Regional Mexican", year: '2019'},
+        {sID: '5', title: "Dancing Queen", artist: "ABBA", 
+            album:"Arrival", genre:"Disco", year: '1976'}, 
+        {sID: '6', title: "Livin' On a Prayer", artist: "Bon Jovi", 
+            album:"Slippery When Wet", genre:"Rock", year: '1971'},
+        {sID: '7', title: "Kids", artist: "MGMT", 
+            album:"Oracular Spectacular", genre:"Indie, Electronic", year: '2007'},
+        {sID: '8', title: "The Veldt", artist: "Deadmau5", 
+            album:"Album Title Goes Here", genre:"House", year: '2012'}]
 
     state={
         searchValue: '',

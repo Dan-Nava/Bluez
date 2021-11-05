@@ -80,7 +80,7 @@ export default class EditAddMusic extends React.Component {
                     </Stack>
                 </Grid>                
                 <Grid item>
-                    <Stack id='stack-row-upload' spacing={2}>
+                    <Stack id='music-upload-stack' spacing={2}>
                         <label htmlFor='upload-image-file'>
                             <Input 
                                 id='upload-image-file' 
@@ -91,41 +91,43 @@ export default class EditAddMusic extends React.Component {
                                 {this.state.imageFile}
                             </Avatar>
                         </label>
-                        <Stack className='stack-row-upload' spacing={2} direction='row'>
-                            <label htmlFor='upload-music-file'>
-                                <Input 
-                                    id='upload-music-file' 
-                                    type='file'
-                                    accept='audio/*'
-                                    onChange={e => {
-                                        if (e.target.value !== ''){
-                                            this.setState({musicFile: e.target.value.slice(12)})
-                                        }
-                                    }}
-                                />
-                                <Button id='add-music-button' component='span' variant='outlined' >
-                                    UPLOAD SONG
-                                </Button>
-                            </label>
-                            <p className='upload-file-string'>{this.state.musicFile}</p>
-                        </Stack>
-                        <Stack className='stack-row-upload' spacing={2} direction='row'>
-                            <label htmlFor='upload-lyric-file'>
-                                <Input 
-                                    id='upload-lyric-file' 
-                                    type='file'
-                                    accept='.txt'
-                                    onChange={e => {
-                                        if (e.target.value !== ''){
-                                            this.setState({lyricFile: e.target.value.slice(12)})
-                                        }
-                                    }}
-                                />
-                                <Button id='add-lyric-button' component='span' variant='outlined' >
-                                    UPLOAD LYRICS
-                                </Button>
-                            </label>
-                            <p className='upload-file-string'>{this.state.lyricFile}</p>
+                        <Stack spacing={2}>
+                            <Stack className='stack-row-upload' spacing={2} direction='row'>
+                                <label htmlFor='upload-music-file'>
+                                    <Input 
+                                        id='upload-music-file' 
+                                        type='file'
+                                        accept='audio/*'
+                                        onChange={e => {
+                                            if (e.target.value !== ''){
+                                                this.setState({musicFile: e.target.value.slice(12)})
+                                            }
+                                        }}
+                                    />
+                                    <Button id='add-music-button' component='span' variant='outlined' >
+                                        UPLOAD SONG
+                                    </Button>
+                                </label>
+                                <p className='upload-file-string'>{this.state.musicFile}</p>
+                            </Stack>
+                            <Stack className='stack-row-upload' spacing={2} direction='row'>
+                                <label htmlFor='upload-lyric-file'>
+                                    <Input 
+                                        id='upload-lyric-file' 
+                                        type='file'
+                                        accept='.txt'
+                                        onChange={e => {
+                                            if (e.target.value !== ''){
+                                                this.setState({lyricFile: e.target.value.slice(12)})
+                                            }
+                                        }}
+                                    />
+                                    <Button id='add-lyric-button' component='span' variant='outlined' >
+                                        UPLOAD LYRICS
+                                    </Button>
+                                </label>
+                                <p className='upload-file-string'>{this.state.lyricFile}</p>
+                            </Stack>
                         </Stack>
                     </Stack>
                 </Grid>
