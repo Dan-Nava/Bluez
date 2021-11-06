@@ -1,0 +1,14 @@
+.music-list{
+    max-width: 65em; 
+    margin: auto;
+    overflow-y: auto;
+    max-height: 33em;
+    margin-bottom: 0.5em;
+}
+
+.table-head{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+}

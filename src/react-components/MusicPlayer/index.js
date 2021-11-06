@@ -11,6 +11,8 @@ import song from "./Controls/static/SoundHelix-Song-1.mp3";
 import Login from "../Auth";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Profile from "../Profile";
+import Admin from "../AdminDashboard";
+import FriendList from "../FriendList";
 
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
@@ -78,13 +80,15 @@ export default class MusicPlayer extends React.Component {
                     (<MusicianMode music={this.state.song}/>)}/>
                 <Route exact path='/video' render={() =>
                     (<VideoMode music={this.state.song}/>)}/>
+                <Route exact path='/admin' render={() =>
+                    (<Admin/>)}/>
             </Switch>);
     }
 
     leftPanelRouting() {
         return (
             <Switch>
-
+                <FriendList/>
             </Switch>
         );
     }
