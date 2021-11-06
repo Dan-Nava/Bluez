@@ -4,60 +4,82 @@ import ListItem from '@mui/material/ListItem'
 import Divider from '@mui/material/Divider'
 import Avatar from '@mui/material/Avatar'
 import Grid from '@mui/material/Grid'
+import ListItemButton from "@mui/material/ListItemButton";
+
 import './styles.css'
 
 export default class FriendList extends React.Component {
 
     //static data: will be remove for P2 (user and song should be objects)
-    friends=[{user:'MusicMan123', currentSongTitle:'Eye of the Tiger', 
-        currentSongArtist:'Survivor'},
-        {user:'MusicMan123', currentSongTitle:'Eye of the Tiger', 
-        currentSongArtist:'Survivor'},
-        {user:'MusicMan123', currentSongTitle:'Eye of the Tiger', 
-        currentSongArtist:'Survivor'},
-        {user:'MusicMan123', currentSongTitle:'Eye of the Tiger', 
-        currentSongArtist:'Survivor'},
-        {user:'MusicMan123', currentSongTitle:'Eye of the Tiger', 
-        currentSongArtist:'Survivor'},
-        {user:'MusicMan123', currentSongTitle:'Eye of the Tiger', 
-        currentSongArtist:'Survivor'},
-        {user:'MusicMan123', currentSongTitle:'Eye of the Tiger', 
-        currentSongArtist:'Survivor'},
-        {user:'MusicMan123', currentSongTitle:'Eye of the Tiger', 
-        currentSongArtist:'Survivor'},
-        {user:'MusicMan123', currentSongTitle:'Eye of the Tiger', 
-        currentSongArtist:'Survivor'}]
+    friends = [{
+        user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
+        currentSongArtist: 'Survivor'
+    },
+        {
+            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
+            currentSongArtist: 'Survivor'
+        },
+        {
+            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
+            currentSongArtist: 'Survivor'
+        },
+        {
+            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
+            currentSongArtist: 'Survivor'
+        },
+        {
+            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
+            currentSongArtist: 'Survivor'
+        },
+        {
+            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
+            currentSongArtist: 'Survivor'
+        },
+        {
+            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
+            currentSongArtist: 'Survivor'
+        },
+        {
+            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
+            currentSongArtist: 'Survivor'
+        },
+        {
+            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
+            currentSongArtist: 'Survivor'
+        }]
 
-    renderFriendCell(userName, title, artist){
-        return(
+    renderFriendCell(userName, title, artist) {
+        return (
             <>
                 <Divider/>
                 <ListItem>
-                    <Grid container direction='row' spacing={1}>
-                        <Grid item>
-                            <Avatar></Avatar>
-                        </Grid>
-                        <Grid item>
-                            <Grid item className='friends-user-name'>
-                                {userName}
+                    <ListItemButton>
+                        <Grid container direction='row' spacing={1}>
+                            <Grid item>
+                                <Avatar></Avatar>
                             </Grid>
-                            <Grid item className='friends-song-info'>
-                                Listening: {title} - {artist}
+                            <Grid item>
+                                <Grid item className='friends-user-name'>
+                                    {userName}
+                                </Grid>
+                                <Grid item className='friends-song-info'>
+                                    Listening: {title} - {artist}
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
+                    </ListItemButton>
                 </ListItem>
             </>
         )
     }
 
-    renderFriendList(array){
+    renderFriendList(array) {
         const friendCells = []
-        for(let i=0; i < array.length; i++){
-            friendCells.push(this.renderFriendCell(array[i].user, 
+        for (let i = 0; i < array.length; i++) {
+            friendCells.push(this.renderFriendCell(array[i].user,
                 array[i].currentSongTitle, array[i].currentSongArtist));
         }
-        return(friendCells)
+        return (friendCells)
     }
 
     render() {
