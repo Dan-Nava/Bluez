@@ -16,7 +16,7 @@ export default class AdminManagemusic extends React.Component {
     //hardcoded data, won't exist in phase 2
     songData=[
         {sID: '1', title: "Stayin Alive", artist: "Bee Gees", 
-            album:"How Can You Mend A Broken Heart", genre:"Pop", year: '1971'}, 
+            album:"How Can You Mend A Broken Heart", genre:"Disco", year: '1971'}, 
         {sID: '2', title: "Secrets", artist: "The Weeknd", 
             album:"Starboy", genre:"New Wave, R&B", year: '2016'},
         {sID: '3', title: "Midnight City", artist: "M83", 
