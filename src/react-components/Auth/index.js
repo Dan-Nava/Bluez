@@ -2,10 +2,50 @@ import React from "react";
 
 import "./styles.css";
 import {Button, TextField} from "@mui/material";
+import {withRouter} from "react-router-dom";
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
+        this.signInForm = React.createRef();
+        this.userCredentials = {'user': 'user'}
+        this.adminCredentials = {'admin': 'admin'}
+    }
+
+    stateChangeHandler(stateName, state) {
+        this.props.stateChangeHandler(stateName, state)
+    }
+
+    componentDidMount() {
+        alert("Please Login First")
+    }
+
+    redirect(url) {
+        this.props.history.push(url)
+        this.props.stateChangeHandler('redirect', true)
+    }
+
+    signIn() {
+        let username = this.signInForm.current['username'].value
+        let password = this.signInForm.current['password'].value
+        if (this.userCredentials[username] !== undefined) {
+            if (password === this.userCredentials[username]) {
+                this.stateChangeHandler('loggedIn', true);
+                this.redirect('/profile');
+            } else {
+                alert("Invalid Username/Password")
+            }
+        } else if (this.adminCredentials[username] !== undefined) {
+            if (password === this.adminCredentials[username]) {
+                this.stateChangeHandler('loggedIn', true);
+                this.stateChangeHandler('adminAuthed', true);
+                this.redirect('/admin');
+            } else {
+                alert("Invalid Username/Password")
+            }
+        } else {
+            alert("Username Not Found")
+        }
     }
 
     render() {
@@ -21,12 +61,12 @@ class Login extends React.Component {
                     </form>
                 </div>
                 <div className="sign-in-container">
-                    <form className="auth-form" action="#">
+                    <form className="auth-form" ref={this.signInForm} action="#">
                         <h1>Sign in</h1><br/>
-                        <TextField required label="Username" type="text"/><br/>
-                        <TextField required label="Password" type="password"/>
+                        <TextField required label="Username" type="text" name={'username'}/><br/>
+                        <TextField required label="Password" type="password" name={'password'}/>
                         <a href="#">Forgot your password?</a>
-                        <Button variant="outlined">Sign In</Button>
+                        <Button variant="outlined" onClick={() => this.signIn()}>Sign In</Button>
                     </form>
                 </div>
             </div>
@@ -34,4 +74,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

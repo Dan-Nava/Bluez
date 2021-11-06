@@ -9,32 +9,22 @@ import InfoPanel from "./InfoPanel";
 
 import song from "./Controls/static/SoundHelix-Song-1.mp3";
 import Login from "../Auth";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import Profile from "../Profile";
 import Admin from "../AdminDashboard";
 import FriendList from "../FriendList";
+import PrivateRoute from "../Auth/privateroute";
 
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
 export default class MusicPlayer extends React.Component {
-    state = {
-        playState: false,
-        toggleButton: 'playButton',
-        progress: 0,
-        mode: "Video",
-        modeList: ["Video", "Lyric", "Musician", "Social"],
-        favList: [],
-        song: "",
-        songMap: (new Map())
-    };
-
     constructor(props) {
         super(props);
+        this.state = this.props.state;
         this.audio_object = new Audio(song);
         this.mode_comp = React.createRef();
         this.setSong("SoundHelix-Song-1.mp3");
         this.addSong("SoundHelix-Song-1.mp3");
-        this.mode_idx = this.state.modeList.indexOf(this.state.mode, 0);
     }
 
     setMode(modeName) {
@@ -57,32 +47,34 @@ export default class MusicPlayer extends React.Component {
         return this.state.songMap.has(songName);
     }
 
-    stateChangeHandler(playState) {
-        this.setState({playState: playState})
-        this.mode_comp.current?.stateChangeHandler(playState)
+    stateChangeHandler(stateName, state) {
+        this.props.stateChangeHandler(stateName, state)
+        this.setState({[stateName]: state})
+        this.mode_comp.current?.stateChangeHandler()
     }
 
     playScreenRouting() {
         return (
             <Switch>
-                <Route exact path='/' render={() =>
-                    (<p>Home Page</p>)}/>
-                <Route exact path='/profile' render={() =>
-                    (<Profile/>)}/>
-                <Route exact path='/login' render={() =>
-                    (<Login/>)}/>
-                <Route exact path='/social' render={() =>
-                    (<SocialMode state={this.state} ref={this.mode_comp}
-                                 audio_object={this.audio_object}/>)}/>
-                <Route exact path='/lyric' render={() =>
-                    (<LyricMode music={this.state.song}/>)}/>
-                <Route exact path='/musician' render={() =>
-                    (<MusicianMode music={this.state.song}/>)}/>
-                <Route exact path='/video' render={() =>
-                    (<VideoMode music={this.state.song}/>)}/>
-                <Route exact path='/admin' render={() =>
-                    (<Admin/>)}/>
-            </Switch>);
+                <Route exact path='/' render={() => (<p>Home Page</p>)}/>
+
+                <Route exact path='/login' render={() => (
+                    <Login stateChangeHandler={this.stateChangeHandler.bind(this)}/>)}/>
+
+                <PrivateRoute exact path='/profile' authed={this.state.loggedIn} comp={<Profile/>}/>
+
+                <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={
+                    <SocialMode state={this.state} audio_object={this.audio_object}/>}/>
+
+                <PrivateRoute exact path='/lyric' authed={this.state.loggedIn} comp={<LyricMode/>}/>
+
+                <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={<MusicianMode/>}/>
+
+                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={<VideoMode/>}/>
+
+                <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={<Admin/>}/>
+            </Switch>
+        );
     }
 
     leftPanelRouting() {
