@@ -9,11 +9,10 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import VolumeDownIcon from '@mui/icons-material/VolumeDown';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
-import {NavLink, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import './styles.css';
-import {AccountCircle, ForumRounded, LoginRounded} from "@mui/icons-material";
+import {AccountCircle, AdminPanelSettingsRounded, ForumRounded, LoginRounded} from "@mui/icons-material";
 
-import PropTypes from 'prop-types'
 
 // This component allows us to control playing music, pausing, fastforwarding, going back etc.
 class Controls extends React.Component {
@@ -104,6 +103,7 @@ class Controls extends React.Component {
 
     redirect(url) {
         this.props.history.push(url)
+        this.props.stateChangeHandler('redirect', true)
     }
 
     render() {
@@ -134,7 +134,9 @@ class Controls extends React.Component {
                         <li><Button variant="contained" color="primary" startIcon={<AccountCircle/>}
                                     onClick={() => this.redirect('/profile')}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<ForumRounded/>}
-                                    onClick={() => this.redirect('/social')}/></li>
+                                    onClick={() => this.redirect('/social')}/>
+                        </li><li><Button variant="contained" color="primary" startIcon={<AdminPanelSettingsRounded/>}
+                                    onClick={() => this.redirect('/admin')}/></li>
                     </ul>
                 </div>
             </div>

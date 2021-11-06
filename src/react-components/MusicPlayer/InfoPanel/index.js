@@ -14,14 +14,14 @@ class InfoPanel extends React.Component {
         this.songInfoList = ["Artist: NAME", "Album: NAME", "Year: YEAR", "ETC."]
         this.songInfoListItems = []
         for (let i = 0; i < this.songInfoList.length; i++) {
-            this.songInfoListItems.push(<ListItemText className="songInfoListItem" primary={this.songInfoList[i]}/>)
+            this.songInfoListItems.push(<ListItemText className="songInfoListItem" primary={this.songInfoList[i]} key={'i'+i}/>)
         }
 
 
         this.songSettingList = ["Setting 1", "Setting 2", "Setting 3", "Setting 4"]
         this.songSettingListItems = []
         for (let i = 0; i < this.songSettingList.length; i++) {
-            this.songSettingListItems.push(<ListItemText className="songSettingListItem" primary={this.songSettingList[i]}/>)
+            this.songSettingListItems.push(<ListItemText className="songSettingListItem" primary={this.songSettingList[i]} key={'s'+i}/>)
         }
     }
 
