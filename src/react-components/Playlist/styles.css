@@ -1,0 +1,25 @@
+#friend-list-container {
+    background-color: antiquewhite;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#play-list{
+    position: relative;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.playlist-song-name{
+    font-size: 0.7em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 16em;
+}
