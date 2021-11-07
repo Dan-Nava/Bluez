@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.css";
 import {Button, TextField} from "@mui/material";
 import CommentBox from "../CommentBox";
+import {fakeComments} from "../../../HardCodedData";
 
 class CommentArea extends React.Component {
     state = {
@@ -12,7 +13,7 @@ class CommentArea extends React.Component {
     constructor(props) {
         super(props);
         this.messagesEndRef = React.createRef()
-        this.fakeComments = ["Nice Song!", "Love it", "My favorite"];
+        this.fakeComments = fakeComments;
         this.state.comments = []
         for (let i = 0; i < this.fakeComments.length; i++) {
             this.state.comments.push(<CommentBox commentText={this.fakeComments[i]} key={i}/>);

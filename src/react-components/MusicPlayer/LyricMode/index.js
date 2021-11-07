@@ -1,16 +1,23 @@
 import React, {useState} from 'react'
 
 import Button from "@mui/material/Button";
-import {CoverFlowerBoy, stayAndDecayLyrics} from '../../HardCodedData'
+import {
+    CoverFlowerBoy,
+    CoverPureComedy,
+    CoverWhite,
+    pureComedLyrics,
+    CoverStayAndDecay,
+    stayAndDecayLyrics,
+    seeYouAgainLyrics
+} from '../../HardCodedData'
 
 import './styles.css'
 
-export default function LyricMode() {
+export default function LyricMode({song}) {
+    let lyrics = seeYouAgainLyrics
     const [currentSong, setcurrentSong] = useState("")
 
     const [pos, setPos] = useState(0)
-
-    const lyrics = stayAndDecayLyrics
 
     function scrollUp() {
         if (pos > 0) {
@@ -23,6 +30,26 @@ export default function LyricMode() {
         if (pos < lyrics.length - 5) {
             setPos(pos + 1)
         }
+    }
+
+    let albumArt = CoverFlowerBoy
+
+    switch (song) {
+        case "See You Again":
+            albumArt = CoverFlowerBoy
+            lyrics = seeYouAgainLyrics
+            break;
+        case "Pure Comedy":
+            albumArt = CoverPureComedy
+            lyrics = pureComedLyrics
+            break;
+        case "Stay And Decay":
+            albumArt = CoverStayAndDecay
+            lyrics = stayAndDecayLyrics
+            break;
+        default:
+            albumArt = CoverWhite
+            break;
     }
 
 
@@ -41,7 +68,7 @@ export default function LyricMode() {
             <Button variant="contained" className='settingButton' onClick={scrollDown}>
                 Next
             </Button>
-            <img src={CoverFlowerBoy} className="back-cover"/>
+            <img src={albumArt} className="back-cover"/>
         </div>
     )
 }

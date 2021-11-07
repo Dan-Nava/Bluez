@@ -3,13 +3,14 @@ import React from "react";
 import "./styles.css";
 import {Button, TextField} from "@mui/material";
 import {withRouter} from "react-router-dom";
+import {users, admins} from "../HardCodedData";
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.signInForm = React.createRef();
-        this.userCredentials = {'user': 'user'}
-        this.adminCredentials = {'admin': 'admin'}
+        this.userCredentials = users
+        this.adminCredentials = admins
     }
 
     stateChangeHandler(stateName, state) {

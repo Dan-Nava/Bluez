@@ -19,8 +19,8 @@ export default class PlayList extends React.Component {
         return (
             <>
                 <Divider/>
-                <ListItem>
-                    <ListItemButton onClick={(e) => (this.props.setSong(songName))}>
+                <ListItem key={Math.random()}>
+                    <ListItemButton onClick={(e) => (this.props.setSong(songName))} key={Math.random()}>
                         <Grid container direction='row' spacing={1}>
                             <Grid item>
                                 <Avatar></Avatar>

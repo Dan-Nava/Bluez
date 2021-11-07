@@ -7,14 +7,15 @@ import MusicianMode from './MusicianMode';
 import SocialMode from './SocialMode';
 import VideoMode from './VideoMode';
 
-import song from "./Controls/static/SoundHelix-Song-1.mp3";
 import Login from "../Auth";
 import {Redirect, Route, Switch} from "react-router-dom";
 import Profile from "../Profile";
 import Admin from "../AdminDashboard";
-import FriendList from "../FriendList";
+import FriendList from "./FriendList";
 import PrivateRoute from "../Auth/privateroute";
-import PlayList from "../PlayList";
+import PlayList from "./PlayList";
+import InfoPanel from "./InfoPanel";
+
 
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
@@ -82,11 +83,14 @@ export default class MusicPlayer extends React.Component {
                 <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={
                     <SocialMode state={this.state} ref={this.mode_comp} audio_object={this.audio_object}/>}/>
 
-                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={<AlbumArtMode/>}/>
+                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn}
+                              comp={<AlbumArtMode song={this.state.song}/>}/>
 
-                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn} comp={<LyricMode/>}/>
+                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
+                              comp={<LyricMode song={this.state.song}/>}/>
 
-                <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={<MusicianMode/>}/>
+                <PrivateRoute exact path='/musician' authed={this.state.loggedIn}
+                              comp={<MusicianMode song={this.state.song}/>}/>
 
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
                               comp={<VideoMode state={this.state} song={this.state.song}
@@ -103,9 +107,12 @@ export default class MusicPlayer extends React.Component {
                 <Route exact path='/login' render={() => (<div/>)}/>
                 <PrivateRoute exact path='/profile' authed={this.state.loggedIn} comp={(<div/>)}/>
                 <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={<FriendList/>}/>
-                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={(<div/>)}/>
-                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn} comp={(<div/>)}/>
-                <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={(<div/>)}/>
+                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn}
+                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)}/>)}/>
+                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
+                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)}/>)}/>
+                <PrivateRoute exact path='/musician' authed={this.state.loggedIn}
+                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)}/>)}/>
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
                               comp={<PlayList state={this.state} setSong={this.setSong.bind(this)}/>}/>
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={(<div/>)}/>
@@ -118,11 +125,11 @@ export default class MusicPlayer extends React.Component {
             <Switch>
                 <Route exact path='/login' render={() => (<div/>)}/>
                 <PrivateRoute exact path='/profile' authed={this.state.loggedIn} comp={(<div/>)}/>
-                <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={<div/>}/>
-                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={(<div/>)}/>
-                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn} comp={(<div/>)}/>
-                <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={(<div/>)}/>
-                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={<div/>}/>
+                <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={<InfoPanel/>}/>
+                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={(<InfoPanel/>)}/>
+                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn} comp={(<InfoPanel/>)}/>
+                <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={(<InfoPanel/>)}/>
+                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={(<InfoPanel/>)}/>
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={(<div/>)}/>
             </Switch>
         );

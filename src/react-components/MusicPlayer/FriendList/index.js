@@ -7,53 +7,21 @@ import Grid from '@mui/material/Grid'
 import ListItemButton from "@mui/material/ListItemButton";
 
 import './styles.css'
+import {Friends} from '../../HardCodedData'
 
 export default class FriendList extends React.Component {
 
-    //static data: will be remove for P2 (user and song should be objects)
-    friends = [{
-        user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
-        currentSongArtist: 'Survivor'
-    },
-        {
-            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
-            currentSongArtist: 'Survivor'
-        },
-        {
-            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
-            currentSongArtist: 'Survivor'
-        },
-        {
-            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
-            currentSongArtist: 'Survivor'
-        },
-        {
-            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
-            currentSongArtist: 'Survivor'
-        },
-        {
-            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
-            currentSongArtist: 'Survivor'
-        },
-        {
-            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
-            currentSongArtist: 'Survivor'
-        },
-        {
-            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
-            currentSongArtist: 'Survivor'
-        },
-        {
-            user: 'MusicMan123', currentSongTitle: 'Eye of the Tiger',
-            currentSongArtist: 'Survivor'
-        }]
+    constructor(props) {
+        super(props);
+        this.friends = Friends
+    }
 
     renderFriendCell(userName, title, artist) {
         return (
             <>
                 <Divider/>
-                <ListItem>
-                    <ListItemButton>
+                <ListItem key={Math.random()}>
+                    <ListItemButton key={Math.random()}>
                         <Grid container direction='row' spacing={1}>
                             <Grid item>
                                 <Avatar></Avatar>

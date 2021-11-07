@@ -16,7 +16,7 @@ import {
     AccountCircle,
     AdminPanelSettingsRounded, EmojiSymbols,
     ForumRounded,
-    LoginRounded,
+    LoginRounded, Loop,
     PhotoAlbum,
     TextSnippet
 } from "@mui/icons-material";
@@ -149,7 +149,7 @@ class Controls extends React.Component {
                 </div>
                 <div>
                     <ul id="controlButtons">
-                        <li><Button variant="contained" color="primary" startIcon={<ReplayIcon/>}
+                        <li><Button variant="contained" color="primary" startIcon={<Loop/>}
                                     onClick={(e) => this.clickLoop(e)}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<VolumeDownIcon/>}
                                     onClick={(e) => this.clickDecreaseVol(e)}/></li>
