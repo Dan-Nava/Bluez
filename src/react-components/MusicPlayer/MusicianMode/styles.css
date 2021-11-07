@@ -1,0 +1,12 @@
+.chords {
+  color: white;
+  font-size: xx-large;
+  font-size: 1.5em;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  position: fixed;
+  top: 0%;
+  left: 12%;
+  z-index: -1;
+  line-height: 4.5em;
+  text-align: left;
+}
