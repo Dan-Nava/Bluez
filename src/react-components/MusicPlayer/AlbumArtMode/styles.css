@@ -19,3 +19,18 @@
   z-index: -10;
   opacity: 30%;
 }
+
+text {
+  color: white;
+  font-size: large;
+  display: block;
+  height: 35em;
+  width: 35em;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  margin: auto;
+  z-index: 100;
+}

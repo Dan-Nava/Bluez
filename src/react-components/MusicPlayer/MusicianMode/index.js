@@ -8,9 +8,7 @@ import CoverStayAndDecay from "../static/stay_and_decay_album_cover.jpg"
 import CoverWhite from "../static/white.png"
 
 import './styles.css'
-export default function MusicianMode() {
-	const [currentSong, setcurrentSong] = useState("")
-
+export default function MusicianMode({song}) {
 	const [key, setkey] = useState(0)
 
 
@@ -33,7 +31,27 @@ export default function MusicianMode() {
 								major[key + 3], minor[key + 0], minor[key + 7], major[key + 10]
 							]
 
-	const chords = stayAndDecayChords
+	let albumArt = CoverWhite
+	let chords = seeYouAgainChords
+
+	switch (song) {
+        case "See You Again":
+            albumArt = CoverFlowerBoy
+			chords = seeYouAgainChords
+            break;
+        case "Pure Comedy":
+            albumArt = CoverPureComedy
+			chords = pureComedyChords
+            break;
+        case "Stay And Decay":
+            albumArt = CoverStayAndDecay
+			chords = stayAndDecayChords
+            break;
+        default:
+            albumArt = CoverWhite
+			chords = ["", "", "", "", "", "", "", "", "", "", ""]
+            break;
+    }
 
 	function transposeUp() {
 		if (key < 11) {
@@ -66,7 +84,7 @@ export default function MusicianMode() {
 			<Button variant="contained" className='settingButton' onClick={transposeDown}>
 				Transpose Down
 			</Button>		
-			<img src={CoverFlowerBoy} className="back-cover"/>
+			<img src={albumArt} className="back-cover"/>
 		</div>
 	)
 }

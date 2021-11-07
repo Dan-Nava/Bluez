@@ -17,6 +17,7 @@ import FriendList from "../FriendList";
 import PrivateRoute from "../Auth/privateroute";
 import PlayList from "../PlayList";
 
+
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
 export default class MusicPlayer extends React.Component {
@@ -83,11 +84,11 @@ export default class MusicPlayer extends React.Component {
                 <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={
                     <SocialMode state={this.state} ref={this.mode_comp} audio_object={this.audio_object}/>}/>
 
-                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={<AlbumArtMode/>}/>
+                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={<AlbumArtMode song={this.state.song}/>} />
 
-                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn} comp={<LyricMode/>}/>
+                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn} comp={<LyricMode song={this.state.song}/>} />
 
-                <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={<MusicianMode/>}/>
+                <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={<MusicianMode song={this.state.song}/>} />
 
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
                               comp={<VideoMode state={this.state} song={this.state.song}
