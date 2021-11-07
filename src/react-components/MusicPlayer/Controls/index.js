@@ -12,7 +12,14 @@ import StopIcon from '@mui/icons-material/Stop';
 import {withRouter} from 'react-router-dom';
 import './styles.css';
 import MusicVideoIcon from '@mui/icons-material/MusicVideo';
-import {AccountCircle, AdminPanelSettingsRounded, ForumRounded, LoginRounded} from "@mui/icons-material";
+import {
+    AccountCircle,
+    AdminPanelSettingsRounded, EmojiSymbols,
+    ForumRounded,
+    LoginRounded,
+    PhotoAlbum,
+    TextSnippet
+} from "@mui/icons-material";
 
 
 // This component allows us to control playing music, pausing, fastforwarding, going back etc.
@@ -33,7 +40,7 @@ class Controls extends React.Component {
             this.props.audio_object.currentTime = 0;
         } else {
             this.props.audio_object.currentTime = this.props.audio_object.currentTime - 10;
-	    this.props.stateChangeHandler('changeTime', this.props.state.changeTime-1);
+            this.props.stateChangeHandler('changeTime', this.props.state.changeTime - 1);
         }
     }
 
@@ -42,7 +49,7 @@ class Controls extends React.Component {
             this.props.audio_object.currentTime = this.props.audio_object.duration;
         } else {
             this.props.audio_object.currentTime = this.props.audio_object.currentTime + 10;
-	    this.props.stateChangeHandler('changeTime', this.props.state.changeTime+1);
+            this.props.stateChangeHandler('changeTime', this.props.state.changeTime + 1);
         }
     }
 
@@ -117,6 +124,30 @@ class Controls extends React.Component {
                     <LinearProgress variant="determinate" value={this.props.audio_object.currentTime}/>
                 </div>
                 <div>
+                    <ul id="modeButtons">
+
+                        <li><Button variant="contained" color="primary" startIcon={<LoginRounded/>}
+                                    onClick={() => this.redirect('/login')}/></li>
+                        <li><Button variant="contained" color="primary" startIcon={<AccountCircle/>}
+                                    onClick={() => this.redirect('/profile')}/></li>
+                        <li><Button variant="contained" color="primary" startIcon={<MusicVideoIcon/>}
+                                    onClick={() => this.redirect('/video')}/></li>
+                        <li><Button variant="contained" color="primary" startIcon={<ForumRounded/>}
+                                    onClick={() => this.redirect('/social')}/></li>
+                        {/*<li><Button variant="contained" color="primary" startIcon={<ForumRounded/>}
+                                    onClick={() => this.props.setSong("SoundHelix-Song-9")}/></li>*/}
+                        <li><Button variant="contained" color="primary" startIcon={<AdminPanelSettingsRounded/>}
+                                    onClick={() => this.redirect('/admin')}/></li>
+
+                        <li><Button variant="contained" color="primary" startIcon={<PhotoAlbum/>}
+                                    onClick={() => this.redirect('/albumArt')}/></li>
+                        <li><Button variant="contained" color="primary" startIcon={<TextSnippet/>}
+                                    onClick={() => this.redirect('/lyrics')}/></li>
+                        <li><Button variant="contained" color="primary" startIcon={<EmojiSymbols/>}
+                                    onClick={() => this.redirect('/musician')}/></li>
+                    </ul>
+                </div>
+                <div>
                     <ul id="controlButtons">
                         <li><Button variant="contained" color="primary" startIcon={<ReplayIcon/>}
                                     onClick={(e) => this.clickLoop(e)}/></li>
@@ -132,26 +163,6 @@ class Controls extends React.Component {
                                     onClick={(e) => this.clickIncreaseVol(e)}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<VolumeOffIcon/>}
                                     onClick={(e) => this.clickMute(e)}/></li>
-
-                        <li><Button variant="contained" color="primary" startIcon={<LoginRounded/>}
-                                    onClick={() => this.redirect('/login')}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<AccountCircle/>}
-                                    onClick={() => this.redirect('/profile')}/></li>
-			            <li><Button variant="contained" color="primary" startIcon={<MusicVideoIcon/>}
-                                    onClick={() => this.redirect('/video')}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<ForumRounded/>}
-                                    onClick={() => this.redirect('/social')}/></li>
-			            {/*<li><Button variant="contained" color="primary" startIcon={<ForumRounded/>}
-                                    onClick={() => this.props.setSong("SoundHelix-Song-9")}/></li>*/}
-                        <li><Button variant="contained" color="primary" startIcon={<AdminPanelSettingsRounded/>}
-                                    onClick={() => this.redirect('/admin')}/></li>
-                        
-                        <li><Button variant="contained" color="primary" startIcon={<LoginRounded/>}
-                                    onClick={() => this.redirect('/albumArt')}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<LoginRounded/>}
-                                    onClick={() => this.redirect('/lyrics')}/></li>      
-                        <li><Button variant="contained" color="primary" startIcon={<LoginRounded/>}
-                                    onClick={() => this.redirect('/musician')}/></li>  
                     </ul>
                 </div>
             </div>
