@@ -130,15 +130,15 @@ class Controls extends React.Component {
                                     onClick={() => this.redirect('/login')}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<AccountCircle/>}
                                     onClick={() => this.redirect('/profile')}/></li>
+                        <li><Button variant="contained" color="primary" startIcon={<AdminPanelSettingsRounded/>}
+                                    onClick={() => this.redirect('/admin')}/></li>
+
+                        <li><span> </span></li>
+
                         <li><Button variant="contained" color="primary" startIcon={<MusicVideoIcon/>}
                                     onClick={() => this.redirect('/video')}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<ForumRounded/>}
                                     onClick={() => this.redirect('/social')}/></li>
-                        {/*<li><Button variant="contained" color="primary" startIcon={<ForumRounded/>}
-                                    onClick={() => this.props.setSong("SoundHelix-Song-9")}/></li>*/}
-                        <li><Button variant="contained" color="primary" startIcon={<AdminPanelSettingsRounded/>}
-                                    onClick={() => this.redirect('/admin')}/></li>
-
                         <li><Button variant="contained" color="primary" startIcon={<PhotoAlbum/>}
                                     onClick={() => this.redirect('/albumArt')}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<TextSnippet/>}
