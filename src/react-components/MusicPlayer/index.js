@@ -10,7 +10,7 @@ import InfoPanel from "./InfoPanel";
 
 import song from "./Controls/static/SoundHelix-Song-1.mp3";
 import Login from "../Auth";
-import {Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import Profile from "../Profile";
 import Admin from "../AdminDashboard";
 import FriendList from "../FriendList";
@@ -73,7 +73,7 @@ export default class MusicPlayer extends React.Component {
     playScreenRouting() {
         return (
             <Switch>
-                <Route exact path='/' render={() => (<p>Home Page</p>)}/>
+                <Route exact path='/' render={() => (<Redirect to="/login"/>)}/>
 
                 <Route exact path='/login' render={() => (
                     <Login stateChangeHandler={this.stateChangeHandler.bind(this)}/>)}/>
@@ -101,9 +101,15 @@ export default class MusicPlayer extends React.Component {
     leftPanelRouting() {
         return (
             <Switch>
+                <Route exact path='/login' render={() => (<div/>)}/>
+                <PrivateRoute exact path='/profile' authed={this.state.loggedIn} comp={(<div/>)}/>
                 <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={<FriendList/>}/>
+                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={(<div/>)}/>
+                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn} comp={(<div/>)}/>
+                <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={(<div/>)}/>
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
                               comp={<PlayList state={this.state} setSong={this.setSong.bind(this)}/>}/>
+                <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={(<div/>)}/>
             </Switch>
         );
     }
@@ -111,7 +117,14 @@ export default class MusicPlayer extends React.Component {
     rightPanelRouting() {
         return (
             <Switch>
-                <InfoPanel/>
+                <Route exact path='/login' render={() => (<div/>)}/>
+                <PrivateRoute exact path='/profile' authed={this.state.loggedIn} comp={(<div/>)}/>
+                <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={<div/>}/>
+                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={(<div/>)}/>
+                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn} comp={(<div/>)}/>
+                <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={(<div/>)}/>
+                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={<div/>}/>
+                <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={(<div/>)}/>
             </Switch>
         );
     }

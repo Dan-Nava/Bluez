@@ -24,7 +24,7 @@
 
 .leftPanel {
   position: absolute;
-  background-color: lightcoral;
+  background-color: antiquewhite;
   left: 0;
   width: 20%;
   height: 90%;
@@ -32,7 +32,7 @@
 
 .rightPanel {
   position: absolute;
-  background-color: lightcoral;
+  background-color: antiquewhite;
   right: 0;
   width: 20%;
   height: 90%;
