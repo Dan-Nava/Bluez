@@ -5,6 +5,17 @@
 	width: 50px;
 	display: inline;
 }
+#modeButtons li{
+	border-radius: 50%;
+	list-style: none;
+	height: 50px;
+	width: 50px;
+	display: inline;
+}
+#modeButtons{
+	position: fixed;
+	float: left;
+}
 .controlBar{
 	background-color: darkgray;
 }
