@@ -1,39 +1,39 @@
 .musicPlayer {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .mediaPlayer {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translate(-50%, 0);
-    margin: auto;
-    width: 60%;
-    height: 90%;
-    background-color: black;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  margin: auto;
+  width: 60%;
+  height: 90%;
+  background-color: black;
 }
 
 .controlBar {
-    position: absolute;
-    width: 100%;
-    height: 10%;
-    bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  bottom: 0;
 }
 
 .leftPanel {
-    position: absolute;
-    background-color: lightcoral;
-    left: 0;
-    width: 20%;
-    height: 90%;
+  position: absolute;
+  background-color: lightcoral;
+  left: 0;
+  width: 20%;
+  height: 90%;
 }
 
 .rightPanel {
-    position: absolute;
-    background-color: lightcoral;
-    right: 0;
-    width: 20%;
-    height: 90%;
+  position: absolute;
+  background-color: lightcoral;
+  right: 0;
+  width: 20%;
+  height: 90%;
 }
