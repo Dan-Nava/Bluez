@@ -14,6 +14,7 @@ import Profile from "../Profile";
 import Admin from "../AdminDashboard";
 import FriendList from "../FriendList";
 import PrivateRoute from "../Auth/privateroute";
+import PlayList from "../PlayList";
 
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
@@ -24,6 +25,12 @@ export default class MusicPlayer extends React.Component {
         this.mode_comp = React.createRef();
         this.setSong("SoundHelix-Song-1");
 	    this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+this.state.song+".mp3");
+	    this.audio_object.addEventListener('ended', () => (function () {
+                                                            if (!this.audio_object.loop) {
+                                                                const idx = (this.state.playList.indexOf(this.state.song)+1)%this.state.playList.length;
+                                                                this.setSong(this.state.playList[idx]);
+                                                            }
+                                                          }));
         this.addSong("SoundHelix-Song-1");
     }
 
@@ -48,6 +55,7 @@ export default class MusicPlayer extends React.Component {
     }
 
     delSong(songName) {
+
         this.state.songMap.delete(songName);
     }
 
@@ -88,7 +96,8 @@ export default class MusicPlayer extends React.Component {
     leftPanelRouting() {
         return (
             <Switch>
-                <FriendList/>
+                <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={<FriendList/>}/>
+                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={<PlayList state={this.state} setSong={this.setSong.bind(this)}/>}/>
             </Switch>
         );
     }

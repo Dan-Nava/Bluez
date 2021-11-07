@@ -15,6 +15,7 @@ class App extends React.Component {
         redirect: false,
         modeList: ["Video", "Lyric", "Musician", "Social"],
         favList: [],
+        playList: ["SoundHelix-Song-1", "SoundHelix-Song-9", "SoundHelix-Song-14", "SoundHelix-Song-15", "SoundHelix-Song-16"],
         song: "SoundHelix-Song-1",
         songMap: (new Map())
     };
