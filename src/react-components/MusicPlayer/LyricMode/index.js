@@ -8,7 +8,7 @@ import CoverStayAndDecay from "../static/stay_and_decay_album_cover.jpg"
 import CoverWhite from "../static/white.png"
 
 import './styles.css'
-export default function LyricMode() {
+export default function LyricMode({song}) {
 	const [currentSong, setcurrentSong] = useState("")
 
 	const [pos, setPos] = useState(0)
@@ -169,7 +169,7 @@ export default function LyricMode() {
 
 
 
-	const lyrics = stayAndDecayLyrics
+	let lyrics = seeYouAgainLyrics
 
 	function scrollUp() {
 		if (pos > 0) {
@@ -184,7 +184,25 @@ export default function LyricMode() {
 		}
 	}
 
+	let albumArt = CoverFlowerBoy
 
+    switch (song) {
+        case "See You Again":
+            albumArt = CoverFlowerBoy
+			lyrics = seeYouAgainLyrics
+            break;
+        case "Pure Comedy":
+            albumArt = CoverPureComedy
+			lyrics = pureComedLyrics
+            break;
+        case "Stay And Decay":
+            albumArt = CoverStayAndDecay
+			lyrics = stayAndDecayLyrics
+            break;
+        default:
+            albumArt = CoverWhite
+            break;
+    }
 
 	 
 	
@@ -203,7 +221,7 @@ export default function LyricMode() {
 			<Button variant="contained" className='settingButton' onClick={scrollDown}>
 				Next
 			</Button>		
-			<img src={CoverFlowerBoy} className="back-cover"/>
+			<img src={albumArt} className="back-cover"/>
 		</div>
 	)
 }

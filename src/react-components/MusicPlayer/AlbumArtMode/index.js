@@ -18,7 +18,7 @@ export default function AlbumArtMode({song}) {
         case "Pure Comedy":
             albumArt = CoverPureComedy
             break;
-        case "Stay and Decay":
+        case "Stay And Decay":
             albumArt = CoverStayAndDecay
             break;
         default:
