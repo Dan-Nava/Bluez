@@ -16,6 +16,8 @@ import Admin from "../AdminDashboard";
 import FriendList from "../FriendList";
 import PrivateRoute from "../Auth/privateroute";
 
+import ModeChanger from './ModeChanger';
+
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
 export default class MusicPlayer extends React.Component {
@@ -111,6 +113,7 @@ export default class MusicPlayer extends React.Component {
                 </div>
                 <Controls state={this.state} audio_object={this.audio_object}
                           stateChangeHandler={this.stateChangeHandler.bind(this)} setSong={this.setSong.bind(this)}/>
+                <ModeChanger/>
             </div>
         );
     }

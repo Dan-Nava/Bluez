@@ -168,6 +168,7 @@ export default function LyricMode() {
 	]
 
 
+
 	const lyrics = stayAndDecayLyrics
 
 	function scrollUp() {
