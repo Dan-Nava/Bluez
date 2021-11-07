@@ -15,6 +15,7 @@ import Profile from "../Profile";
 import Admin from "../AdminDashboard";
 import FriendList from "../FriendList";
 import PrivateRoute from "../Auth/privateroute";
+import PlayList from "../PlayList";
 
 import ModeChanger from './ModeChanger';
 
@@ -25,9 +26,15 @@ export default class MusicPlayer extends React.Component {
         super(props);
         this.state = this.props.state;
         this.mode_comp = React.createRef();
-        this.setSong("SoundHelix-Song-1");
-	this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+this.state.song+".mp3");
-        this.addSong("SoundHelix-Song-1");
+        this.setSong("See You Again");
+	    this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+this.state.song+".mp3");
+	    this.audio_object.addEventListener('ended', () => (function () {
+                                                            if (!this.audio_object.loop) {
+                                                                const idx = (this.state.playList.indexOf(this.state.song)+1)%this.state.playList.length;
+                                                                this.setSong(this.state.playList[idx]);
+                                                            }
+                                                          }));
+        this.addSong("See You Again");
     }
 
     setMode(modeName) {
@@ -35,8 +42,15 @@ export default class MusicPlayer extends React.Component {
     }
 
     setSong(songName) {
-	this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+songName+".mp3");
-        this.setState({song: songName});
+	    if (this.audio_object) {
+	        this.audio_object.pause();
+	        this.audio_object.src = process.env.PUBLIC_URL+"/"+songName+".mp3";
+	        this.audio_object.load();
+	    } else {
+	        this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+songName+".mp3");
+	    }
+	    this.stateChangeHandler('playState', false);
+        this.stateChangeHandler('song', songName);
     }
 
     addSong(songName) {
@@ -44,6 +58,7 @@ export default class MusicPlayer extends React.Component {
     }
 
     delSong(songName) {
+
         this.state.songMap.delete(songName);
     }
 
@@ -86,7 +101,8 @@ export default class MusicPlayer extends React.Component {
     leftPanelRouting() {
         return (
             <Switch>
-                <FriendList/>
+                <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={<FriendList/>}/>
+                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={<PlayList state={this.state} setSong={this.setSong.bind(this)}/>}/>
             </Switch>
         );
     }
