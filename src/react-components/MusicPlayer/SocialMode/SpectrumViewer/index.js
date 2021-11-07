@@ -38,15 +38,17 @@ class SpectrumViewer extends React.Component {
     }
 
     drawSpectrum(amplitudeData) {
-        const ctx = this.canvas.current.getContext("2d");
-        ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-        ctx.fillStyle = "#3CAEA3";
-        let w = this.canvasWidth / amplitudeData.length - this.spectrumPadding;
-        for (let i = 0; i < amplitudeData.length; i++) {
-            ctx.fillRect((w + this.spectrumPadding) * i,
-                this.canvasHeight - amplitudeData[i] * this.canvasHeight,
-                w,
-                amplitudeData[i] * this.canvasHeight);
+        const ctx = this.canvas.current?.getContext("2d");
+        if (ctx) {
+            ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+            ctx.fillStyle = "#3CAEA3";
+            let w = this.canvasWidth / amplitudeData.length - this.spectrumPadding;
+            for (let i = 0; i < amplitudeData.length; i++) {
+                ctx.fillRect((w + this.spectrumPadding) * i,
+                    this.canvasHeight - amplitudeData[i] * this.canvasHeight,
+                    w,
+                    amplitudeData[i] * this.canvasHeight);
+            }
         }
     }
 
