@@ -1,0 +1,21 @@
+.front-cover {
+  display: block;
+  height: 35em;
+  width: 35em;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  margin: auto;
+}
+
+.back-cover {
+  height: 100%;
+  width: 80em;
+  position: fixed;
+  object-fit: cover;
+  left: -25%;
+  z-index: -10;
+  opacity: 30%;
+}

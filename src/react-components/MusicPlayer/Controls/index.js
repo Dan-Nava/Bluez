@@ -145,6 +145,13 @@ class Controls extends React.Component {
                                     onClick={() => this.props.setSong("SoundHelix-Song-9")}/></li>*/}
                         <li><Button variant="contained" color="primary" startIcon={<AdminPanelSettingsRounded/>}
                                     onClick={() => this.redirect('/admin')}/></li>
+                        
+                        <li><Button variant="contained" color="primary" startIcon={<LoginRounded/>}
+                                    onClick={() => this.redirect('/albumArt')}/></li>
+                        <li><Button variant="contained" color="primary" startIcon={<LoginRounded/>}
+                                    onClick={() => this.redirect('/lyrics')}/></li>      
+                        <li><Button variant="contained" color="primary" startIcon={<LoginRounded/>}
+                                    onClick={() => this.redirect('/musician')}/></li>  
                     </ul>
                 </div>
             </div>

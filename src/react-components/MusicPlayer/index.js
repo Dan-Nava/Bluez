@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles.css';
 import Controls from './Controls';
+import AlbumArtMode from './AlbumArtMode'
 import LyricMode from './LyricMode';
 import MusicianMode from './MusicianMode';
 import SocialMode from './SocialMode';
@@ -82,7 +83,9 @@ export default class MusicPlayer extends React.Component {
                 <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={
                     <SocialMode state={this.state} audio_object={this.audio_object}/>}/>
 
-                <PrivateRoute exact path='/lyric' authed={this.state.loggedIn} comp={<LyricMode/>}/>
+                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={<AlbumArtMode/>}/>
+
+                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn} comp={<LyricMode/>}/>
 
                 <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={<MusicianMode/>}/>
 
