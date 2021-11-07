@@ -25,13 +25,13 @@ export default class MusicPlayer extends React.Component {
         this.state = this.props.state;
         this.mode_comp = React.createRef();
         this.setSong("See You Again");
-	    this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+this.state.song+".mp3");
-	    this.audio_object.addEventListener('ended', () => (function () {
-                                                            if (!this.audio_object.loop) {
-                                                                const idx = (this.state.playList.indexOf(this.state.song)+1)%this.state.playList.length;
-                                                                this.setSong(this.state.playList[idx]);
-                                                            }
-                                                          }));
+        this.audio_object = new Audio(process.env.PUBLIC_URL + "/" + this.state.song + ".mp3");
+        this.audio_object.addEventListener('ended', () => (function () {
+            if (!this.audio_object.loop) {
+                const idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
+                this.setSong(this.state.playList[idx]);
+            }
+        }));
         this.addSong("See You Again");
     }
 
@@ -40,14 +40,14 @@ export default class MusicPlayer extends React.Component {
     }
 
     setSong(songName) {
-	    if (this.audio_object) {
-	        this.audio_object.pause();
-	        this.audio_object.src = process.env.PUBLIC_URL+"/"+songName+".mp3";
-	        this.audio_object.load();
-	    } else {
-	        this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+songName+".mp3");
-	    }
-	    this.stateChangeHandler('playState', false);
+        if (this.audio_object) {
+            this.audio_object.pause();
+            this.audio_object.src = process.env.PUBLIC_URL + "/" + songName + ".mp3";
+            this.audio_object.load();
+        } else {
+            this.audio_object = new Audio(process.env.PUBLIC_URL + "/" + songName + ".mp3");
+        }
+        this.stateChangeHandler('playState', false);
         this.stateChangeHandler('song', songName);
     }
 
@@ -81,7 +81,7 @@ export default class MusicPlayer extends React.Component {
                 <PrivateRoute exact path='/profile' authed={this.state.loggedIn} comp={<Profile/>}/>
 
                 <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={
-                    <SocialMode state={this.state} audio_object={this.audio_object}/>}/>
+                    <SocialMode state={this.state} ref={this.mode_comp} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={<AlbumArtMode/>}/>
 
@@ -89,7 +89,9 @@ export default class MusicPlayer extends React.Component {
 
                 <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={<MusicianMode/>}/>
 
-                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={<VideoMode state={this.state} song={this.state.song} audio_object={this.audio_object}/>}/>
+                <PrivateRoute exact path='/video' authed={this.state.loggedIn}
+                              comp={<VideoMode state={this.state} song={this.state.song}
+                                               audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={<Admin/>}/>
             </Switch>
@@ -100,7 +102,8 @@ export default class MusicPlayer extends React.Component {
         return (
             <Switch>
                 <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={<FriendList/>}/>
-                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={<PlayList state={this.state} setSong={this.setSong.bind(this)}/>}/>
+                <PrivateRoute exact path='/video' authed={this.state.loggedIn}
+                              comp={<PlayList state={this.state} setSong={this.setSong.bind(this)}/>}/>
             </Switch>
         );
     }
