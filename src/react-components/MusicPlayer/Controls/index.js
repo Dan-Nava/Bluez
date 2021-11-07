@@ -11,6 +11,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import {withRouter} from 'react-router-dom';
 import './styles.css';
+import MusicVideoIcon from '@mui/icons-material/MusicVideo';
 import {AccountCircle, AdminPanelSettingsRounded, ForumRounded, LoginRounded} from "@mui/icons-material";
 
 
@@ -32,6 +33,7 @@ class Controls extends React.Component {
             this.props.audio_object.currentTime = 0;
         } else {
             this.props.audio_object.currentTime = this.props.audio_object.currentTime - 10;
+	    this.props.stateChangeHandler('changeTime', this.props.state.changeTime-1);
         }
     }
 
@@ -40,6 +42,7 @@ class Controls extends React.Component {
             this.props.audio_object.currentTime = this.props.audio_object.duration;
         } else {
             this.props.audio_object.currentTime = this.props.audio_object.currentTime + 10;
+	    this.props.stateChangeHandler('changeTime', this.props.state.changeTime+1);
         }
     }
 
@@ -90,6 +93,7 @@ class Controls extends React.Component {
             this.props.audio_object.loop = true;
         } else {
             this.props.audio_object.loop = false;
+	    this.props.stateChangeHandler('loop', !this.props.state.loop);
         }
     }
 
@@ -133,9 +137,13 @@ class Controls extends React.Component {
                                     onClick={() => this.redirect('/login')}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<AccountCircle/>}
                                     onClick={() => this.redirect('/profile')}/></li>
+			<li><Button variant="contained" color="primary" startIcon={<MusicVideoIcon/>}
+                                    onClick={() => this.redirect('/video')}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<ForumRounded/>}
-                                    onClick={() => this.redirect('/social')}/>
-                        </li><li><Button variant="contained" color="primary" startIcon={<AdminPanelSettingsRounded/>}
+                                    onClick={() => this.redirect('/social')}/></li>
+			{/*<li><Button variant="contained" color="primary" startIcon={<ForumRounded/>}
+                                    onClick={() => this.props.setSong("SoundHelix-Song-9")}/></li>*/}
+                        <li><Button variant="contained" color="primary" startIcon={<AdminPanelSettingsRounded/>}
                                     onClick={() => this.redirect('/admin')}/></li>
                     </ul>
                 </div>
