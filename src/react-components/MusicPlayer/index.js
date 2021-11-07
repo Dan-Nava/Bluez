@@ -23,7 +23,7 @@ export default class MusicPlayer extends React.Component {
         super(props);
         this.state = this.props.state;
         this.mode_comp = React.createRef();
-        this.setSong("SoundHelix-Song-1");
+        this.setSong("See You Again");
 	    this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+this.state.song+".mp3");
 	    this.audio_object.addEventListener('ended', () => (function () {
                                                             if (!this.audio_object.loop) {
@@ -31,7 +31,7 @@ export default class MusicPlayer extends React.Component {
                                                                 this.setSong(this.state.playList[idx]);
                                                             }
                                                           }));
-        this.addSong("SoundHelix-Song-1");
+        this.addSong("See You Again");
     }
 
     setMode(modeName) {
