@@ -21,10 +21,10 @@ export default class MusicPlayer extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.props.state;
-        this.audio_object = new Audio(song);
         this.mode_comp = React.createRef();
-        this.setSong("SoundHelix-Song-1.mp3");
-        this.addSong("SoundHelix-Song-1.mp3");
+        this.setSong("SoundHelix-Song-1");
+	this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+this.state.song+".mp3");
+        this.addSong("SoundHelix-Song-1");
     }
 
     setMode(modeName) {
@@ -32,6 +32,7 @@ export default class MusicPlayer extends React.Component {
     }
 
     setSong(songName) {
+	this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+songName+".mp3");
         this.setState({song: songName});
     }
 
@@ -70,7 +71,7 @@ export default class MusicPlayer extends React.Component {
 
                 <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={<MusicianMode/>}/>
 
-                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={<VideoMode/>}/>
+                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={<VideoMode state={this.state} song={this.state.song} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={<Admin/>}/>
             </Switch>
@@ -106,7 +107,7 @@ export default class MusicPlayer extends React.Component {
                     {this.rightPanelRouting()}
                 </div>
                 <Controls state={this.state} audio_object={this.audio_object}
-                          stateChangeHandler={this.stateChangeHandler.bind(this)}/>
+                          stateChangeHandler={this.stateChangeHandler.bind(this)} setSong={this.setSong.bind(this)}/>
             </div>
         );
     }

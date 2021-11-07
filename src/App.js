@@ -8,12 +8,14 @@ class App extends React.Component {
         loggedIn: false,
         adminAuthed:false,
         playState: false,
+	loop: false,
+	changeTime: 0,
         toggleButton: 'playButton',
         progress: 0,
         redirect: false,
         modeList: ["Video", "Lyric", "Musician", "Social"],
         favList: [],
-        song: "",
+        song: "SoundHelix-Song-1",
         songMap: (new Map())
     };
 
