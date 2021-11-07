@@ -13,8 +13,8 @@
 	display: inline;
 }
 #modeButtons{
-	position: fixed;
-	float: left;
+	position: absolute;
+	left: 0;
 }
 .controlBar{
 	background-color: darkgray;
