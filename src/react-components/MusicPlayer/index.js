@@ -23,7 +23,7 @@ export default class MusicPlayer extends React.Component {
         this.state = this.props.state;
         this.mode_comp = React.createRef();
         this.setSong("SoundHelix-Song-1");
-	this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+this.state.song+".mp3");
+	    this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+this.state.song+".mp3");
         this.addSong("SoundHelix-Song-1");
     }
 
@@ -32,8 +32,15 @@ export default class MusicPlayer extends React.Component {
     }
 
     setSong(songName) {
-	this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+songName+".mp3");
-        this.setState({song: songName});
+	    if (this.audio_object) {
+	        this.audio_object.pause();
+	        this.audio_object.src = process.env.PUBLIC_URL+"/"+songName+".mp3";
+	        this.audio_object.load();
+	    } else {
+	        this.audio_object = new Audio(process.env.PUBLIC_URL+"/"+songName+".mp3");
+	    }
+	    this.stateChangeHandler('playState', false);
+        this.stateChangeHandler('song', songName);
     }
 
     addSong(songName) {
