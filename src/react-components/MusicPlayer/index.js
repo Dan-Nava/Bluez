@@ -6,7 +6,6 @@ import LyricMode from './LyricMode';
 import MusicianMode from './MusicianMode';
 import SocialMode from './SocialMode';
 import VideoMode from './VideoMode';
-import InfoPanel from "./InfoPanel";
 
 import song from "./Controls/static/SoundHelix-Song-1.mp3";
 import Login from "../Auth";
