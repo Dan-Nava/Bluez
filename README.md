@@ -93,7 +93,7 @@ On startup users will be redirected to the login page. Only the default song can
 player during this time, but no other functionality is accessible by users that are not logged in.
 
 ### User Functionality:
-To log into a user account use: USERNAME: user, PASSWORD: user.
+To log into a user account use: `USERNAME: user`, `PASSWORD: user`.
 Users will have access to all 5 views, their user profile and the music player.
 
 In the user profile, users will be able to change their profile picture, background image, description and current
