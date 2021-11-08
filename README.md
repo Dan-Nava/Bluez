@@ -73,7 +73,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # Application utilization instructions
 
-### UI DESCRIPTION:
+### UI Description:
 The UI is divided into 3 main sections alongside the music player bar and the navigation bar
 on the bottom and top of the screen respectively.
 
@@ -88,11 +88,11 @@ and Musician mode.
 The music player bar has 7 buttons, from left to right they are: loop current song, lower volume,
 reverse song by 10sec, play/pause, fast forward song by 10sec, increase volume and mute.
 
-### ON STARTUP:
+### On Startup:
 On startup users will be redirected to the login page. Only the default song can be played through the music
 player during this time, but no other functionality is accessible by users that are not logged in.
 
-### USER FUNCTIONALITY:
+### User Functionality:
 To log into a user account use: USERNAME: user, PASSWORD: user.
 Users will have access to all 5 views, their user profile and the music player.
 
@@ -115,7 +115,7 @@ In Lyric mode users can view the lyrics of the song they are currently listening
 
 In Musician Mode users can view the current chords of the song and they can transpose it to a key that they want to see the song in. The chords will update accordingly to reflect the key change. The left pane and right panes here will be the same as in Video mode.
 
-### ADMIN FUNCTIONALITY:
+### Admin Functionality:
 To log into an admin account use: USERNAME: admin, PASSWORD: admin. 
 Admins have access to all general user functionality with the added bonus of being able to access the Admin Dashboard
 through the navigation menu.
