@@ -121,9 +121,6 @@ class Controls extends React.Component {
                 </div>
                 <div>
                     <ul id="modeButtons">
-
-                        <li><Button variant="contained" color="primary" startIcon={<LoginRounded/>}
-                                    onClick={() => this.redirect('/login')}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<AccountCircle/>}
                                     onClick={() => this.redirect('/profile')}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<AdminPanelSettingsRounded/>}
