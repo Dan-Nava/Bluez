@@ -14,7 +14,7 @@ import './styles.css'
 export default function MusicianMode({song}) {
     const [key, setkey] = useState(0)
 
-
+    //These chords would be stored on an external server and would be retrieved
     //0    1     2    3     4    5    6    7     8     9   10    11
     const major = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B",
         "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
