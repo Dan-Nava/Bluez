@@ -116,7 +116,7 @@ In Lyric mode users can view the lyrics of the song they are currently listening
 In Musician Mode users can view the current chords of the song and they can transpose it to a key that they want to see the song in. The chords will update accordingly to reflect the key change. The left pane and right panes here will be the same as in Video mode.
 
 ### Admin Functionality:
-To log into an admin account use: USERNAME: admin, PASSWORD: admin. 
+To log into an admin account use: `USERNAME: admin`, `PASSWORD: admin`. 
 Admins have access to all general user functionality with the added bonus of being able to access the Admin Dashboard
 through the navigation menu.
 
