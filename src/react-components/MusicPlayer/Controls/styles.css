@@ -13,8 +13,10 @@
 	display: inline;
 }
 #modeButtons{
-	position: absolute;
-	left: 0;
+	position: fixed;
+	top: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .controlBar{
 	background-color: darkgray;
