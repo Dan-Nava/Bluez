@@ -17,7 +17,7 @@ export default class PlayList extends React.Component {
 
     playListPanel(songName) {
         return (
-            <>
+            <div key={Math.random()}>
                 <Divider/>
                 <ListItem key={Math.random()}>
                     <ListItemButton onClick={(e) => (this.props.setSong(songName))} key={Math.random()}>
@@ -33,7 +33,7 @@ export default class PlayList extends React.Component {
                         </Grid>
                     </ListItemButton>
                 </ListItem>
-            </>
+            </div>
         )
     }
 

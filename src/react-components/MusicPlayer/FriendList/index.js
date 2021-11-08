@@ -18,7 +18,7 @@ export default class FriendList extends React.Component {
 
     renderFriendCell(userName, title, artist) {
         return (
-            <>
+            <div key={Math.random()}>
                 <Divider/>
                 <ListItem key={Math.random()}>
                     <ListItemButton key={Math.random()}>
@@ -37,7 +37,7 @@ export default class FriendList extends React.Component {
                         </Grid>
                     </ListItemButton>
                 </ListItem>
-            </>
+            </div>
         )
     }
 
