@@ -5,3 +5,9 @@
     text-overflow: ellipsis;
     max-width: 8em;
 }
+
+.cover-art-admin-manage-music{
+    height: 2em;
+    width: 2em;
+    object-fit: cover;
+}

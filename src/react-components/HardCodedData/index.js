@@ -14,15 +14,15 @@ export const fakeComments = ["Nice Song!", "Love it", "My favorite"]
 export const songData = [
     {
         sID: '1', title: "See You Again", artist: "Tyler, The Creator",
-        album: "Flower Boy", genre: "Hip Hop", year: '2017'
+        album: "Flower Boy", genre: "Hip Hop", year: '2017', coverArt: CoverFlowerBoy
     },
     {
         sID: '2', title: "Pure Comedy", artist: "Father John Misty",
-        album: "Pure Comedy", genre: "Alternative/Indie", year: '2017'
+        album: "Pure Comedy", genre: "Alternative/Indie", year: '2017', coverArt: CoverPureComedy
     },
     {
         sID: '3', title: "Stay And Decay", artist: "Unlike Pluto",
-        album: "Life in Minor", genre: "Rock", year: '2019'
+        album: "Life in Minor", genre: "Rock", year: '2019', coverArt: CoverStayAndDecay
     }]
 
 export const accountData = [

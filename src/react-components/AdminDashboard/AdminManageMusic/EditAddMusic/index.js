@@ -23,7 +23,7 @@ export default class EditAddMusic extends React.Component {
                 year: this.props.song.year,
                 musicFile: 'song.mp3',
                 lyricFile: 'lyrics.txt',
-                imageFile: <AlbumIcon id='add-music-placeholder'/>
+                imageFile: <img className='cover-art-admin-edit' src={this.props.song.coverArt} alt='Cover Art'/>
             }
         }
     }
