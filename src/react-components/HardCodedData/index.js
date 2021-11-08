@@ -10,39 +10,21 @@ export const CoverWhite = CoverWhiteAlbumCover;
 export const users = {'user': 'user'}
 export const admins = {'admin': 'admin'}
 export const fakeComments = ["Nice Song!", "Love it", "My favorite"]
+
 export const songData = [
     {
-        sID: '1', title: "Stayin Alive", artist: "Bee Gees",
-        album: "How Can You Mend A Broken Heart", genre: "Disco", year: '1971'
+        sID: '1', title: "See You Again", artist: "Tyler, The Creator",
+        album: "Flower Boy", genre: "Hip Hop", year: '2017'
     },
     {
-        sID: '2', title: "Secrets", artist: "The Weeknd",
-        album: "Starboy", genre: "New Wave, R&B", year: '2016'
+        sID: '2', title: "Pure Comedy", artist: "Father John Misty",
+        album: "Pure Comedy", genre: "Alternative/Indie", year: '2017'
     },
     {
-        sID: '3', title: "Midnight City", artist: "M83",
-        album: "Hurry Up, We're Dreaming", genre: "Pop", year: '2011'
-    },
-    {
-        sID: '4', title: "Amor a Primera Vista", artist: "Belinda, Los Angeles Azules",
-        album: "Single", genre: "Regional Mexican", year: '2019'
-    },
-    {
-        sID: '5', title: "Dancing Queen", artist: "ABBA",
-        album: "Arrival", genre: "Disco", year: '1976'
-    },
-    {
-        sID: '6', title: "Livin' On a Prayer", artist: "Bon Jovi",
-        album: "Slippery When Wet", genre: "Rock", year: '1971'
-    },
-    {
-        sID: '7', title: "Kids", artist: "MGMT",
-        album: "Oracular Spectacular", genre: "Indie, Electronic", year: '2007'
-    },
-    {
-        sID: '8', title: "The Veldt", artist: "Deadmau5",
-        album: "Album Title Goes Here", genre: "House", year: '2012'
+        sID: '3', title: "Stay And Decay", artist: "Unlike Pluto",
+        album: "Life in Minor", genre: "Rock", year: '2019'
     }]
+
 export const accountData = [
     {uID: '1', userName: "admin1", password: "asdf23", type: "admin", banned: false},
     {uID: '2', userName: "elephant", password: "12312owoe", type: "regular", banned: false},
