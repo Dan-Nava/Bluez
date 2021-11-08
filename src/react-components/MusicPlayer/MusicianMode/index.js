@@ -81,12 +81,14 @@ export default function MusicianMode({song}) {
                 <p>Pre-chorus: {chords[4]}, {chords[5]}, {chords[6]}, {chords[7]}</p>
                 <p>Chorus: {chords[8]}, {chords[9]}, {chords[10]}, {chords[11]} </p>
             </div>
-            <Button variant="contained" className='settingButton' onClick={transposeUp}>
-                Tranpose Up
-            </Button>
-            <Button variant="contained" className='settingButton' onClick={transposeDown}>
-                Transpose Down
-            </Button>
+            <div className='settingButton' >
+                <Button variant="contained" onClick={transposeUp}>
+                    Tranpose Up
+                </Button>
+                <Button variant="contained" onClick={transposeDown}>
+                    Transpose Down
+                </Button>
+            </div>
             <img src={albumArt} className="back-cover" alt=""/>
         </div>
     )

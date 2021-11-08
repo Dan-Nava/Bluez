@@ -59,12 +59,15 @@ export default function LyricMode({song}) {
                 <p className="lyric">{lyrics[pos + 3]}</p>
                 <p className="lyric">{lyrics[pos + 4]}</p>
             </div>
-            <Button variant="contained" className='settingButton' onClick={scrollUp}>
-                Previous
-            </Button>
-            <Button variant="contained" className='settingButton' onClick={scrollDown}>
-                Next
-            </Button>
+            <div className='settingButton'>
+                <Button variant="contained" onClick={scrollUp}>
+                    Previous
+                </Button>
+                <Button variant="contained" onClick={scrollDown}>
+                    Next
+                </Button>
+            </div>
+            
             <img src={albumArt} className="back-cover" alt=""/>
         </div>
     )
