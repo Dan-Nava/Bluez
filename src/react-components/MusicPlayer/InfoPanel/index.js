@@ -31,12 +31,7 @@ class InfoPanel extends React.Component {
                                                       key={'i' + i}/>)
         }
 
-        this.songSettingList = ["Setting 1", "Setting 2", "Setting 3", "Setting 4"]
-        this.songSettingListItems = []
-        for (let i = 0; i < this.songSettingList.length; i++) {
-            this.songSettingListItems.push(<ListItemText className="songSettingListItem"
-                                                         primary={this.songSettingList[i]} key={'s' + i}/>)
-        }
+
     }
 
     handleClick(openState, open) {
@@ -58,19 +53,6 @@ class InfoPanel extends React.Component {
                     <Collapse in={this.state.infoOpen} timeout="auto" unmountOnExit>
                         <List>
                             {this.songInfoListItems}
-                        </List>
-                    </Collapse>
-
-                    <ListItemButton onClick={() => this.handleClick("settingOpen", this.state.settingOpen)}>
-                        <ListItemIcon>
-                            <Settings/>
-                        </ListItemIcon>
-                        <ListItemText primary="Settings"/>
-                        {this.state.settingOpen ? <ExpandLess/> : <ExpandMore/>}
-                    </ListItemButton>
-                    <Collapse in={this.state.settingOpen} timeout="auto" unmountOnExit>
-                        <List>
-                            {this.songSettingListItems}
                         </List>
                     </Collapse>
                 </List>
