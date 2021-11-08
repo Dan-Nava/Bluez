@@ -3,7 +3,7 @@
 }
 
 #add-music-grid{
-    margin-top: 1em;
+    margin-top: 3em;
     margin-left: 15%;
 }
 
@@ -55,5 +55,5 @@
 
 .cover-art-admin-edit{
     height: 10em;
-    weight: 10em;
+    width: 10em;
 }
