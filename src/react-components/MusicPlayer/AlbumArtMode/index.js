@@ -11,7 +11,7 @@ import {
 export default function AlbumArtMode({song}) {
 
     let albumArt = CoverFlowerBoy
-
+    // These album covers would be stored on an external database and retrieved properly
     switch (song) {
         case "See You Again":
             albumArt = CoverFlowerBoy

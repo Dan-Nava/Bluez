@@ -31,6 +31,8 @@ export default function LyricMode({song}) {
 
     let albumArt = undefined
 
+    //These album covers and lyrics would be stored on an external server and would be retrieved
+
     switch (song) {
         case "See You Again":
             albumArt = CoverFlowerBoy
