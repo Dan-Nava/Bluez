@@ -14,13 +14,22 @@ export default class AdminMMLRow extends React.Component {
 
     handleEdit = () => this.props.editCallback(this.props.song);
 
+    addImage(){
+        if (this.props.song.coverArt === null ){
+            return <AlbumIcon/>
+        }
+        else{
+            return <img className='cover-art-admin-manage-music' alt='' src={this.props.song.coverArt}/>
+        }
+    }
+
     render() {
 
         const {song} = this.props;
 
         return (
             <TableRow key={song.sID}>
-                <TableCell><Avatar variant="square"><AlbumIcon/></Avatar></TableCell>
+                <TableCell><Avatar variant="square">{this.addImage()}</Avatar></TableCell>
                 <TableCell className="music-edit-cell">{song.title}</TableCell>
                 <TableCell className="music-edit-cell">{song.artist}</TableCell>
                 <TableCell className="music-edit-cell">{song.album}</TableCell>
