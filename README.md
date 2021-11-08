@@ -71,7 +71,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
---- Application utilization instructions ---
+# Application utilization instructions
 
 UI DESCRIPTION:
 The UI is divided into 3 main sections alongside the music player bar and the navigation bar
