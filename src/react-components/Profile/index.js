@@ -6,27 +6,37 @@ import Button from "@mui/material/Button";
 import hero from "./static/hero.png";
 import avatar from "./static/avatar.png";
 import cover from "./static/cover.png";
+import {userProfiles} from "../HardCodedData";
 
 class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = this.props.state
+    }
+
+    loadUserProfile() {
+        for (let i = 0; i < userProfiles.length; i++) {
+            if (parseInt(this.props.userId) === parseInt(userProfiles[i]['id'])) {
+                this.username = userProfiles[i]['name'];
+                this.description = userProfiles[i]['description'];
+                break;
+            }
+        }
+    }
+
     render() {
+        this.loadUserProfile()
         return (
             <div className="profile">
                 <div className="card">
                     <div className="hero" style={{backgroundImage: 'url(' + hero + ')'}}>
                         <img src={avatar} className="avatar" alt=""/>
-                        <h1>NAME</h1>
+                        <h1>{this.username}</h1>
                     </div>
                     <div className="info_container">
                         <br/>
                         <span>Music Enthusiast</span>
-                        <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                            in
-                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                            laborum.</p>
+                        <p className="description">{this.description}</p>
                         <br/>
                         <h1>Favorites</h1>
                         <div className="favs">

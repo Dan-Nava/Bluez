@@ -7,6 +7,7 @@ class App extends React.Component {
     state = {
         loggedIn: false,
         adminAuthed:false,
+        userId:1,
         playState: false,
 	    loop: false,
 	    changeTime: 0,

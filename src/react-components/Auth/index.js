@@ -32,6 +32,7 @@ class Login extends React.Component {
         if (this.userCredentials[username] !== undefined) {
             if (password === this.userCredentials[username]) {
                 this.stateChangeHandler('loggedIn', true);
+                this.stateChangeHandler('userId', 1);
                 this.redirect('/profile');
             } else {
                 alert("Invalid Username/Password")
@@ -40,6 +41,7 @@ class Login extends React.Component {
             if (password === this.adminCredentials[username]) {
                 this.stateChangeHandler('loggedIn', true);
                 this.stateChangeHandler('adminAuthed', true);
+                this.stateChangeHandler('userId', 2);
                 this.redirect('/admin');
             } else {
                 alert("Invalid Username/Password")

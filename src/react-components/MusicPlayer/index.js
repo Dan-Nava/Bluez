@@ -77,7 +77,8 @@ export default class MusicPlayer extends React.Component {
                 <Route exact path='/login' render={() => (
                     <Login stateChangeHandler={this.stateChangeHandler.bind(this)}/>)}/>
 
-                <PrivateRoute exact path='/profile' authed={this.state.loggedIn} comp={<Profile/>}/>
+                <PrivateRoute exact path='/profile' authed={this.state.loggedIn}
+                              comp={<Profile userId={this.state.userId}/>}/>
 
                 <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={
                     <SocialMode state={this.state} ref={this.mode_comp} audio_object={this.audio_object}/>}/>
@@ -124,11 +125,16 @@ export default class MusicPlayer extends React.Component {
             <Switch>
                 <Route exact path='/login' render={() => (<div/>)}/>
                 <PrivateRoute exact path='/profile' authed={this.state.loggedIn} comp={(<div/>)}/>
-                <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={<InfoPanel state={this.state} song={this.state.song}/>}/>
-                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn} comp={(<InfoPanel state={this.state} song={this.state.song}/>)}/>
-                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn} comp={(<InfoPanel state={this.state} song={this.state.song}/>)}/>
-                <PrivateRoute exact path='/musician' authed={this.state.loggedIn} comp={(<InfoPanel state={this.state} song={this.state.song}/>)}/>
-                <PrivateRoute exact path='/video' authed={this.state.loggedIn} comp={(<InfoPanel state={this.state} song={this.state.song}/>)}/>
+                <PrivateRoute exact path='/social' authed={this.state.loggedIn}
+                              comp={<InfoPanel state={this.state} song={this.state.song}/>}/>
+                <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn}
+                              comp={(<InfoPanel state={this.state} song={this.state.song}/>)}/>
+                <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
+                              comp={(<InfoPanel state={this.state} song={this.state.song}/>)}/>
+                <PrivateRoute exact path='/musician' authed={this.state.loggedIn}
+                              comp={(<InfoPanel state={this.state} song={this.state.song}/>)}/>
+                <PrivateRoute exact path='/video' authed={this.state.loggedIn}
+                              comp={(<InfoPanel state={this.state} song={this.state.song}/>)}/>
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={(<div/>)}/>
             </Switch>
         );

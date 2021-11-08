@@ -10,7 +10,26 @@ export const CoverWhite = CoverWhiteAlbumCover;
 export const users = {'user': 'user'}
 export const admins = {'admin': 'admin'}
 export const fakeComments = ["Nice Song!", "Love it", "My favorite"]
+export const userProfiles = [
+    {
+        id: 1,
+        name: 'Regular User',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do\n' +
+            '                            eiusmod\n' +
+            '                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud\n' +
+            '                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor\n' +
+            '                            in\n' +
+            '                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint\n' +
+            '                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est\n' +
+            '                            laborum.'
+    },
 
+    {
+        id: 2,
+        name: 'Admin User',
+        description: 'I am the admin user'
+    }
+]
 export const songData = [
     {
         sID: '1', title: "See You Again", artist: "Tyler, The Creator",

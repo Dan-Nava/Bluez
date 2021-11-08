@@ -17,7 +17,7 @@ class SocialMode extends React.Component {
     render() {
         return (
             <div className="socialContainer">
-                <SpectrumViewer ref={this.spectrumViewer} audio_object={this.props.audio_object}/>
+                {/*<SpectrumViewer ref={this.spectrumViewer} audio_object={this.props.audio_object}/>*/}
                 <CommentArea/>
             </div>
         );
