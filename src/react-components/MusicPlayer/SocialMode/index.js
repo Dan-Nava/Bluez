@@ -11,7 +11,7 @@ class SocialMode extends React.Component {
     }
 
     stateChangeHandler() {
-        this.spectrumViewer.current.stateChangeHandler();
+        // this.spectrumViewer.current.stateChangeHandler();
     }
 
     render() {
