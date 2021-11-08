@@ -30,7 +30,7 @@ class VideoMode extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.song != prevState.song) {
+		if (this.state.song !== prevState.song) {
 			this.load();
 		}
 		this.videoRef.currentTime = this.audio.currentTime;

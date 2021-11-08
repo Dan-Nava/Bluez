@@ -1,7 +1,6 @@
 import React from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import Button from "@mui/material/Button";
-import ReplayIcon from '@mui/icons-material/Replay';
 import FastForwardIcon from '@mui/icons-material/FastForward';
 import FastRewindIcon from '@mui/icons-material/FastRewind';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -29,9 +28,6 @@ class Controls extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.props.state;
-
-        const {history} = this.props;
-        this.hisitory = history;
     };
 
 
@@ -87,7 +83,7 @@ class Controls extends React.Component {
     }
 
     clickMute(e) {
-        if (this.props.audio_object.muted == false) {
+        if (this.props.audio_object.muted === false) {
             this.props.audio_object.muted = true;
 
         } else {
@@ -96,7 +92,7 @@ class Controls extends React.Component {
     }
 
     clickLoop(e) {
-        if (this.props.audio_object.loop == false) {
+        if (this.props.audio_object.loop === false) {
             this.props.audio_object.loop = true;
         } else {
             this.props.audio_object.loop = false;
@@ -105,7 +101,7 @@ class Controls extends React.Component {
     }
 
     getPlayIcon() {
-        if (this.state.playState == true) {
+        if (this.state.playState === true) {
             return (<StopIcon/>)
         } else {
             return (<PlayArrowIcon/>)

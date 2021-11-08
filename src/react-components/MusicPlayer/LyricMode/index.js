@@ -15,15 +15,12 @@ import './styles.css'
 
 export default function LyricMode({song}) {
     let lyrics = seeYouAgainLyrics
-    const [currentSong, setcurrentSong] = useState("")
-
     const [pos, setPos] = useState(0)
 
     function scrollUp() {
         if (pos > 0) {
             setPos(pos - 1)
         }
-
     }
 
     function scrollDown() {
@@ -32,7 +29,7 @@ export default function LyricMode({song}) {
         }
     }
 
-    let albumArt = CoverFlowerBoy
+    let albumArt = undefined
 
     switch (song) {
         case "See You Again":
@@ -68,7 +65,7 @@ export default function LyricMode({song}) {
             <Button variant="contained" className='settingButton' onClick={scrollDown}>
                 Next
             </Button>
-            <img src={albumArt} className="back-cover"/>
+            <img src={albumArt} className="back-cover" alt=""/>
         </div>
     )
 }

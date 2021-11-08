@@ -87,7 +87,7 @@ export default function MusicianMode({song}) {
             <Button variant="contained" className='settingButton' onClick={transposeDown}>
                 Transpose Down
             </Button>
-            <img src={albumArt} className="back-cover"/>
+            <img src={albumArt} className="back-cover" alt=""/>
         </div>
     )
 }

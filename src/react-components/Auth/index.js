@@ -66,7 +66,7 @@ class Login extends React.Component {
                         <h1>Sign in</h1><br/>
                         <TextField required label="Username" type="text" name={'username'}/><br/>
                         <TextField required label="Password" type="password" name={'password'}/>
-                        <a href="#">Forgot your password?</a>
+                        <a href="/">Forgot your password?</a>
                         <Button variant="outlined" onClick={() => this.signIn()}>Sign In</Button>
                     </form>
                 </div>

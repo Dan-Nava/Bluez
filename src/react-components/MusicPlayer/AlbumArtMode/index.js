@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import "./styles.css";
 
@@ -29,8 +29,8 @@ export default function AlbumArtMode({song}) {
 
     return (
         <div>
-            <img src={albumArt} className="front-cover"/>
-            <img src={albumArt} className="back-cover"/>
+            <img src={albumArt} className="front-cover" alt=""/>
+            <img src={albumArt} className="back-cover" alt=""/>
         </div>
     )
 }
