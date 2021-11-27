@@ -1,6 +1,5 @@
 let Users = require('../model/users')
 
-
 function findAllUsers() {
     Users.findAll().then(data => {
         data.map((node) => {

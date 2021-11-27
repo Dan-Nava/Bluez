@@ -1,7 +1,6 @@
 const express = require('express');
-const {DataTypes} = require("sequelize");
 const router = express.Router();
-const loginService = require('../service/loginService')
+const loginService = require('../service/authService')
 
 router.post('/login', (request, response) => {
     // let username = request.body.username;

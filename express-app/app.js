@@ -1,14 +1,14 @@
-const log = console.log;
 const express = require('express');
 const bodyParser = require("body-parser");
-const path = require('path');
+require('./utils/databaseUtils')
 
-const loginRouter = require('./module/authentication/controller/loginController')
+const loginRouter = require('./module/authentication/controller/authController')
+
+const log = console.log;
 
 const app = express();
 
 function init() {
-    app.use(express.static(path.join(__dirname, '/public')))
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
 
@@ -17,7 +17,6 @@ function init() {
 
 function start() {
     const port = process.env.PORT || 5000;
-
     app.listen(port, () => {
         log(`Listening on port ${port}...`)
     })
@@ -28,6 +27,5 @@ function main() {
     start();
 }
 
-let db = require('./utils/databaseUtils')
 main();
 module.exports = app;
