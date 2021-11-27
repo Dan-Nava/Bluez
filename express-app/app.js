@@ -1,19 +1,33 @@
 const log = console.log;
-let express = require('express');
-let path = require('path');
+const express = require('express');
+const bodyParser = require("body-parser");
+const path = require('path');
 
-let app = express();
+const loginRouter = require('./module/authentication/controller/loginController')
 
-app.use(express.static(path.join(__dirname, '/public')))
+const app = express();
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname+'/public/index.html'));
-})
+function init() {
+    app.use(express.static(path.join(__dirname, '/public')))
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.json());
 
-const port = process.env.PORT || 5000;
+    app.use("/", loginRouter);
+}
 
-app.listen(port, () => {
-    log(`Listening on port ${port}...`)
-})
+function start() {
+    const port = process.env.PORT || 5000;
 
+    app.listen(port, () => {
+        log(`Listening on port ${port}...`)
+    })
+}
+
+function main() {
+    init();
+    start();
+}
+
+let db = require('./utils/databaseUtils')
+main();
 module.exports = app;
