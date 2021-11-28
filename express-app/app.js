@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require("body-parser");
 require('./utils/databaseUtils')
 
-const loginRouter = require('./module/authentication/controller/authController')
+const authRouter = require('./module/authentication/controller/authController')
+const registerRouter = require('./module/authentication/controller/registerController')
 
 const log = console.log;
 
@@ -12,7 +13,8 @@ function init() {
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
 
-    app.use("/", loginRouter);
+    app.use("/", authRouter);
+    app.use("/", registerRouter);
 }
 
 function start() {
