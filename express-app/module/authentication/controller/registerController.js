@@ -8,7 +8,7 @@ router.post('/register', async function (request, response) {
 
     let success = await registrationService.register(username, password);
     if (!success) {
-        response.status(400).end(JSON.stringify({message: 'Invalid username or password'}));
+        response.status(400).end(JSON.stringify({message: 'Username already taken'}));
     } else {
         response.status(200).end(JSON.stringify({success: true}));
     }

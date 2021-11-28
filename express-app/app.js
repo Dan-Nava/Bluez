@@ -21,7 +21,9 @@ function init() {
     app.use("/", registerRouter);
 }
 
+const encryptionUtils = require('./utils/encryptionUtils');
 function start() {
+    console.log(encryptionUtils.hash("test"))
     const port = process.env.PORT || 5000;
     app.listen(port, () => {
         log(`Listening on port ${port}...`)

@@ -1,15 +1,21 @@
 import React from "react";
 
 import "./styles.css";
-import {Button, TextField} from "@mui/material";
+import {Button, InputLabel, TextField} from "@mui/material";
 import {withRouter} from "react-router-dom";
 import configs from '../../config'
 import constructRequest from '../../utils/requestConstructor'
 
 class Login extends React.Component {
+    state = {
+        signInHelperText: '',
+        signUpHelperText: ''
+    }
+
     constructor(props) {
         super(props);
         this.signInForm = React.createRef();
+        this.signUpForm = React.createRef();
     }
 
     stateChangeHandler(stateName, state) {
@@ -17,7 +23,7 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        alert("Please Login First")
+        this.setState({signInHelperText: "Please Login First"})
     }
 
     redirect(url) {
@@ -48,7 +54,29 @@ class Login extends React.Component {
                 this.redirect('/profile');
             }
         } else {
-            alert(tokenData.message)
+            this.setState({signInHelperText: tokenData.message})
+        }
+    }
+
+
+    async signUp() {
+        let username = this.signUpForm.current['username'].value
+        let password = this.signUpForm.current['password'].value
+        let password2 = this.signUpForm.current['password2'].value
+        if(password!==password2){
+            this.setState({signUpHelperText: "Password don't match"})
+        }else{
+            const body = {
+                'username': username,
+                'password': password,
+            };
+
+            let data = await fetch(`${configs.SERVER_URL}/register`, constructRequest(body, 'POST')).then(res => res.json());
+            if (data.success) {
+                this.setState({signUpHelperText: "Success! Please login."})
+            } else {
+                this.setState({signUpHelperText: data.message})
+            }
         }
     }
 
@@ -56,12 +84,13 @@ class Login extends React.Component {
         return (
             <div className="auth-container">
                 <div className="sign-up-container">
-                    <form className="auth-form" action="#">
+                    <form className="auth-form" ref={this.signUpForm} action="#">
                         <h1>Create Account</h1><br/>
-                        <TextField required label="Username" type="text"/><br/>
-                        <TextField required label="Password" type="password"/><br/>
-                        <TextField required label="Repeat Password" type="password"/><br/>
-                        <Button variant="outlined">Sign Up</Button>
+                        <TextField required label="Username" type="text" name={'username'}/><br/>
+                        <TextField required label="Password" type="password" name={'password'}/><br/>
+                        <TextField required label="Repeat Password" type="password" name={'password2'}/><br/>
+                        <InputLabel id="helper">{this.state.signUpHelperText}</InputLabel><br/>
+                        <Button variant="outlined" onClick={() => this.signUp()}>Sign Up</Button>
                     </form>
                 </div>
                 <div className="sign-in-container">
@@ -70,6 +99,7 @@ class Login extends React.Component {
                         <TextField required label="Username" type="text" name={'username'}/><br/>
                         <TextField required label="Password" type="password" name={'password'}/>
                         <a href="/">Forgot your password?</a>
+                        <InputLabel id="helper">{this.state.signInHelperText}</InputLabel><br/>
                         <Button variant="outlined" onClick={() => this.signIn()}>Sign In</Button>
                     </form>
                 </div>

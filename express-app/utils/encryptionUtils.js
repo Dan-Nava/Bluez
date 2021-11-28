@@ -1,5 +1,8 @@
+const SHA256 = require('crypto-js/sha256');
+
 function hash(str){
-    return str
+    const hashDigest = SHA256(str)
+    return hashDigest.toString();
 }
 
 module.exports = {
