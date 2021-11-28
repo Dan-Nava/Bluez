@@ -5,6 +5,7 @@ import {Button, InputLabel, TextField} from "@mui/material";
 import {withRouter} from "react-router-dom";
 import configs from '../../config'
 import constructRequest from '../../utils/requestConstructor'
+import Cookies from 'js-cookie';
 
 class Login extends React.Component {
     state = {
@@ -42,6 +43,7 @@ class Login extends React.Component {
         let tokenData = await fetch(`${configs.SERVER_URL}/login`, constructRequest(body, 'POST')).then(res => res.json());
         let token = tokenData.token;
         if (token) {
+            Cookies.set('token', token);
             let data = await fetch(`${configs.SERVER_URL}/accessLevel?token=${token}`).then(res => res.json());
             if (data.accessLevel > 0) {
                 this.stateChangeHandler('loggedIn', true);
