@@ -37,4 +37,15 @@ router.post('/logout', async function (request, response) {
     }
 });
 
+router.get('/accessLevel', async function (request, response) {
+    let token = request.query.token
+    let accessLevel = await authService.accessLevel(token)
+    if (accessLevel===false) {
+        response.status(400).end(JSON.stringify({message: 'Invalid token'}));
+    } else {
+        response.status(200).end(JSON.stringify({accessLevel: accessLevel}));
+    }
+});
+
+
 module.exports = router;

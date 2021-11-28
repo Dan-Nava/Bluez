@@ -7,8 +7,6 @@ export const CoverFlowerBoy = CoverFlowerBoyAlbumCover;
 export const CoverPureComedy = CoverPureComedyAlbumCover;
 export const CoverStayAndDecay = CoverStayAndDecayAlbumCover;
 export const CoverWhite = CoverWhiteAlbumCover;
-export const users = {'user': 'user'}
-export const admins = {'admin': 'admin'}
 export const fakeComments = ["Nice Song!", "Love it", "My favorite"]
 export const userProfiles = [
     {

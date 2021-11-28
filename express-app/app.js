@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
+const cors = require('cors');
 require('./utils/databaseUtils')
 
 const authRouter = require('./module/authentication/controller/authController')
@@ -10,6 +11,9 @@ const log = console.log;
 const app = express();
 
 function init() {
+    app.use(cors({
+        origin: '*'
+    }));
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
 

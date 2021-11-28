@@ -53,9 +53,28 @@ async function checkPassword(username, password) {
     }
 }
 
+async function accessLevel(token){
+    let username = findUsernameByToken(token);
+    if(!username){
+        return false;
+    }
+    let data = await Users.findAll({
+        where: {
+            username: username
+        }
+    });
+    if (data.length > 0) {
+        let user = data[0].get({plain: true});
+        return user.access_level;
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
     login: login,
     validateToken: validateToken,
     invalidateToken: invalidateToken,
     findUsernameByToken: findUsernameByToken,
+    accessLevel:accessLevel
 };

@@ -3,14 +3,13 @@ import React from "react";
 import "./styles.css";
 import {Button, TextField} from "@mui/material";
 import {withRouter} from "react-router-dom";
-import {users, admins} from "../HardCodedData";
+import configs from '../../config'
+import constructRequest from '../../utils/requestConstructor'
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.signInForm = React.createRef();
-        this.userCredentials = users
-        this.adminCredentials = admins
     }
 
     stateChangeHandler(stateName, state) {
@@ -26,28 +25,30 @@ class Login extends React.Component {
         this.props.stateChangeHandler('redirect', true)
     }
 
-    signIn() {
+    async signIn() {
         let username = this.signInForm.current['username'].value
         let password = this.signInForm.current['password'].value
-        if (this.userCredentials[username] !== undefined) {
-            if (password === this.userCredentials[username]) {
-                this.stateChangeHandler('loggedIn', true);
-                this.stateChangeHandler('userId', 1);
-                this.redirect('/profile');
-            } else {
-                alert("Invalid Username/Password")
-            }
-        } else if (this.adminCredentials[username] !== undefined) {
-            if (password === this.adminCredentials[username]) {
+        const body = {
+            'username': username,
+            'password': password,
+        };
+
+        let tokenData = await fetch(`${configs.SERVER_URL}/login`, constructRequest(body, 'POST')).then(res => res.json());
+        let token = tokenData.token;
+        if (token) {
+            let data = await fetch(`${configs.SERVER_URL}/accessLevel?token=${token}`).then(res => res.json());
+            if (data.accessLevel > 0) {
                 this.stateChangeHandler('loggedIn', true);
                 this.stateChangeHandler('adminAuthed', true);
                 this.stateChangeHandler('userId', 2);
                 this.redirect('/admin');
             } else {
-                alert("Invalid Username/Password")
+                this.stateChangeHandler('loggedIn', true);
+                this.stateChangeHandler('userId', 1);
+                this.redirect('/profile');
             }
         } else {
-            alert("Username Not Found")
+            alert(tokenData.message)
         }
     }
 
