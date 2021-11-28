@@ -3,6 +3,12 @@ const router = express.Router();
 const authService = require('../service/authService')
 
 router.post('/login', async function (request, response) {
+    /*
+    {
+        username: str,
+        password: str
+    }
+     */
     let username = request.body.username;
     let password = request.body.password;
 
@@ -16,6 +22,12 @@ router.post('/login', async function (request, response) {
 
 
 router.post('/isLoggedIn', async function (request, response) {
+    /*
+    {
+        username: str,
+        token: str
+    }
+     */
     let username = request.body.username;
     let token = request.body.token;
     let isLoggedIn = authService.validateToken(username, token);
@@ -27,6 +39,12 @@ router.post('/isLoggedIn', async function (request, response) {
 });
 
 router.post('/logout', async function (request, response) {
+    /*
+    {
+        username: str,
+        token: str
+    }
+     */
     let username = request.body.username;
     let token = request.body.token;
     let success = authService.invalidateToken(username, token);
@@ -38,6 +56,9 @@ router.post('/logout', async function (request, response) {
 });
 
 router.get('/accessLevel', async function (request, response) {
+    /*
+    /accessLevel?token=token
+     */
     let token = request.query.token
     let accessLevel = await authService.accessLevel(token)
     if (accessLevel===false) {
