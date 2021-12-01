@@ -1,4 +1,4 @@
-#friend-list-container {
+#play-list-container {
     background-color: antiquewhite;
     position: relative;
     overflow: hidden;
@@ -16,10 +16,21 @@
     width: 100%;
 }
 
-.playlist-song-name{
+.playlist-cell-text{
     font-size: 0.7em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 16em;
+}
+
+#playlist-search-div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    align-items: center;
+}
+
+#playlist-search-autocomplete {
+    width: 14em;
 }
