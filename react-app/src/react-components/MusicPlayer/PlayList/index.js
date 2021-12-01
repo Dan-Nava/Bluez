@@ -7,7 +7,12 @@ import Grid from '@mui/material/Grid'
 import ListItemButton from "@mui/material/ListItemButton";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import AlbumIcon from '@mui/icons-material/Album'
+import Button from '@mui/material/Button';
+import InputAdornment from '@mui/material/InputAdornment';
+import AlbumIcon from '@mui/icons-material/Album';
+import SearchIcon from '@mui/icons-material/Search';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
 
 import './styles.css'
 
@@ -29,7 +34,7 @@ export default class PlayList extends React.Component {
             <div key={Math.random()}>
                 <Divider/>
                 <ListItem key={Math.random()} {...extras}>
-                    <ListItemButton onClick={(e) => {
+                    <ListItemButton onClick={() => {
                         if (searching) {
                             this.addToPlaylist(songName);
                         } else {
@@ -44,13 +49,23 @@ export default class PlayList extends React.Component {
                             </Grid>
                             <Grid item>
                                 <Grid container direction='column' spacing={1}>
-                                    <Grid item className='playlist-cell-text'>
+                                    <Grid item id='playlist-song-name'>
                                         {songName}
                                     </Grid>
-                                    <Grid item className='playlist-cell-text'>
-                                        {'artist'}
+                                    <Grid item id='playlist-artist-name'>
+                                        {'The name of the 2artist goes here'}
                                     </Grid>
                                 </Grid>
+                            </Grid>
+                            <Grid item>
+                                <Button
+                                    id='playlist-song-options-button'
+                                    aria-controls='playlist-song-options-menu'
+                                    aria-haspopup='true'
+                                    //aria-expanded={open ? 'true' : null}
+                                >
+                                    <MoreVertIcon fontSize="small"/>
+                                </Button>
                             </Grid>
                         </Grid>
                     </ListItemButton>
@@ -84,7 +99,20 @@ export default class PlayList extends React.Component {
                     //changes value shown in searchbox after selection
                     // and is the value the user must search for to find the song
                     getOptionLabel = {(option) => (option)} 
-                    renderInput={(params) => <TextField {...params} label="Search Music" />}
+                    renderInput={(params) => 
+                        <TextField 
+                            {...params} 
+                            label="Search Song Title"
+                            InputProps={{ 
+                                ...params.InputProps,
+                                startAdornment: (
+                                <InputAdornment position='start'>
+                                    <SearchIcon/>
+                                </InputAdornment>
+                                ),
+                            }}
+                        />
+                    }
                     renderOption={(props, song) => (this.playListPanel(song, true, props))}  
                 />
             </div>

@@ -14,14 +14,23 @@
     overflow-y: auto;
     height: 100%;
     width: 100%;
+    padding-top: 0em;
 }
 
-.playlist-cell-text{
+#playlist-song-name{
     font-size: 0.7em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 16em;
+    max-width: 10em;
+}
+
+#playlist-artist-name{
+    font-size: 0.7em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 10em;
 }
 
 #playlist-search-div {
@@ -33,4 +42,8 @@
 
 #playlist-search-autocomplete {
     width: 14em;
+}
+
+#playlist-song-options-button{
+    left: 3em;
 }
