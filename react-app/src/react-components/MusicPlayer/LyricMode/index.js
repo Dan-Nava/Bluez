@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import Button from "@mui/material/Button";
 import {
@@ -8,14 +8,33 @@ import {
     pureComedLyrics,
     CoverStayAndDecay,
     stayAndDecayLyrics,
-    seeYouAgainLyrics
+    seeYouAgainLyrics,
+    //pureComedTimeStamps,
+    //stayAndDecayTimeStamps,
+    seeYouAgainTimeStamps,
 } from '../../HardCodedData'
 
 import './styles.css'
 
-export default function LyricMode({song}) {
+export default function LyricMode({song}, {audio_object}) {
     let lyrics = seeYouAgainLyrics
+    let timeStamps = seeYouAgainTimeStamps
     const [pos, setPos] = useState(0)
+    
+    useEffect( () => {
+	nextLyric();
+	}
+    );
+
+    function nextLyric() {
+	let index = 0;
+	for (let i = 0; i < (timeStamps.length - 1); i++) {
+	    if ((audio_object.currentTime >= timeStamps[i]) && (audio_object.currentTime < timeStamps[i])) {
+		index = i
+	    }
+	}
+	setPos(index)
+    }
 
     function scrollUp() {
         if (pos > 0) {
@@ -29,6 +48,8 @@ export default function LyricMode({song}) {
         }
     }
 
+    
+
     let albumArt = undefined
 
     //These album covers and lyrics would be stored on an external server and would be retrieved
@@ -37,14 +58,17 @@ export default function LyricMode({song}) {
         case "See You Again":
             albumArt = CoverFlowerBoy
             lyrics = seeYouAgainLyrics
+            timeStamps = seeYouAgainTimeStamps
             break;
         case "Pure Comedy":
             albumArt = CoverPureComedy
             lyrics = pureComedLyrics
+	    //timeStamps = pureComedTimeStamps
             break;
         case "Stay And Decay":
             albumArt = CoverStayAndDecay
             lyrics = stayAndDecayLyrics
+	    //timeStamps = stayAndDecayTimeStamps
             break;
         default:
             albumArt = CoverWhite
