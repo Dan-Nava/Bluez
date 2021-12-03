@@ -8,6 +8,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
 import AlbumIcon from '@mui/icons-material/Album';
 import SearchIcon from '@mui/icons-material/Search';
@@ -33,8 +35,9 @@ export default class PlayList extends React.Component {
         return (
             <div key={Math.random()}>
                 <Divider/>
-                <ListItem key={Math.random()} {...extras}>
-                    <ListItemButton onClick={() => {
+                <ListItem id='playlist-song-cell' key={Math.random()} {...extras}>
+                    <ListItemButton
+                    onClick={() => {
                         if (searching) {
                             this.addToPlaylist(songName);
                         } else {
@@ -43,7 +46,7 @@ export default class PlayList extends React.Component {
                     }} 
                     key={Math.random()}
                     >
-                        <Grid container direction='row' spacing={1}>
+                        <Grid container direction='row' spacing={1} sx={{padding: 0 + 'em'}}>
                             <Grid item>
                                 <Avatar variant='square'><AlbumIcon/></Avatar>
                             </Grid>
@@ -53,24 +56,49 @@ export default class PlayList extends React.Component {
                                         {songName}
                                     </Grid>
                                     <Grid item id='playlist-artist-name'>
-                                        {'The name of the 2artist goes here'}
+                                        {'The name of the artist goes here'}
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item>
-                                <Button
-                                    id='playlist-song-options-button'
-                                    aria-controls='playlist-song-options-menu'
-                                    aria-haspopup='true'
-                                    //aria-expanded={open ? 'true' : null}
-                                >
-                                    <MoreVertIcon fontSize="small"/>
-                                </Button>
-                            </Grid>
                         </Grid>
                     </ListItemButton>
+                    {searching ? null : this.renderOptionsButton(songName)}
                 </ListItem>
             </div>
+        )
+    }
+
+    renderOptionsButton(songName) {
+
+        return (
+            <>
+                <Button
+                    id='playlist-song-options-button'
+                    aria-controls='playlist-song-options-menu'
+                    aria-haspopup='true'
+                    // aria-expanded={open ? 'true' : undefined}
+                    onClick={null}
+                >
+                    <MoreVertIcon/>
+                </Button>
+                <Menu
+                  id="playlist-song-options-menu"
+                  aria-labelledby="playlist-song-options-button"
+                //   anchorEl={this.state.anchorEl}
+                  open={false}
+                  onClose={null}
+                //   anchorOrigin={{
+                //     vertical: 'top',
+                //     horizontal: 'left',
+                //   }}
+                //   transformOrigin={{
+                //     vertical: 'top',
+                //     horizontal: 'left',
+                //   }}
+                >
+                <MenuItem onClick={null}>Profile</MenuItem>
+                </Menu>
+            </>
         )
     }
 
