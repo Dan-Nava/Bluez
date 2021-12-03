@@ -25,7 +25,7 @@ export default class MusicPlayer extends React.Component {
         this.state = this.props.state;
         this.mode_comp = React.createRef();
         this.setSong("See You Again");
-        this.audio_object = new Audio(`http://localhost:5000/public/${this.state.song+".mp3"}`);
+        this.audio_object = new Audio(`${configs.SERVER_URL}/music/audio?name=${this.state.song+".mp3"}`);
         this.addSong("See You Again");
 	this.audio_object.addEventListener('ended', () => {this.incrementSong()});
     }
@@ -44,10 +44,10 @@ export default class MusicPlayer extends React.Component {
     async setSong(songName) {
 	if (this.audio_object) {
             this.audio_object.pause();
-            this.audio_object.src = `http://localhost:5000/public/${songName+".mp3"}`;
+            this.audio_object.src = `${configs.SERVER_URL}/music/audio?name=${this.state.song+".mp3"}`;
             this.audio_object.load();
         } else {
-            this.audio_object = new Audio(`http://localhost:5000/public/${songName+".mp3"}`);
+            this.audio_object = new Audio(`${configs.SERVER_URL}/music/audio?name=${this.state.song+".mp3"}`);
         }
         this.stateChangeHandler('playState', false);
         this.stateChangeHandler('song', songName);
