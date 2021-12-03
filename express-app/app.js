@@ -21,6 +21,10 @@ function init() {
     app.use("/", registerRouter);
 }
 
+app.get("/public/:id", function(req, res) {
+    res.sendFile(__dirname+"/public/"+req.params.id);
+});
+
 const encryptionUtils = require('./utils/encryptionUtils');
 function start() {
     console.log(encryptionUtils.hash("test"))
