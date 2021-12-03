@@ -2,6 +2,7 @@ const Music = require('../model/music');
 const path = require("path");
 
 async function getInfo(name) {
+    name = name.toLowerCase();
     let data = await Music.findAll({
         attributes: ['info'],
         where: {
@@ -16,6 +17,7 @@ async function getInfo(name) {
 }
 
 async function getLyrics(name) {
+    name = name.toLowerCase();
     let data = await Music.findAll({
         attributes: ['timestamps', 'lyrics'],
         where: {
@@ -30,6 +32,7 @@ async function getLyrics(name) {
 }
 
 async function getChords(name) {
+    name = name.toLowerCase();
     let data = await Music.findAll({
         attributes: ['timestamps', 'chords'],
         where: {
@@ -44,6 +47,7 @@ async function getChords(name) {
 }
 
 async function getAudio(name) {
+    name = name.toLowerCase();
     let data = await Music.findAll({
         attributes: ['song_file'],
         where: {
@@ -59,6 +63,7 @@ async function getAudio(name) {
 }
 
 async function getVideo(name) {
+    name = name.toLowerCase();
     let data = await Music.findAll({
         attributes: ['video_file'],
         where: {
