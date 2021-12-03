@@ -5,6 +5,7 @@ require('./utils/databaseUtils')
 
 const authRouter = require('./module/authentication/controller/authController')
 const registerRouter = require('./module/authentication/controller/registerController')
+const musicRouter = require('./module/music/controller/musicController')
 
 const log = console.log;
 
@@ -19,11 +20,10 @@ function init() {
 
     app.use("/", authRouter);
     app.use("/", registerRouter);
+    app.use("/music", musicRouter);
 }
 
-const encryptionUtils = require('./utils/encryptionUtils');
 function start() {
-    console.log(encryptionUtils.hash("test"))
     const port = process.env.PORT || 5000;
     app.listen(port, () => {
         log(`Listening on port ${port}...`)
