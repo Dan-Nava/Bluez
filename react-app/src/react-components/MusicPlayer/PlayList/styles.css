@@ -17,27 +17,6 @@
     padding-top: 0em;
 }
 
-#playlist-song-cell{
-    margin-left: 0.3em;
-    padding: 0em; 
-}
-
-#playlist-song-name{
-    font-size: 0.7em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 14em;
-}
-
-#playlist-artist-name{
-    font-size: 0.7em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 14em;
-}
-
 #playlist-search-div {
     display: flex;
     flex-direction: column;
@@ -49,9 +28,3 @@
     width: 14em;
 }
 
-#playlist-song-options-button {
-    margin-right: 0.6em;
-    margin-left: 0.3em;
-    padding: 0em;
-    min-width: 2em;
-}

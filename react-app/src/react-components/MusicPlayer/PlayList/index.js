@@ -1,20 +1,10 @@
 import React from 'react'
 import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import Divider from '@mui/material/Divider'
-import Avatar from '@mui/material/Avatar'
-import Grid from '@mui/material/Grid'
-import ListItemButton from "@mui/material/ListItemButton";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
-import AlbumIcon from '@mui/icons-material/Album';
 import SearchIcon from '@mui/icons-material/Search';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import SongCell from './SongCell';
 
 import './styles.css'
 
@@ -23,96 +13,36 @@ export default class PlayList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            playList: [],
+            playlist: [],
         }
     }
 
     songList = this.props.state.playList;
 
-    //'extras' only relevant to search popup, 
-    // it lets autocomplete component know that an element has been clicked
-    playListPanel(songName, searching, extras) {
-        return (
-            <div key={Math.random()}>
-                <Divider/>
-                <ListItem id='playlist-song-cell' key={Math.random()} {...extras}>
-                    <ListItemButton
-                    onClick={() => {
-                        if (searching) {
-                            this.addToPlaylist(songName);
-                        } else {
-                            this.props.setSong(songName);
-                        }  
-                    }} 
-                    key={Math.random()}
-                    >
-                        <Grid container direction='row' spacing={1} sx={{padding: 0 + 'em'}}>
-                            <Grid item>
-                                <Avatar variant='square'><AlbumIcon/></Avatar>
-                            </Grid>
-                            <Grid item>
-                                <Grid container direction='column' spacing={1}>
-                                    <Grid item id='playlist-song-name'>
-                                        {songName}
-                                    </Grid>
-                                    <Grid item id='playlist-artist-name'>
-                                        {'The name of the artist goes here'}
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </ListItemButton>
-                    {searching ? null : this.renderOptionsButton(songName)}
-                </ListItem>
-            </div>
-        )
-    }
-
-    renderOptionsButton(songName) {
-
-        return (
-            <>
-                <Button
-                    id='playlist-song-options-button'
-                    aria-controls='playlist-song-options-menu'
-                    aria-haspopup='true'
-                    // aria-expanded={open ? 'true' : undefined}
-                    onClick={null}
-                >
-                    <MoreVertIcon/>
-                </Button>
-                <Menu
-                  id="playlist-song-options-menu"
-                  aria-labelledby="playlist-song-options-button"
-                //   anchorEl={this.state.anchorEl}
-                  open={false}
-                  onClose={null}
-                //   anchorOrigin={{
-                //     vertical: 'top',
-                //     horizontal: 'left',
-                //   }}
-                //   transformOrigin={{
-                //     vertical: 'top',
-                //     horizontal: 'left',
-                //   }}
-                >
-                <MenuItem onClick={null}>Profile</MenuItem>
-                </Menu>
-            </>
-        )
-    }
-
     renderPlaylist() {
         const plist = [];
-        for (let i = 0; i < this.state.playList.length; i++) {
-            plist.push(this.playListPanel(this.state.playList[i], false));
+        for (let i = 0; i < this.state.playlist.length; i++) {
+            plist.push(
+                <SongCell
+                    key={Math.random()}
+                    songName={this.state.playlist[i]} 
+                    searching={false} 
+                    extras={null} 
+                    addToPlaylistCallback={null}
+                    setSongCallback={this.setSongCallback}
+                />
+            );
         }
         return (plist)
     }
 
-    addToPlaylist(songName) {
+    setSongCallback = (songName) => {
+        this.props.setSong(songName);
+    }
+
+    addToPlaylistCallback = (songName) => {
         this.setState({
-            playList: [...this.state.playList, songName]
+            playlist: [...this.state.playlist, songName]
         });
     }
 
@@ -141,7 +71,15 @@ export default class PlayList extends React.Component {
                             }}
                         />
                     }
-                    renderOption={(props, song) => (this.playListPanel(song, true, props))}  
+                    renderOption={(props, song) => (
+                        <SongCell 
+                            songName={song} 
+                            searching={true} 
+                            extras={props}
+                            addToPlaylistCallback={this.addToPlaylistCallback}
+                            setSongCallback={null}
+                        />
+                    )}  
                 />
             </div>
         )
