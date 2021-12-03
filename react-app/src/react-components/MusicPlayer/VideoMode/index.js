@@ -14,7 +14,7 @@ class VideoMode extends React.Component {
 	async load() {
 	    if (this.videoRef != null) {
 		    await this.videoRef.pause();
-		    this.videoRef.src = (process.env.PUBLIC_URL+"/"+this.state.song+".mp4");
+		    this.videoRef.src = `http://localhost:5000/public/${this.state.song+".mp4"}`
 		    await this.videoRef.load();
 		    this.videoRef.muted = true;
 		    this.videoRef.currentTime = this.audio.currentTime;
@@ -49,7 +49,7 @@ class VideoMode extends React.Component {
 	render() {
 		return (
 			<div>
-				<video className="Video" muted ref={ref => (this.videoRef = ref)} src={process.env.PUBLIC_URL+"/"+this.props.song+".mp4"} preload="auto" loop autoPlay={this.autoplay}/>
+				<video className="Video" muted ref={ref => (this.videoRef = ref)} src={`http://localhost:5000/public/${this.props.song+".mp4"}`} preload="auto" loop autoPlay={this.autoplay}/>
 			</div>
 		)
 	}

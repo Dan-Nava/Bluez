@@ -26,13 +26,13 @@ export default class MusicPlayer extends React.Component {
         this.mode_comp = React.createRef();
         this.setSong("See You Again");
         this.audio_object = new Audio(`http://localhost:5000/public/${this.state.song+".mp3"}`);
-        this.audio_object.addEventListener('ended', () => (function () {
+        this.addSong("See You Again");
+	this.audio_object.addEventListener('ended', () => (function () {
             if (!this.audio_object.loop) {
-                const idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
+                let idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
                 this.setSong(this.state.playList[idx]);
             }
         }));
-        this.addSong("See You Again");
     }
 
     setMode(modeName) {
@@ -40,12 +40,12 @@ export default class MusicPlayer extends React.Component {
     }
 
     async setSong(songName) {
-        if (this.audio_object) {
+	if (this.audio_object) {
             this.audio_object.pause();
-            this.audio_object.src = `http://localhost:5000/public/${this.state.song+".mp3"}`;
+            this.audio_object.src = `http://localhost:5000/public/${songName+".mp3"}`;
             this.audio_object.load();
         } else {
-            this.audio_object = new Audio(`http://localhost:5000/public/${this.state.song+".mp3"}`);
+            this.audio_object = new Audio(`http://localhost:5000/public/${songName+".mp3"}`);
         }
         this.stateChangeHandler('playState', false);
         this.stateChangeHandler('song', songName);
