@@ -27,12 +27,14 @@ export default class MusicPlayer extends React.Component {
         this.setSong("See You Again");
         this.audio_object = new Audio(`http://localhost:5000/public/${this.state.song+".mp3"}`);
         this.addSong("See You Again");
-	this.audio_object.addEventListener('ended', () => (function () {
-            if (!this.audio_object.loop) {
-                let idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
-                this.setSong(this.state.playList[idx]);
-            }
-        }));
+	this.audio_object.addEventListener('ended', () => {this.incrementSong()});
+    }
+
+    incrementSong() {
+	if (!this.audio_object.loop) {
+            let idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
+            this.setSong(this.state.playList[idx]);
+        }
     }
 
     setMode(modeName) {
