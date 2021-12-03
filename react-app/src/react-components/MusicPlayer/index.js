@@ -87,7 +87,7 @@ export default class MusicPlayer extends React.Component {
                               comp={<AlbumArtMode song={this.state.song}/>}/>
 
                 <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
-                              comp={<LyricMode song={this.state.song}/>} audio_object={this.audio_object}/>
+                              comp={<LyricMode song={this.state.song} pos={this.state.pos} stateChangeHandler={this.stateChangeHandler.bind(this)} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/musician' authed={this.state.loggedIn}
                               comp={<MusicianMode song={this.state.song}/>}/>

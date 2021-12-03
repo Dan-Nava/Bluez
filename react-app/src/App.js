@@ -18,6 +18,7 @@ class App extends React.Component {
         favList: [],
         playList: ["See You Again", "Pure Comedy", "Stay And Decay"],
         song: "See You Again",
+        pos: 0,
         songMap: (new Map())
     };
 

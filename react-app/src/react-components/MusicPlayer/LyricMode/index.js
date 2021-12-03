@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react'
-
+import React from 'react'
 import Button from "@mui/material/Button";
 import {
     CoverFlowerBoy,
@@ -16,85 +15,80 @@ import {
 
 import './styles.css'
 
-export default function LyricMode({song}, {audio_object}) {
-    let lyrics = seeYouAgainLyrics
-    let timeStamps = seeYouAgainTimeStamps
-    const [pos, setPos] = useState(0)
-    
-    useEffect( () => {
-	nextLyric();
-	}
-    );
+export default class LyricMode extends React.Component {
+    constructor(props) {
+	super(props);
+        this.lyrics = seeYouAgainLyrics;
+        this.timeStamps = seeYouAgainTimeStamps;
+	this.albumArt = undefined;
+        //These album covers and lyrics would be stored on an external server and would be retrieved
 
-    function nextLyric() {
-	let index = 0;
-	for (let i = 0; i < (timeStamps.length - 1); i++) {
-	    if ((audio_object.currentTime >= timeStamps[i]) && (audio_object.currentTime < timeStamps[i])) {
-		index = i
+    	switch (this.props.song) {
+            case "See You Again":
+                this.albumArt = CoverFlowerBoy
+            	this.lyrics = seeYouAgainLyrics
+            	this.timeStamps = seeYouAgainTimeStamps
+            	break;
+            case "Pure Comedy":
+            	this.albumArt = CoverPureComedy
+            	this.lyrics = pureComedLyrics
+	    	//timeStamps = pureComedTimeStamps
+            	break;
+            case "Stay And Decay":
+            	this.albumArt = CoverStayAndDecay
+                this.lyrics = stayAndDecayLyrics
+	    	//timeStamps = stayAndDecayTimeStamps
+            	break;
+            default:
+            	this.albumArt = CoverWhite
+            	break;
+    	}
+	this.props.audio_object.ontimeupdate = this.pos_value.bind(this);
+
+    }
+
+    pos_value() {
+	if (this.props.audio_object) {
+	    for (let i = 0; i < (this.timeStamps.length - 1); i++) {
+	        if ((this.props.audio_object.currentTime >= this.timeStamps[i]) && (this.props.audio_object.currentTime < this.timeStamps[i+1]) && (i != this.props.pos)) {
+		    this.props.stateChangeHandler("pos", i);
+	        }
 	    }
-	}
-	setPos(index)
-    }
-
-    function scrollUp() {
-        if (pos > 0) {
-            setPos(pos - 1)
         }
     }
 
-    function scrollDown() {
-        if (pos < lyrics.length - 5) {
-            setPos(pos + 1)
+    scrollUp() {
+        if (this.props.pos > 0) {
+            this.props.stateChangeHandler("pos", this.props.pos-1);
         }
     }
 
-    
-
-    let albumArt = undefined
-
-    //These album covers and lyrics would be stored on an external server and would be retrieved
-
-    switch (song) {
-        case "See You Again":
-            albumArt = CoverFlowerBoy
-            lyrics = seeYouAgainLyrics
-            timeStamps = seeYouAgainTimeStamps
-            break;
-        case "Pure Comedy":
-            albumArt = CoverPureComedy
-            lyrics = pureComedLyrics
-	    //timeStamps = pureComedTimeStamps
-            break;
-        case "Stay And Decay":
-            albumArt = CoverStayAndDecay
-            lyrics = stayAndDecayLyrics
-	    //timeStamps = stayAndDecayTimeStamps
-            break;
-        default:
-            albumArt = CoverWhite
-            break;
+    scrollDown() {
+        if (this.props.pos < this.lyrics.length - 5) {
+            this.props.stateChangeHandler("pos", this.props.pos+1);
+        }
     }
 
-
-    return (
-        <div>
-            <div className="lyrics">
-                <p className="lyric">{lyrics[pos]}</p>
-                <p className="lyric">{lyrics[pos + 1]}</p>
-                <p className="lyric">{lyrics[pos + 2]}</p>
-                <p className="lyric">{lyrics[pos + 3]}</p>
-                <p className="lyric">{lyrics[pos + 4]}</p>
-            </div>
+    render () {
+        return (
+            <div >
+                <div className="lyrics">
+                    <p className="lyric">{this.lyrics[this.props.pos]}</p>
+                    <p className="lyric">{this.lyrics[this.props.pos + 1]}</p>
+                    <p className="lyric">{this.lyrics[this.props.pos + 2]}</p>
+                    <p className="lyric">{this.lyrics[this.props.pos + 3]}</p>
+                    <p className="lyric">{this.lyrics[this.props.pos + 4]}</p>
+                </div>
             <div className='settingButton'>
-                <Button variant="contained" onClick={scrollUp}>
+                <Button variant="contained" onClick={(e) => this.scrollUp()}>
                     Previous
                 </Button>
-                <Button variant="contained" onClick={scrollDown}>
+                <Button variant="contained" onClick={(e) => this.scrollDown()}>
                     Next
                 </Button>
             </div>
-            
-            <img src={albumArt} className="back-cover" alt=""/>
-        </div>
-    )
+                <img src={this.albumArt} className="back-cover" alt=""/>
+            </div>
+    	)
+    }
 }
