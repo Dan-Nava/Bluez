@@ -3,6 +3,12 @@ const router = express.Router();
 
 const registrationService = require('../service/registerService')
 router.post('/register', async function (request, response) {
+    /*
+    {
+        username: str,
+        password: str
+    }
+     */
     let username = request.body.username;
     let password = request.body.password;
 
