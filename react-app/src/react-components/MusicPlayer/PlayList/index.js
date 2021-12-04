@@ -14,6 +14,7 @@ export default class PlayList extends React.Component {
         super(props);
         this.state = {
             playlist: [],
+            pID: 0,
         }
     }
 
@@ -25,11 +26,15 @@ export default class PlayList extends React.Component {
             plist.push(
                 <SongCell
                     key={Math.random()}
-                    songName={this.state.playlist[i]} 
+                    songName={this.state.playlist[i].name} //this will eventually change to songInfo
+                    pID={this.state.playlist[i].pID}
+                    favorite={this.state.playlist[i].favorite} 
                     searching={false} 
-                    extras={null} 
-                    addToPlaylistCallback={null}
+                    // extras={null} 
+                    // addToPlaylistCallback={null}
                     setSongCallback={this.setSongCallback}
+                    deleteSongCallback={this.deleteSongCallback}
+                    favoriteSongCallback={this.favoriteSongCallback}
                 />
             );
         }
@@ -42,8 +47,27 @@ export default class PlayList extends React.Component {
 
     addToPlaylistCallback = (songName) => {
         this.setState({
-            playlist: [...this.state.playlist, songName]
-        });
+            //TODO: favourite is defaulted to false ATM, needs to be based on user's favorites
+            playlist: [...this.state.playlist, {name: songName, pID: this.state.pID, favorite: false}],
+            pID: this.state.pID + 1
+        })
+
+    }
+
+    deleteSongCallback = (songName, pID) => {
+        this.setState({
+            playlist:  this.state.playlist.filter((data) => data.songName !== songName && data.pID !== pID)
+        })
+    }
+
+    favoriteSongCallback = (songName, favorite) => {
+        this.setState({playlist: this.state.playlist.map((data) => {
+            let newData = data;
+            if (newData.name === songName){
+                newData.favorite = favorite;
+            }
+            return newData;
+        })});
     }
 
     renderPlaylistSearch() {
@@ -72,12 +96,16 @@ export default class PlayList extends React.Component {
                         />
                     }
                     renderOption={(props, song) => (
-                        <SongCell 
-                            songName={song} 
+                        <SongCell
+                            key={Math.random()}
+                            songName={song}
+                            // pID={this.state.playlist[i].pID}
                             searching={true} 
                             extras={props}
+                            // favorite={this.state.playlist[i].favorite}
                             addToPlaylistCallback={this.addToPlaylistCallback}
-                            setSongCallback={null}
+                            // setSongCallback={null}
+                            // deleteSongCallback={null}
                         />
                     )}  
                 />

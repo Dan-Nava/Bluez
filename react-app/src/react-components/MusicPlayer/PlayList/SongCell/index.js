@@ -11,27 +11,46 @@ import AlbumIcon from '@mui/icons-material/Album';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
 import './styles.css'
 
-
 export default class SongCell extends React.Component {
 
-    state = {
-        anchorElement: null,
-        openOptionsMenu: false,
+    constructor(props) {
+        super(props);
+        this.state = {
+            anchorElement: null,
+            openOptionsMenu: false,
+            favorite: this.props.favorite, //TODO: change this to intake a value later based on user  
+        }
     }
+
 
     handleOnClick = () => {
-        if (this.props.searching){
+        if (this.props.searching) {
             return this.props.addToPlaylistCallback(this.props.songName);
+        } else {
+            return this.props.setSongCallback(this.props.songName);
         }
-        else{return this.props.setSongCallback(this.props.songName)}
     }
 
-        //'extras' only relevant to search popup, 
+    handleDelete = () => this.props.deleteSongCallback(this.props.songName, this.props.pID);
+
+    handleFavorite = () => {
+        let fav;
+        if (this.state.favorite){
+            fav = false;
+        } else {
+            fav = true;
+        }  
+        this.setState({favorite: fav})
+        this.props.favoriteSongCallback(this.props.songName, fav);
+    }
+
+    //'extras' only relevant to search popup, 
     // it lets autocomplete component know that an element has been clicked
-    playListPanel(songName, searching, extras) {
+    renderSongCell(songName, searching, extras) {
         return (
             <div>
                 <Divider/>
@@ -96,8 +115,14 @@ export default class SongCell extends React.Component {
                     horizontal: 'left',
                   }}
                 >
-                <MenuItem id="playlist-song-options-delete" onClick={null}><DeleteIcon/>Delete</MenuItem>
-                <MenuItem id="playlist-song-options-favorite" onClick={null}><FavoriteBorderIcon/>Favourite</MenuItem>
+                <MenuItem id="playlist-song-options-delete" onClick={this.handleDelete}>
+                    <DeleteIcon/>
+                    Delete
+                </MenuItem>
+                <MenuItem id="playlist-song-options-favorite" onClick={this.handleFavorite}>
+                    {this.state.favorite ? <FavoriteIcon/> : <FavoriteBorderIcon/>} 
+                    Favourite
+                </MenuItem>
                 </Menu>
             </>
         )
@@ -106,7 +131,7 @@ export default class SongCell extends React.Component {
     render() {
         return (
                 <>
-                    {this.playListPanel(this.props.songName, this.props.searching, this.props.extras)}
+                    {this.renderSongCell(this.props.songName, this.props.searching, this.props.extras)}
                 </>
             )
         }
