@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const musicService = require('../service/musicService')
-const adminService = require("../service/adminService");
 
 router.get('/info', async function (request, response) {
     /*
