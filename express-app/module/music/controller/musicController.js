@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const musicService = require('../service/musicService')
+const adminService = require("../service/adminService");
 
 router.get('/info', async function (request, response) {
     /*
@@ -64,6 +65,18 @@ router.get('/video', async function (request, response) {
         response.status(400).end(JSON.stringify({message: 'Invalid song name'}));
     } else {
         response.status(200).sendFile(file);
+    }
+});
+
+router.get('/all', async function (request, response) {
+    /*
+    /music/all
+     */
+    let names = await adminService.getAllUsers();
+    if (names === false) {
+        response.status(404).end(JSON.stringify({message: 'No songs found'}));
+    } else {
+        response.status(200).end(JSON.stringify({names: names}));
     }
 });
 
