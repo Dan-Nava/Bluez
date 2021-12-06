@@ -3,6 +3,8 @@ import {TableCell, TableRow} from '@mui/material'
 import Button from '@mui/material/Button'
 import Avatar from '@mui/material/Avatar'
 
+import './styles.css'
+
 /* Component for a single row in the list of user accounts in admin edit user menu
     each row represents one account */
 export default class AdminMULRow extends React.Component {
@@ -10,39 +12,53 @@ export default class AdminMULRow extends React.Component {
     //handles user ban
     handleBan = () => this.props.banCallback(this.props.user);
 
-    handleEdit = () => {
-        //open user profile
-        // this should effectively be a copy of the user profile edit page for the specific user being edited
-        this.props.editCallback('EDIT_USER_PROFILE', this.props.user);
+    handleSetAdmin = () => {
+        //modify DOM
+        //database call
+        this.props.setAdminCallback(this.props.user);
     }
 
     render() {
-
         const {user} = this.props;
+        let accountType;
+        switch (user.access_level) {
+            case -1:
+                accountType = 'Banned';
+                break;
+            case 0:
+                accountType = 'Regular';
+                break;
+            case 1:
+                accountType = 'Admin';
+                break;
+            default:
+                break;
+        }
 
         return (
-            <TableRow key = {user.uID}>
-                <TableCell><Avatar></Avatar></TableCell>
-                <TableCell>{user.userName}</TableCell>
-                <TableCell>{user.password}</TableCell>
-                <TableCell>{user.type}</TableCell>
-                <TableCell>{user.uID}</TableCell>
+            <TableRow key = {Math.random()}>
+                <TableCell className='admin-user-table-cell-image'><Avatar></Avatar></TableCell>
+                <TableCell className='admin-user-table-cell-text'>{user.username}</TableCell>
+                <TableCell className='admin-user-table-cell-text'>{accountType}</TableCell>
                 <TableCell> 
                     <Button 
-                        className='edit-button' 
+                        id='set-admin-button' 
                         variant="outlined" 
                         onClick={this.handleEdit}
-                        color='primary'> 
-                        EDIT     
+                        color='primary'
+                        disabled={!(accountType === 'Regular') ? true : false}
+                    >
+                        {!(accountType === 'Admin') ? 'SET ADMIN' : 'REVERT ADMIN'}   
                     </Button> 
                 </TableCell>
                 <TableCell>
                     <Button 
-                        className='ban-button' 
+                        id='ban-button' 
                         variant="outlined" 
                         onClick={this.handleBan}
-                        color='secondary'> 
-                        {user.banned ? 'UNBAN' : 'BAN'}
+                        color='secondary'
+                    >
+                        {(accountType === 'Banned') ? 'UNBAN' : 'BAN'}
                     </Button>
                 </TableCell>
             </TableRow>
