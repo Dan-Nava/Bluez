@@ -44,6 +44,7 @@ class Login extends React.Component {
         let token = tokenData.token;
         if (token) {
             Cookies.set('token', token);
+            Cookies.set('username', username);
             let data = await fetch(`${configs.SERVER_URL}/accessLevel?token=${token}`).then(res => res.json());
             if (data.accessLevel > 0) {
                 this.stateChangeHandler('loggedIn', true);
