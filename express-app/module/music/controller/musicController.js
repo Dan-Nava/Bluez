@@ -71,7 +71,7 @@ router.get('/all', async function (request, response) {
     /*
     /music/all
      */
-    let names = await adminService.getAllUsers();
+    let names = await musicService.getAll();
     if (names === false) {
         response.status(404).end(JSON.stringify({message: 'No songs found'}));
     } else {
