@@ -38,16 +38,12 @@ export default class AdminMUList extends React.Component {
         
         if (user.access_level === -1){ // if accounts already banned, unban it and revert it to a regular user
             user.access_level = 0;            
-            this.modifyBanState('unban', body);
+            this.modifyUserAccessLevel('restore', body);
         } else { //otherwise ban it
             user.access_level = -1;
-            this.modifyBanState('ban', body);
+            this.modifyUserAccessLevel('ban', body);
         }
         this.setState({accountData: this.props.accountData}); //forces re-render
-    }
-
-    async modifyBanState(action, body) {
-        await fetch(`${configs.SERVER_URL}/admin/${action}`, constructRequest(body, 'POST')).then(res => res.json()); 
     }
 
     setAdminCallback = (user) => {
@@ -55,18 +51,18 @@ export default class AdminMUList extends React.Component {
         let body = {token: token, username: user.username};
 
         if (user.access_level === 1) { //if already admin, revert to regular user
-            // user.access_level = 0;
-            // this.modifyAdminState(body);
+            user.access_level = 0;
+            this.modifyUserAccessLevel('restore', body);
         } else { //otherwise set account to admin
             user.access_level = 1;
-            this.modifyAdminState(body);
+            this.modifyUserAccessLevel('add', body);
         }
+        this.setState({accountData: this.props.accountData}); //forces re-render
     }
 
-    async modifyAdminState(body) {
-        await fetch(`${configs.SERVER_URL}/add`, constructRequest(body, 'POST')).then(res => res.json()); 
+    async modifyUserAccessLevel(action, body) {
+        await fetch(`${configs.SERVER_URL}/admin/${action}`, constructRequest(body, 'POST')).then(res => res.json()); 
     }
-    
 
     renderTableHeader(){
         const tableHeaders = ["", "User Name", "Account Type", "", ""]

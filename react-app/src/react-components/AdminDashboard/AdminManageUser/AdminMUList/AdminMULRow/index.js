@@ -2,6 +2,7 @@ import React from 'react'
 import {TableCell, TableRow} from '@mui/material'
 import Button from '@mui/material/Button'
 import Avatar from '@mui/material/Avatar'
+import Cookies from 'js-cookie';
 
 import './styles.css'
 
@@ -44,9 +45,10 @@ export default class AdminMULRow extends React.Component {
                     <Button 
                         id='set-admin-button' 
                         variant="outlined" 
-                        onClick={this.handleEdit}
+                        onClick={this.handleSetAdmin}
                         color='primary'
-                        disabled={!(accountType === 'Regular') ? true : false}
+                        disabled={(accountType === 'Banned' 
+                        || !(Cookies.get('username') === user.username)) ? false : true}
                     >
                         {!(accountType === 'Admin') ? 'SET ADMIN' : 'REVERT ADMIN'}   
                     </Button> 
@@ -57,6 +59,7 @@ export default class AdminMULRow extends React.Component {
                         variant="outlined" 
                         onClick={this.handleBan}
                         color='secondary'
+                        disabled={Cookies.get('username') === user.username ? true : false}
                     >
                         {(accountType === 'Banned') ? 'UNBAN' : 'BAN'}
                     </Button>
