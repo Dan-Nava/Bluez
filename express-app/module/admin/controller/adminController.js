@@ -44,7 +44,7 @@ router.post('/ban', async function (request, response) {
     }
 });
 
-router.post('/unban', async function (request, response) {
+router.post('/restore', async function (request, response) {
     /*
     {
         token: str,
@@ -57,7 +57,7 @@ router.post('/unban', async function (request, response) {
     if (accessLevel < 1) {
         response.status(401).end(JSON.stringify({message: 'Not enough access level'}));
     } else {
-        let success = await adminService.unbanUser(username);
+        let success = await adminService.restoreUser(username);
         if (success === false) {
             response.status(404).end(JSON.stringify({message: 'Not users found'}));
         } else {
