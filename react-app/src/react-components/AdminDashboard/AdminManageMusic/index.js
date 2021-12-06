@@ -8,6 +8,10 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import AdminMMList from './AdminMMList';
 import EditAddMusic from './EditAddMusic';
+import configs from '../../../config';
+import constructRequest from '../../../utils/requestConstructor';
+import Cookies from 'js-cookie';
+
 import './styles.css';
 import {songData} from "../../HardCodedData";
 
@@ -15,15 +19,14 @@ import {songData} from "../../HardCodedData";
 export default class AdminManageMusic extends React.Component {
     constructor(props) {
         super(props);
-        this.songData = songData
-    }
-
-    state = {
-        searchValue: '',
-        currentView: 'DEFAULT', //possible views: DEFAULT, EDIT_SONG, ADD_SONG
-        songToBeEdited: null,
-        filterValue: 'title' //possible options: title, artist, album, genre, year
-
+         
+        this.state = {
+            songData: songData,
+            searchValue: '',
+            currentView: 'DEFAULT', //possible views: DEFAULT, EDIT_SONG, ADD_SONG
+            songToBeEdited: null,
+            filterValue: 'title' //possible options: title, artist, album, genre, year
+        }
     }
 
     //edit button callback
@@ -33,8 +36,8 @@ export default class AdminManageMusic extends React.Component {
 
     //DATABASE CALL: deletes song from the database
     deleteCallback = (song) => {
-        const newlist = this.songData.filter((s) => s !== song);
-        this.songData = newlist;
+        const newlist = this.state.songData.filter((s) => s !== song);
+        this.setState({songData: newlist})
     }
 
     //callback for return button from any child views
@@ -45,6 +48,13 @@ export default class AdminManageMusic extends React.Component {
 
     //add music button handler
     handleAddMusic = () => this.setState({currentView: 'ADD_SONG'});
+
+    async componentDidMount () {
+        let token = Cookies.get('token');
+        let data = await fetch(`${configs.SERVER_URL}/info`).then(res => res.json());
+        console.log(data)
+        // this.setState({songData: data.users})
+    }
 
     //default view of the MANAGE MUSIC menu
     defaultView() {
@@ -92,7 +102,7 @@ export default class AdminManageMusic extends React.Component {
                 </div>
                 <div>
                     <AdminMMList
-                        songData={this.songData}
+                        songData={this.state.songData}
                         searchValue={this.state.searchValue}
                         filterValue={this.state.filterValue}
                         editCallback={this.editCallback}
