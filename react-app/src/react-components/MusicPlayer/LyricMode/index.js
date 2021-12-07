@@ -62,12 +62,22 @@ export default class LyricMode extends React.Component {
 		    		<p className="lyric">{this.props.lyrics[this.props.pos + 1]}</p>
 		    		<p className="lyric">{this.props.lyrics[this.props.pos + 2]}</p>
 		    		<p className="lyric">{this.props.lyrics[this.props.pos + 3]}</p>
-     		    		<p className="lyric">{this.props.lyrics[this.props.pos + 4]}</p>
+     		    	<p className="lyric">{this.props.lyrics[this.props.pos + 4]}</p>
+					<p className="lyric">{this.props.lyrics[this.props.pos + 5]}</p>
+		    		<p className="lyric">{this.props.lyrics[this.props.pos + 6]}</p>
+					<p className="lyric">{this.props.lyrics[this.props.pos + 7]}</p>
+     		    	<p className="lyric">{this.props.lyrics[this.props.pos + 8]}</p>
+					<p className="lyric">{this.props.lyrics[this.props.pos + 9]}</p>
 			</div>
 			);
 	} else {
 		return (
 			<div className="lyrics">
+				<p className="lyric"></p>
+				<p className="lyric"></p>
+				<p className="lyric"></p>
+				<p className="lyric"></p>
+				<p className="lyric"></p>
 				<p className="lyric"></p>
 				<p className="lyric"></p>
 				<p className="lyric"></p>
