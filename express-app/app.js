@@ -7,6 +7,7 @@ const authRouter = require('./module/authentication/controller/authController')
 const registerRouter = require('./module/authentication/controller/registerController')
 const musicRouter = require('./module/music/controller/musicController')
 const adminRouter = require('./module/admin/controller/adminController')
+const accountRouter = require('./module/account/controller/accountController')
 
 const log = console.log;
 
@@ -23,6 +24,7 @@ function init() {
     app.use("/", registerRouter);
     app.use("/music", musicRouter);
     app.use("/admin", adminRouter);
+    app.use("/account", accountRouter);
 }
 
 function start() {

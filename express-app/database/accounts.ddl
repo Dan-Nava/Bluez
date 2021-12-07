@@ -8,5 +8,5 @@ CREATE TABLE accounts
     playlist            VARCHAR,
     friends             VARCHAR,
     avatar              VARCHAR,
-    hero                VARCHAR,
+    hero                VARCHAR
 );
