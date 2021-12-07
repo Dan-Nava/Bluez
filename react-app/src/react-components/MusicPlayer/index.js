@@ -20,6 +20,7 @@ import InfoPanel from "./InfoPanel";
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
 export default class MusicPlayer extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = this.props.state;

@@ -56,7 +56,10 @@ class Controls extends React.Component {
 	    }
         }
 	if (this.props.audio_object) {
-		this.props.stateChangeHandler('progress', this.props.audio_object.currentTime * 100 / this.props.audio_object.duration);
+		let currentProgress = this.props.audio_object.currentTime * 100 / this.props.audio_object.duration;
+		if (Math.abs(currentProgress - this.props.progress) > 1) {
+			this.props.stateChangeHandler("progress", currentProgress);
+		}
 	}
     }
 
