@@ -17,6 +17,10 @@ class App extends React.Component {
         favList: [],
         playList: ["After The Love Has Gone", "Woman", "How Deep Is Your Love"],
         song: "After The Love Has Gone",
+	albumArt: null,
+	lyrics: null,
+	timestamps: null,
+        pos: 0,
         songMap: (new Map())
     };
 

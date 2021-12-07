@@ -15,7 +15,7 @@ import {
     AccountCircle,
     AdminPanelSettingsRounded, EmojiSymbols,
     ForumRounded,
-    LoginRounded, Loop,
+    Loop,
     PhotoAlbum,
     TextSnippet
 } from "@mui/icons-material";
