@@ -109,7 +109,7 @@ export default class LyricMode extends React.Component {
                     	Next
                 	</Button>
 	    	</div>
-	    	{(this.props.albumArt) ? <div><img src={this.get_album()} className="back-cover" alt=""/></div> : <div></div>}
+	    	{(this.props.albumArt) ? <div><img src={this.props.albumArt} className="back-cover" alt=""/></div> : <div></div>}
 	    </div>
 		
     	)
