@@ -1,10 +1,12 @@
 const Accounts = require('../model/accounts')
 const Users = require('../../authentication/model/users')
 const authService = require('../../authentication/service/authService')
+const {v4: uuidv4} = require('uuid');
+const defaultData = require('../../../resources/default/defaultData')
 
-async function getAccountId(token){
+async function getAccountId(token) {
     let username = authService.findUsernameByToken(token);
-    if(!username){
+    if (!username) {
         return false;
     }
     let data = await Users.findAll({
@@ -21,9 +23,24 @@ async function getAccountId(token){
     }
 }
 
-async function getAccount(token, attributes){
+async function createAccount() {
+    let accountId = uuidv4();
+    await Accounts.create({
+        account_id: accountId,
+        title: 'Music Enthusiast',
+        description: 'Write something here',
+        favorites: '[]',
+        playlist: '[]',
+        friends: '[]',
+        avatar: defaultData.avatar,
+        hero: defaultData.hero,
+    });
+    return accountId;
+}
+
+async function getAccount(token, attributes) {
     let accountId = await getAccountId(token);
-    if(!accountId){
+    if (!accountId) {
         return false;
     }
     let data = await Accounts.findAll({
@@ -41,4 +58,5 @@ async function getAccount(token, attributes){
 
 module.exports = {
     getAccount: getAccount,
+    createAccount: createAccount,
 };
