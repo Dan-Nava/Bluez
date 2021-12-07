@@ -67,4 +67,16 @@ router.get('/video', async function (request, response) {
     }
 });
 
+router.get('/all', async function (request, response) {
+    /*
+    /music/all
+     */
+    let names = await musicService.getAll();
+    if (names === false) {
+        response.status(404).end(JSON.stringify({message: 'No songs found'}));
+    } else {
+        response.status(200).end(JSON.stringify({names: names}));
+    }
+});
+
 module.exports = router;
