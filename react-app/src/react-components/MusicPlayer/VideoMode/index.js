@@ -6,8 +6,6 @@ import './styles.css';
 class VideoMode extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = this.props.state;
-		this.audio = this.props.audio_object;
 		this.autoplay = !this.props.audio_object.paused;
 		this.videoRef = null;
 	}
@@ -15,10 +13,10 @@ class VideoMode extends React.Component {
 	async load() {
 	    if (this.videoRef != null) {
 		    await this.videoRef.pause();
-		    this.videoRef.src = `${configs.SERVER_URL}/music/video?name=${this.state.song}`
+		    this.videoRef.src = `${configs.SERVER_URL}/music/video?name=${this.props.state.song}`;
 		    await this.videoRef.load();
 		    this.videoRef.muted = true;
-		    this.videoRef.currentTime = this.audio.currentTime;
+		    this.videoRef.currentTime = this.props.audio_object.currentTime;
 		}
 	}
 
@@ -31,16 +29,16 @@ class VideoMode extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.song !== prevState.song) {
+		if (this.props.state.song !== prevProps.state.song) {
 			this.load();
 		}
-		this.videoRef.currentTime = this.audio.currentTime;
-		if (this.videoRef.duration < this.audio.duration) {
+		this.videoRef.currentTime = this.props.audio_object.currentTime;
+		if (this.videoRef.duration < this.props.audio_object.duration) {
 			this.videoRef.loop = true;
 		} else {
-		    this.videoRef.loop = this.audio.loop;
+		    this.videoRef.loop = this.props.audio_object.loop;
 		}
-		if (this.audio.paused) {
+		if (this.props.audio_object.paused) {
 			this.pause();
 		} else {
 			this.play();
@@ -50,7 +48,7 @@ class VideoMode extends React.Component {
 	render() {
 		return (
 			<div>
-				<video className="Video" muted ref={ref => (this.videoRef = ref)} src={`${configs.SERVER_URL}/music/video?name=${this.state.song}`} preload="auto" loop autoPlay={this.autoplay}/>
+				<video className="Video" muted ref={ref => (this.videoRef = ref)} src={`${configs.SERVER_URL}/music/video?name=${this.props.state.song}`} preload="auto" loop autoPlay={this.autoplay}/>
 			</div>
 		)
 	}
