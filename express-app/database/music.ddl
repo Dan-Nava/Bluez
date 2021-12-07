@@ -7,5 +7,6 @@ CREATE TABLE music
     lyrics          VARCHAR,
     chords          VARCHAR,
     song_file       VARCHAR(255),
-    video_file      VARCHAR(255)
+    video_file      VARCHAR(255),
+    album_art       VARCHAR
 );
