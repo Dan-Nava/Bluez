@@ -108,13 +108,17 @@ export default class MusicPlayer extends React.Component {
                 <PrivateRoute exact path='/profile' authed={this.state.loggedIn} comp={(<div/>)}/>
                 <PrivateRoute exact path='/social' authed={this.state.loggedIn} comp={<FriendList/>}/>
                 <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn}
-                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)}/>)}/>
+                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)} 
+                              stateChangeHandler={this.stateChangeHandler.bind(this)}/>)}/>
                 <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
-                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)}/>)}/>
+                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)} 
+                              stateChangeHandler={this.stateChangeHandler.bind(this)}/>)}/>
                 <PrivateRoute exact path='/musician' authed={this.state.loggedIn}
-                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)}/>)}/>
+                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)} 
+                              stateChangeHandler={this.stateChangeHandler.bind(this)}/>)}/>
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
-                              comp={<PlayList state={this.state} setSong={this.setSong.bind(this)}/>}/>
+                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)} 
+                              stateChangeHandler={this.stateChangeHandler.bind(this)}/>)}/>
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={(<div/>)}/>
             </Switch>
         );

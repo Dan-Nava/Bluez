@@ -5,6 +5,9 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import SongCell from './SongCell';
+import configs from '../../../config'
+import Cookies from 'js-cookie';
+import constructRequest from '../../../utils/requestConstructor'
 
 import './styles.css'
 
@@ -13,15 +16,65 @@ export default class PlayList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            playlist: [],
+            playlist: [], // ex: [{name: 'abc', pID: 0, favorite: false}, ...]
             pID: 0,
+            songList: [], // ex: ['songname1', 'songname2', ...]
+            favorites: [] // ex: ['favorite1', 'favorite2', ...]
         }
     }
 
-    songList = this.props.state.playList;
+    async componentDidMount() {
+        //server call for all songs in database
+        const songData = await fetch(`${configs.SERVER_URL}/music/all`).then(res => res.json());
+        let songNames = [];
+        for (let i = 0; i < songData.names.length; i++) {
+            songNames.push(songData.names[i].name);
+        }
+        this.setState({songList: songNames})
+
+        //server call for favorites of user
+        this.getFavorites();
+        let fav;
+
+        this.getPlaylist(fav);
+
+
+    }
+
+    async getPlaylist(fav) {
+        const userPL = this.props.state.playlist;
+        //populates playlist based on user's pre-existing playlist
+        if (userPL) { //ie. if its not empty
+            let currentPlaylist = [];
+            let pID = 0;
+            for (let i = 0; i < userPL.length; i++){
+                if (this.state.favorites && this.state.favorites.includes(userPL[i])){
+                    fav = true;
+                } else { fav = false;}
+                currentPlaylist.push({name: userPL[i], pID: pID, favorite: fav});
+                pID += 1;
+            }   
+            this.setState({playlist: currentPlaylist, pID: pID})
+        }
+    }
+
+    async getFavorites () {
+        const token = Cookies.get('token');
+        const favData = await fetch(`${configs.SERVER_URL}/account/favorites?token=${token}`).then(res => res.json());
+        this.setState({favorites: JSON.parse(favData.account.favorites)});
+    }
+
+    async updateFavorites (favs) {
+        const token = Cookies.get('token');
+        const body = {token: token, newValues: {favorites: JSON.stringify(favs)}};
+        await fetch(`${configs.SERVER_URL}/account/update`, constructRequest(body, 'POST')).then(res => res.json());
+    }
 
     renderPlaylist() {
         const plist = [];
+        if (!this.state.playlist){
+            return null;
+        }
         for (let i = 0; i < this.state.playlist.length; i++) {
             plist.push(
                 <SongCell
@@ -45,29 +98,63 @@ export default class PlayList extends React.Component {
         this.props.setSong(songName);
     }
 
-    addToPlaylistCallback = (songName) => {
-        this.setState({
-            //TODO: favourite is defaulted to false ATM, needs to be based on user's favorites
-            playlist: [...this.state.playlist, {name: songName, pID: this.state.pID, favorite: false}],
+    addToPlaylistCallback = async (songName) => {
+        let fav;
+        if (this.state.favorites.length && this.state.favorites.includes(songName)){fav = true;} 
+        else {fav = false;}
+        await this.setState({
+            playlist: [...this.state.playlist, {name: songName, pID: this.state.pID, favorite: fav}],
             pID: this.state.pID + 1
         })
 
+        //updates app.js playlist state
+        let songNames = [];
+        for (let i = 0; i < this.state.playlist.length; i++) {
+            songNames.push(this.state.playlist[i].name);
+        }
+        this.props.stateChangeHandler('playList', songNames);
     }
 
-    deleteSongCallback = (songName, pID) => {
-        this.setState({
+    deleteSongCallback = async (songName, pID) => {
+        await this.setState({
             playlist:  this.state.playlist.filter((data) => data.songName !== songName && data.pID !== pID)
         })
+
+        //updates app.js playlist state
+        let songNames = [];
+        for (let i = 0; i < this.state.playlist.length; i++) {
+            songNames.push(this.state.playlist[i].name);
+        }
+        this.props.stateChangeHandler('playList', songNames);
     }
 
-    favoriteSongCallback = (songName, favorite) => {
-        this.setState({playlist: this.state.playlist.map((data) => {
+    favoriteSongCallback = async (songName, favorite) => {
+        //this effectively updates the front-end 
+        await this.setState({playlist: this.state.playlist.map((data) => {
             let newData = data;
             if (newData.name === songName){
                 newData.favorite = favorite;
             }
             return newData;
         })});
+
+        if (favorite){ //favoriting the song
+            //non-empty favorites list and this song isnt already in it
+            if (this.state.favorites.length > 0 && !this.state.favorites.includes(songName)){
+                console.log("in here", this.state.favorites.length)
+                this.setState({favorites: [...this.state.favorites, songName]});
+            //empty favorites list
+            } else if (this.state.favorites.length === 0){  
+                this.setState({favorites: [...this.state.favorites, songName]});
+            }
+        } else { //un-favoriting the song
+            this.setState({favorites: this.state.favorites.filter((song) => song !== songName)});
+        }
+    
+        //server call
+        console.log(this.state.favorites);
+        this.updateFavorites(this.state.favorites);
+        
     }
 
     renderPlaylistSearch() {
@@ -75,7 +162,7 @@ export default class PlayList extends React.Component {
             <div id='playlist-search-div'>
                 <Autocomplete
                     id="playlist-search-autocomplete"
-                    options={this.songList}
+                    options={this.state.songList}
                     freeSolo
                     size='small'
                     //changes value shown in searchbox after selection
@@ -114,6 +201,7 @@ export default class PlayList extends React.Component {
     }
 
     render() {
+        console.log(this.state.favorites)
         return (
             <>  
                 {this.renderPlaylistSearch()}
