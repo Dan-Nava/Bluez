@@ -90,20 +90,23 @@ class Controls extends React.Component {
     }
 
     clickMute(e) {
-        if (this.props.audio_object.muted === false) {
+        if (this.props.state.muted === false) {
             this.props.audio_object.muted = true;
+	    this.props.stateChangeHandler('muted', true);
 
         } else {
             this.props.audio_object.muted = false;
+	    this.props.stateChangeHandler('muted', false);
         }
     }
 
     clickLoop(e) {
-        if (this.props.audio_object.loop === false) {
+        if (this.props.state.loop === false) {
             this.props.audio_object.loop = true;
+	    this.props.stateChangeHandler('loop', true);
         } else {
             this.props.audio_object.loop = false;
-            this.props.stateChangeHandler('loop', !this.props.state.loop);
+            this.props.stateChangeHandler('loop', false);
         }
     }
 
@@ -141,8 +144,9 @@ class Controls extends React.Component {
                 </div>
                 <div>
                     <ul id="controlButtons">
-                        <li><Button variant="contained" color="primary" startIcon={<Loop/>}
-                                    onClick={(e) => this.clickLoop(e)}/></li>
+			{this.props.state.loop
+                        ? <li><Button variant="contained" color="secondary" startIcon={<Loop/>} onClick={(e) => this.clickLoop(e)}/></li>
+			: <li><Button variant="contained" color="primary" startIcon={<Loop/>} onClick={(e) => this.clickLoop(e)}/></li>}
                         <li><Button variant="contained" color="primary" startIcon={<VolumeDownIcon/>}
                                     onClick={(e) => this.clickDecreaseVol(e)}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<FastRewindIcon/>}
@@ -154,8 +158,9 @@ class Controls extends React.Component {
                                     onClick={(e) => this.clickForward(e)}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<VolumeUpIcon/>}
                                     onClick={(e) => this.clickIncreaseVol(e)}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<VolumeOffIcon/>}
-                                    onClick={(e) => this.clickMute(e)}/></li>
+			{this.props.state.muted
+                        ? <li><Button variant="contained" color="secondary" startIcon={<VolumeOffIcon/>} onClick={(e) => this.clickMute(e)}/></li>
+			: <li><Button variant="contained" color="primary" startIcon={<VolumeOffIcon/>} onClick={(e) => this.clickMute(e)}/></li>}
                     </ul>
                 </div>
             </div>
