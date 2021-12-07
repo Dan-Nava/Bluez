@@ -37,7 +37,7 @@ router.get('/chords', async function (request, response) {
     if (music === false) {
         response.status(400).end(JSON.stringify({message: 'Invalid song name'}));
     } else {
-        response.status(200).end(JSON.stringify({timestamps: music.timestamps, lyrics: music.chords}));
+        response.status(200).end(JSON.stringify({timestamps: music.timestamps, chords: music.chords}));
     }
 });
 

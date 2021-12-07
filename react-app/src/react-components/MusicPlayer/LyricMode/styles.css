@@ -10,17 +10,19 @@
   line-height: 4.5em;
   text-align: left;
 }
-.lyric:nth-child(1) {
-  opacity: 25%;
-}
+
 .lyric:nth-child(2) {
+  opacity: 75%;
+}
+
+.lyric:nth-child(3) {
   opacity: 50%;
 }
 
 .lyric:nth-child(4) {
-  opacity: 50%;
+  opacity: 25%;
 }
 
 .lyric:nth-child(5) {
-  opacity: 25%;
+  opacity: 15%;
 }

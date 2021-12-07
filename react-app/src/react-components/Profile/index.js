@@ -3,40 +3,61 @@ import React from "react";
 
 import Button from "@mui/material/Button";
 
-import hero from "./static/hero.png";
-import avatar from "./static/avatar.png";
 import cover from "./static/cover.png";
-import {userProfiles} from "../HardCodedData";
+import configs from "../../config";
+import Cookies from "js-cookie";
 
 class Profile extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = this.props.state
+    state = {
+        name: '',
+        title: '',
+        description: '',
+        avatar:'',
+        hero:'',
+    }
+
+    componentDidMount() {
+        this.loadUserProfile()
     }
 
     loadUserProfile() {
-        for (let i = 0; i < userProfiles.length; i++) {
-            if (parseInt(this.props.userId) === parseInt(userProfiles[i]['id'])) {
-                this.username = userProfiles[i]['name'];
-                this.description = userProfiles[i]['description'];
-                break;
-            }
-        }
+        let token = Cookies.get('token');
+        fetch(`${configs.SERVER_URL}/account/info?token=${token}`).then(res => res.json()).then(data => {
+            let account = data.account;
+            this.setState({
+                name: account.name,
+                title: account.title,
+                description: account.description,
+            });
+        });
+        fetch(`${configs.SERVER_URL}/account/avatar?token=${token}`).then(res => res.json()).then(data => {
+            let account = data.account;
+            this.setState({
+                avatar: account.avatar
+            });
+        });
+
+        fetch(`${configs.SERVER_URL}/account/hero?token=${token}`).then(res => res.json()).then(data => {
+            let account = data.account;
+            this.setState({
+                hero: account.hero
+            });
+        });
     }
 
     render() {
-        this.loadUserProfile()
+        let hero = this.state.hero;
         return (
             <div className="profile">
                 <div className="card">
                     <div className="hero" style={{backgroundImage: 'url(' + hero + ')'}}>
-                        <img src={avatar} className="avatar" alt=""/>
-                        <h1>{this.username}</h1>
+                        <img src={this.state.avatar} className="avatar" alt=""/>
+                        <h1>{this.state.name}</h1>
                     </div>
                     <div className="info_container">
                         <br/>
-                        <span>Music Enthusiast</span>
-                        <p className="description">{this.description}</p>
+                        <span>{this.state.title}</span>
+                        <p className="description">{this.state.description}</p>
                         <br/>
                         <h1>Favorites</h1>
                         <div className="favs">

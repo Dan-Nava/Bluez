@@ -6,17 +6,20 @@ import {BrowserRouter} from "react-router-dom";
 class App extends React.Component {
     state = {
         loggedIn: false,
-        adminAuthed:false,
-        userId:1,
+        adminAuthed: false,
         playState: false,
-	    loop: false,
-	    changeTime: 0,
+        loop: false,
+        changeTime: 0,
         progress: 0,
         redirect: false,
         modeList: ["Video", "Lyric", "Musician", "Social"],
         favList: [],
         playList: ["After The Love Has Gone", "Woman", "How Deep Is Your Love"],
         song: "After The Love Has Gone",
+        albumArt: null,
+        lyrics: null,
+        timestamps: null,
+        pos: 0,
         songMap: (new Map())
     };
 
