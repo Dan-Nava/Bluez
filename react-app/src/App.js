@@ -11,7 +11,6 @@ class App extends React.Component {
         playState: false,
 	    loop: false,
 	    changeTime: 0,
-        toggleButton: 'playButton',
         progress: 0,
         redirect: false,
         modeList: ["Video", "Lyric", "Musician", "Social"],
