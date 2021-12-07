@@ -21,7 +21,6 @@ export default class LyricMode extends React.Component {
 	super(props);
 	this.lyrics = null;
 	this.timestamps = null;
-	console.log(this.lyrics);
 	this.props.audio_object.ontimeupdate = this.pos_value.bind(this);
     }
 
@@ -35,6 +34,12 @@ export default class LyricMode extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
 	if ((this.lyrics == null) || (prevProps.song != this.props.song)) {
+		this.get_data();
+	}
+    }
+
+    componentDidMount() {
+	if (this.lyrics == null) {
 		this.get_data();
 	}
     }
