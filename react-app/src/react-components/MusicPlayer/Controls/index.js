@@ -25,10 +25,6 @@ import {
 class Controls extends React.Component {
 
     // This file should be taken from the server, for our purposes, we have saved it locally for phase1
-    constructor(props) {
-        super(props);
-    };
-
 
     clickBack(e) {
         if ((this.props.audio_object.currentTime - 10) < 0) {
