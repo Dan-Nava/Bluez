@@ -29,7 +29,6 @@ export default class MusicianMode extends React.Component {
     let lyrics = lyricResults.lyrics.split("\\n");
     let chords = chordResults.lyrics.split("\\n"); //there is a misname here?
 
-	console.log(chords)
     this.props.stateChangeHandler("lyrics", lyrics);
     this.props.stateChangeHandler("chords", chords);
     this.props.stateChangeHandler("timestamps", timestamps);
@@ -102,9 +101,8 @@ export default class MusicianMode extends React.Component {
 
   loaded_lyrics() {
     if (this.props.lyrics) {
-	console.log("fuck my pussy")
       return (
-        <div className="lyrics">
+        <div className="musician-lyrics">
           <p className="lyric">{this.props.lyrics[this.props.pos]}</p>
           <p className="lyric">{this.props.lyrics[this.props.pos + 1]}</p>
           <p className="lyric">{this.props.lyrics[this.props.pos + 2]}</p>
@@ -127,7 +125,6 @@ export default class MusicianMode extends React.Component {
 
   loaded_chords() {
     if (this.props.chords) {
-	console.log("FUCK MY ASSHOLE")
       return (
         <div className="chords">
           <p className="chord">{this.props.chords[this.props.pos]}</p>
@@ -153,10 +150,8 @@ export default class MusicianMode extends React.Component {
   render() {
     return (
       <div>
-        {/* {this.loaded_lyrics()} */}
-		FUCK
+        {this.loaded_lyrics()}
         {this.loaded_chords()}
-		MY ASSHOLE
         {this.props.albumArt ? (
           <img src={this.props.albumArt} className="back-cover" alt="" />
         ) : (
