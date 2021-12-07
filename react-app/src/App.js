@@ -16,7 +16,7 @@ class App extends React.Component {
         redirect: false,
         modeList: ["Video", "Lyric", "Musician", "Social"],
         favList: [],
-        playList: ["After The Love Has Gone", "See You Again", "Pure Comedy", "Stay And Decay"],
+        playList: ["After The Love Has Gone", "Woman", "How Deep Is Your Love"],
         song: "After The Love Has Gone",
         songMap: (new Map())
     };
