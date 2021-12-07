@@ -41,8 +41,11 @@ class Login extends React.Component {
                     this.redirect('/profile');
                 }
             });
+        }else{
+            this.stateChangeHandler('loggedIn', false);
+            this.stateChangeHandler('adminAuthed', false);
+            this.setState({signInHelperText: "Please Login First"})
         }
-        this.setState({signInHelperText: "Please Login First"})
     }
 
     redirect(url) {

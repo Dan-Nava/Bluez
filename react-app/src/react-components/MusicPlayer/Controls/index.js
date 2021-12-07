@@ -10,7 +10,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import {withRouter} from 'react-router-dom';
 import './styles.css';
-import {Loop, Person,} from "@mui/icons-material";
+import {ExitToApp, Loop, Person,} from "@mui/icons-material";
 
 
 import Tabs from '@mui/material/Tabs';
@@ -18,10 +18,10 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 import Avatar from '@mui/material/Avatar';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 
 import configs from '../../../config'
 import Cookies from "js-cookie";
+import constructRequest from "../../../utils/requestConstructor";
 
 
 // This component allows us to control playing music, pausing, fastforwarding, going back etc.
@@ -107,12 +107,40 @@ class Controls extends React.Component {
         }
     }
 
+    async logout() {
+        this.tabValue = null;
+        let token = Cookies.get('token');
+        let username = Cookies.get('username');
+        const body = {
+            'username': username,
+            'token': token,
+        };
+        Cookies.remove('token');
+        Cookies.remove('username');
+        await fetch(`${configs.SERVER_URL}/logout`, constructRequest(body, 'POST')).then(res => res.json());
+        this.redirect('/login');
+    }
+
+    renderIfLoggedIn() {
+        if (this.props.authed) {
+            return (
+                <div>
+                    <Avatar onClick={() => this.userOrAdmin()} className="avatar-float">
+                        <Person/>
+                    </Avatar>
+                    <Avatar onClick={() => this.logout()} className="avatar-float">
+                        <ExitToApp/>
+                    </Avatar>
+                </div>
+            );
+        }
+    }
+
     render() {
         return (
             <div>
-                <Avatar onClick={() => this.userOrAdmin()} className="avatar-float">
-                    <Person/>
-                </Avatar>
+                {this.renderIfLoggedIn()}
+
                 <Box>
                     <Tabs value={this.tabValue} centered className="tabs">
                         <Tab label="Album Art" onClick={() => {
@@ -161,7 +189,8 @@ class Controls extends React.Component {
                 </div>
             </div>
         )
-    };
+    }
+    ;
 }
 
 export default withRouter(Controls);

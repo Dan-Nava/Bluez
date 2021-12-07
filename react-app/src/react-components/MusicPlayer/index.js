@@ -152,7 +152,7 @@ export default class MusicPlayer extends React.Component {
                 <div className='rightPanel'>
                     {this.rightPanelRouting()}
                 </div>
-                <Controls state={this.state} audio_object={this.audio_object}
+                <Controls state={this.state} authed={this.state.loggedIn} audio_object={this.audio_object}
                           stateChangeHandler={this.stateChangeHandler.bind(this)} setSong={this.setSong.bind(this)}/>
             </div>
         );
