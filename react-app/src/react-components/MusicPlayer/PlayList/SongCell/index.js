@@ -22,7 +22,7 @@ export default class SongCell extends React.Component {
         this.state = {
             anchorElement: null,
             openOptionsMenu: false,
-            favorite: this.props.favorite, //TODO: change this to intake a value later based on user  
+            favorite: this.props.favorite
         }
     }
 
