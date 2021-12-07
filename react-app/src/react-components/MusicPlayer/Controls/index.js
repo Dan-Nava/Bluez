@@ -20,6 +20,7 @@ import {
     TextSnippet
 } from "@mui/icons-material";
 
+
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -28,6 +29,9 @@ import Box from '@mui/material/Box';
 
 import Avatar from '@mui/material/Avatar';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+
+import configs from '../../../config'
+import constructRequest from '../../../utils/requestConstructor'
 
 
 // This component allows us to control playing music, pausing, fastforwarding, going back etc.
@@ -102,10 +106,14 @@ class Controls extends React.Component {
         this.props.stateChangeHandler('redirect', true)
     }
 
+    userOrAdmin() {
+        // stuff for redirecting to user or admin
+    }
+
     render() {
         return (
             <div>
-                <Avatar onClick={() => this.redirect('/profile')} className="avatar">
+                <Avatar onClick={() => this.userOrAdmin()} className="avatar">
                     <AssignmentIcon />
                 </Avatar>
                 <Box> 
