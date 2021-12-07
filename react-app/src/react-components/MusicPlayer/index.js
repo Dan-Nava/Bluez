@@ -94,7 +94,7 @@ export default class MusicPlayer extends React.Component {
                               comp={<MusicianMode song={this.state.song}/>}/>
 
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
-                              comp={<VideoMode state={this.state} audio_object={this.audio_object}/>}/>
+                              comp={<VideoMode song={this.state.song} playState={this.state.playState} changeTime={this.state.changeTime} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={<Admin/>}/>
             </Switch>
@@ -112,9 +112,9 @@ export default class MusicPlayer extends React.Component {
                 <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
                               comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)}/>)}/>
                 <PrivateRoute exact path='/musician' authed={this.state.loggedIn}
-                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)}/>)}/>
+                              comp={(<PlayList playList={this.state.playList} setSong={this.setSong.bind(this)}/>)}/>
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
-                              comp={<PlayList state={this.state} setSong={this.setSong.bind(this)}/>}/>
+                              comp={<PlayList playList={this.state.playList} setSong={this.setSong.bind(this)}/>}/>
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={(<div/>)}/>
             </Switch>
         );
@@ -152,7 +152,7 @@ export default class MusicPlayer extends React.Component {
                 <div className='rightPanel'>
                     {this.rightPanelRouting()}
                 </div>
-                <Controls state={this.state} audio_object={this.audio_object}
+                <Controls state={this.state} progress={this.state.progress} audio_object={this.audio_object}
                           stateChangeHandler={this.stateChangeHandler.bind(this)} setSong={this.setSong.bind(this)}/>
             </div>
         );

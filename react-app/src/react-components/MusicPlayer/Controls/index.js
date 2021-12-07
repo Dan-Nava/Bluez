@@ -24,7 +24,10 @@ import {
 // This component allows us to control playing music, pausing, fastforwarding, going back etc.
 class Controls extends React.Component {
 
-    // This file should be taken from the server, for our purposes, we have saved it locally for phase1
+    constructor(props) {
+	super(props);
+	this.props.audio_object.ontimeupdate = (e) => {this.incrementProgress()};
+    }
 
     clickBack(e) {
         if ((this.props.audio_object.currentTime - 10) < 0) {
@@ -42,6 +45,19 @@ class Controls extends React.Component {
             this.props.audio_object.currentTime = this.props.audio_object.currentTime + 10;
             this.props.stateChangeHandler('changeTime', this.props.state.changeTime + 1);
         }
+    }
+
+    incrementProgress() {
+	if ((this.props.audio_object) && (this.props.state.timestamps)) {
+	    for (let i = 0; i <(this.props.state.timestamps.length - 1); i++) {
+	        if ((this.props.audio_object.currentTime >= this.props.state.timestamps[i]) && (this.props.audio_object.currentTime < this.props.state.timestamps[i+1]) && (i !== this.props.state.pos)) {
+		    this.props.stateChangeHandler("pos", i);
+	        }
+	    }
+        }
+	if (this.props.audio_object) {
+		this.props.stateChangeHandler('progress', this.props.audio_object.currentTime * 100 / this.props.audio_object.duration);
+	}
     }
 
     play(e) {
@@ -97,7 +113,7 @@ class Controls extends React.Component {
         return (
             <div className="controlBar">
                 <div>
-                    <LinearProgress variant="determinate" value={this.props.audio_object.currentTime}/>
+                    <LinearProgress variant="determinate" value={this.props.progress}/>
                 </div>
                 <div>
                     <ul id="modeButtons">
