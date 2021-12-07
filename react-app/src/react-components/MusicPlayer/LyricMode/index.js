@@ -10,6 +10,7 @@ import './styles.css'
 export default class LyricMode extends React.Component {
     constructor(props) {
 	super(props);
+	this.data_url = null;
 	this.props.audio_object.ontimeupdate = this.pos_value.bind(this);
     }
 
@@ -23,15 +24,30 @@ export default class LyricMode extends React.Component {
 	this.props.stateChangeHandler("timestamps", timestamps);
     }
 
+    async get_art() {
+	let art = await fetch(`${configs.SERVER_URL}/music/albumArt?name=${this.props.song}`).then(res => res.json());
+	this.props.stateChangeHandler("albumArt", art.album_art);
+    }
+
+    get_album() {
+	return this.props.albumArt;
+    }
+
     componentDidUpdate(prevProps, prevState) {
 	if ((this.props.lyrics === null) || (prevProps.song !== this.props.song)) {
 		this.get_data();
+		if (prevProps.song !== this.props.song) {
+			this.get_art();
+		}
 	}
     }
 
     componentDidMount() {
 	if (this.props.lyrics === null) {
 		this.get_data();
+	}
+	if (this.props.albumArt === null) {
+		this.get_art();
 	}
     }
 
@@ -83,18 +99,19 @@ export default class LyricMode extends React.Component {
 
     render () {
         return (
-            <div >
+            <div>
 		{this.loaded_lyrics()}
-            <div className='settingButton'>
-                <Button variant="contained" onClick={(e) => this.scrollUp()}>
-                    Previous
-                </Button>
-                <Button variant="contained" onClick={(e) => this.scrollDown()}>
-                    Next
-                </Button>
-            </div>
-                <img src={CoverFlowerBoy} className="back-cover" alt=""/>
-            </div>
+            	<div className='settingButton'>
+                	<Button variant="contained" onClick={(e) => this.scrollUp()}>
+                    	Previous
+                	</Button>
+                	<Button variant="contained" onClick={(e) => this.scrollDown()}>
+                    	Next
+                	</Button>
+	    	</div>
+	    	{(this.props.albumArt) ? <div><img src={this.get_album()} className="back-cover" alt=""/></div> : <div></div>}
+	    </div>
+		
     	)
     }
 }
