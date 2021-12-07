@@ -11,7 +11,8 @@ const Music = db.define('music', {
         lyrics: DataTypes.STRING,
         chords: DataTypes.STRING,
         song_file: DataTypes.STRING,
-        video_file: DataTypes.STRING
+        video_file: DataTypes.STRING,
+        album_art: DataTypes.STRING,
     }, {
         timestamps: false
     }

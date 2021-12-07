@@ -23,7 +23,7 @@ async function banUser(username) {
     return true;
 }
 
-async function unbanUser(username) {
+async function restoreUser(username) {
     await Users.update({access_level: 0}, {
         where: {
             username: username
@@ -44,6 +44,6 @@ async function addAdmin(username) {
 module.exports = {
     getAllUsers: getAllUsers,
     banUser: banUser,
-    unbanUser: unbanUser,
+    restoreUser: restoreUser,
     addAdmin: addAdmin,
 };

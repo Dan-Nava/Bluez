@@ -1,6 +1,21 @@
 const Music = require('../model/music');
 const path = require("path");
 
+async function getAll() {
+    let data = await Music.findAll({
+        attributes: ['name']
+    });
+    if (data.length > 0) {
+        let names = [];
+        for (let i = 0; i < data.length; i++) {
+            names.push(data[i].get({plain: true}));
+        }
+        return names;
+    } else {
+        return false;
+    }
+}
+
 async function getInfo(name) {
     name = name.toLowerCase();
     let data = await Music.findAll({
@@ -46,6 +61,21 @@ async function getChords(name) {
     }
 }
 
+async function getAlbumArt(name) {
+    name = name.toLowerCase();
+    let data = await Music.findAll({
+        attributes: ['album_art'],
+        where: {
+            name: name
+        }
+    });
+    if (data.length > 0) {
+        return data[0].get({plain: true});
+    } else {
+        return false;
+    }
+}
+
 async function getAudio(name) {
     name = name.toLowerCase();
     let data = await Music.findAll({
@@ -79,9 +109,11 @@ async function getVideo(name) {
 }
 
 module.exports = {
+    getAll: getAll,
     getInfo: getInfo,
     getLyrics: getLyrics,
     getChords: getChords,
+    getAlbumArt: getAlbumArt,
     getAudio: getAudio,
     getVideo: getVideo,
 };

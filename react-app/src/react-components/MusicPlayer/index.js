@@ -6,7 +6,7 @@ import LyricMode from './LyricMode';
 import MusicianMode from './MusicianMode';
 import SocialMode from './SocialMode';
 import VideoMode from './VideoMode';
-
+import configs from '../../config';
 import Login from "../Auth";
 import {Redirect, Route, Switch} from "react-router-dom";
 import Profile from "../Profile";
@@ -24,28 +24,29 @@ export default class MusicPlayer extends React.Component {
         super(props);
         this.state = this.props.state;
         this.mode_comp = React.createRef();
-        this.setSong("See You Again");
-        this.audio_object = new Audio(process.env.PUBLIC_URL + "/" + this.state.song + ".mp3");
-        this.audio_object.addEventListener('ended', () => (function () {
-            if (!this.audio_object.loop) {
-                const idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
-                this.setSong(this.state.playList[idx]);
-            }
-        }));
-        this.addSong("See You Again");
+        this.audio_object = new Audio(`${configs.SERVER_URL}/music/audio?name=${this.state.song}`);
+        this.addSong(this.state.song);
+	this.audio_object.addEventListener('ended', () => {this.incrementSong()});
+    }
+
+    incrementSong() {
+	if (!this.audio_object.loop) {
+            let idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
+            this.setSong(this.state.playList[idx]);
+        }
     }
 
     setMode(modeName) {
         this.setState({mode: modeName});
     }
 
-    setSong(songName) {
-        if (this.audio_object) {
+    async setSong(songName) {
+	if (this.audio_object) {
             this.audio_object.pause();
-            this.audio_object.src = process.env.PUBLIC_URL + "/" + songName + ".mp3";
+            this.audio_object.src = `${configs.SERVER_URL}/music/audio?name=${songName}`;
             this.audio_object.load();
         } else {
-            this.audio_object = new Audio(process.env.PUBLIC_URL + "/" + songName + ".mp3");
+            this.audio_object = new Audio(`${configs.SERVER_URL}/music/audio?name=${songName}`);
         }
         this.stateChangeHandler('playState', false);
         this.stateChangeHandler('song', songName);
@@ -93,8 +94,7 @@ export default class MusicPlayer extends React.Component {
                               comp={<MusicianMode song={this.state.song}/>}/>
 
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
-                              comp={<VideoMode state={this.state} song={this.state.song}
-                                               audio_object={this.audio_object}/>}/>
+                              comp={<VideoMode state={this.state} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={<Admin/>}/>
             </Switch>
