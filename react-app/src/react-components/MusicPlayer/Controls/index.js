@@ -27,7 +27,6 @@ class Controls extends React.Component {
     // This file should be taken from the server, for our purposes, we have saved it locally for phase1
     constructor(props) {
         super(props);
-        this.state = this.props.state;
     };
 
 
@@ -49,21 +48,14 @@ class Controls extends React.Component {
         }
     }
 
-    clickToggle(e) {
-        if (this.state.playState === false) {
-            this.setState({playState: true}, () => this.props.stateChangeHandler(this.state.playState));
-            this.setState({toggleButton: 'stopButton'});
-            this.props.audio_object.play();
-        } else {
-            this.setState({playState: false}, () => this.props.stateChangeHandler(this.state.playState));
-            this.setState({toggleButton: 'playButton'});
-            this.props.audio_object.pause();
-        }
-    }
+    play(e) {
+	this.props.stateChangeHandler('playState', true);
+	this.props.audio_object.play();
+    } 
 
-    clickStop(e) {
-        this.props.audio_object.pause();
-        this.setState({playState: false});
+    stop(e) {
+	this.props.stateChangeHandler('playState', false);
+	this.props.audio_object.pause();
     }
 
     clickIncreaseVol(e) {
@@ -97,14 +89,6 @@ class Controls extends React.Component {
         } else {
             this.props.audio_object.loop = false;
             this.props.stateChangeHandler('loop', !this.props.state.loop);
-        }
-    }
-
-    getPlayIcon() {
-        if (this.state.playState === true) {
-            return (<StopIcon/>)
-        } else {
-            return (<PlayArrowIcon/>)
         }
     }
 
@@ -148,8 +132,9 @@ class Controls extends React.Component {
                                     onClick={(e) => this.clickDecreaseVol(e)}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<FastRewindIcon/>}
                                     onClick={(e) => this.clickBack(e)}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={this.getPlayIcon()}
-                                    onClick={(e) => this.clickToggle(e)}/></li>
+			{this.props.state.playState 
+                        ? <li><Button variant="contained" color="primary" startIcon={<StopIcon/>} onClick={(e) => this.stop(e)}/></li>
+			: <li><Button variant="contained" color="primary" startIcon={<PlayArrowIcon/>} onClick={(e) => this.play(e)}/></li>}
                         <li><Button variant="contained" color="primary" startIcon={<FastForwardIcon/>}
                                     onClick={(e) => this.clickForward(e)}/></li>
                         <li><Button variant="contained" color="primary" startIcon={<VolumeUpIcon/>}
