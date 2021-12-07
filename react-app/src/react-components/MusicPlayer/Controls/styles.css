@@ -21,3 +21,17 @@
 .controlBar{
 	background-color: darkgray;
 }
+
+.avatar {
+	float: right;
+}
+.tabs {
+	position: absolute;
+	bottom: 4.5em;
+	left: 0;
+	right: 0;
+	width: auto;
+	margin: auto;
+	background-color: white;
+
+}

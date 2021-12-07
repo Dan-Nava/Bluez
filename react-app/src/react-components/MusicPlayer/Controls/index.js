@@ -20,6 +20,15 @@ import {
     TextSnippet
 } from "@mui/icons-material";
 
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+
+import Avatar from '@mui/material/Avatar';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+
 
 // This component allows us to control playing music, pausing, fastforwarding, going back etc.
 class Controls extends React.Component {
@@ -95,49 +104,41 @@ class Controls extends React.Component {
 
     render() {
         return (
-            <div className="controlBar">
-                <div>
-                    <LinearProgress variant="determinate" value={this.props.audio_object.currentTime}/>
-                </div>
-                <div>
-                    <ul id="modeButtons">
-                        <li><Button variant="contained" color="primary" startIcon={<AccountCircle/>}
-                                    onClick={() => this.redirect('/profile')}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<AdminPanelSettingsRounded/>}
-                                    onClick={() => this.redirect('/admin')}/></li>
-
-                        <li><span> </span></li>
-
-                        <li><Button variant="contained" color="primary" startIcon={<MusicVideoIcon/>}
-                                    onClick={() => this.redirect('/video')}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<ForumRounded/>}
-                                    onClick={() => this.redirect('/social')}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<PhotoAlbum/>}
-                                    onClick={() => this.redirect('/albumArt')}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<TextSnippet/>}
-                                    onClick={() => this.redirect('/lyrics')}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<EmojiSymbols/>}
-                                    onClick={() => this.redirect('/musician')}/></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul id="controlButtons">
-                        <li><Button variant="contained" color="primary" startIcon={<Loop/>}
-                                    onClick={(e) => this.clickLoop(e)}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<VolumeDownIcon/>}
-                                    onClick={(e) => this.clickDecreaseVol(e)}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<FastRewindIcon/>}
-                                    onClick={(e) => this.clickBack(e)}/></li>
-			{this.props.state.playState 
-                        ? <li><Button variant="contained" color="primary" startIcon={<StopIcon/>} onClick={(e) => this.stop(e)}/></li>
-			: <li><Button variant="contained" color="primary" startIcon={<PlayArrowIcon/>} onClick={(e) => this.play(e)}/></li>}
-                        <li><Button variant="contained" color="primary" startIcon={<FastForwardIcon/>}
-                                    onClick={(e) => this.clickForward(e)}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<VolumeUpIcon/>}
-                                    onClick={(e) => this.clickIncreaseVol(e)}/></li>
-                        <li><Button variant="contained" color="primary" startIcon={<VolumeOffIcon/>}
-                                    onClick={(e) => this.clickMute(e)}/></li>
-                    </ul>
+            <div>
+                <Avatar onClick={() => this.redirect('/profile')} className="avatar">
+                    <AssignmentIcon />
+                </Avatar>
+                <Box> 
+                    <Tabs centered className="tabs">
+                        <Tab label="Album Art"  onClick={() => this.redirect('/albumArt')}/>
+                        <Tab label="Video"      onClick={() => this.redirect('/video')}/>
+                        <Tab label="Lyrics"     onClick={() => this.redirect('/lyrics')}/>
+                        <Tab label="Chords"     onClick={() => this.redirect('/musician')}/>
+                    </Tabs>
+                </Box>
+                <div className="controlBar">  
+                    <div>
+                        <LinearProgress variant="determinate" value={this.props.audio_object.currentTime}/>
+                    </div>
+                    <div>
+                        <ul id="controlButtons">
+                            <li><Button variant="contained" color="primary" startIcon={<Loop/>}
+                                        onClick={(e) => this.clickLoop(e)}/></li>
+                            <li><Button variant="contained" color="primary" startIcon={<VolumeDownIcon/>}
+                                        onClick={(e) => this.clickDecreaseVol(e)}/></li>
+                            <li><Button variant="contained" color="primary" startIcon={<FastRewindIcon/>}
+                                        onClick={(e) => this.clickBack(e)}/></li>
+                {this.props.state.playState 
+                            ? <li><Button variant="contained" color="primary" startIcon={<StopIcon/>} onClick={(e) => this.stop(e)}/></li>
+                : <li><Button variant="contained" color="primary" startIcon={<PlayArrowIcon/>} onClick={(e) => this.play(e)}/></li>}
+                            <li><Button variant="contained" color="primary" startIcon={<FastForwardIcon/>}
+                                        onClick={(e) => this.clickForward(e)}/></li>
+                            <li><Button variant="contained" color="primary" startIcon={<VolumeUpIcon/>}
+                                        onClick={(e) => this.clickIncreaseVol(e)}/></li>
+                            <li><Button variant="contained" color="primary" startIcon={<VolumeOffIcon/>}
+                                        onClick={(e) => this.clickMute(e)}/></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         )
