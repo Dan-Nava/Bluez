@@ -51,6 +51,8 @@ export default class MusicPlayer extends React.Component {
         }
         this.stateChangeHandler('playState', false);
         this.stateChangeHandler('song', songName);
+	this.stateChangeHandler('progress', 0);
+	this.stateChangeHandler('pos', 0);
     }
 
     addSong(songName) {
