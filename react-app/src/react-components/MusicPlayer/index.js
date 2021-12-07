@@ -26,11 +26,13 @@ export default class MusicPlayer extends React.Component {
         this.mode_comp = React.createRef();
         this.audio_object = new Audio(`${configs.SERVER_URL}/music/audio?name=${this.state.song}`);
         this.addSong(this.state.song);
-	this.audio_object.addEventListener('ended', () => {this.incrementSong()});
+        this.audio_object.addEventListener('ended', () => {
+            this.incrementSong()
+        });
     }
 
     incrementSong() {
-	if (!this.audio_object.loop) {
+        if (!this.audio_object.loop) {
             let idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
             this.setSong(this.state.playList[idx]);
         }
@@ -41,7 +43,7 @@ export default class MusicPlayer extends React.Component {
     }
 
     async setSong(songName) {
-	if (this.audio_object) {
+        if (this.audio_object) {
             this.audio_object.pause();
             this.audio_object.src = `${configs.SERVER_URL}/music/audio?name=${songName}`;
             this.audio_object.load();
@@ -88,7 +90,11 @@ export default class MusicPlayer extends React.Component {
                               comp={<AlbumArtMode song={this.state.song}/>}/>
 
                 <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
-                              comp={<LyricMode song={this.state.song} pos={this.state.pos} albumArt={this.state.albumArt} lyrics={this.state.lyrics} timestamps={this.state.timestamps} stateChangeHandler={this.stateChangeHandler.bind(this)} audio_object={this.audio_object}/>}/>
+                              comp={<LyricMode song={this.state.song} pos={this.state.pos}
+                                               albumArt={this.state.albumArt} lyrics={this.state.lyrics}
+                                               timestamps={this.state.timestamps}
+                                               stateChangeHandler={this.stateChangeHandler.bind(this)}
+                                               audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/musician' authed={this.state.loggedIn}
                               comp={<MusicianMode song={this.state.song}/>}/>
@@ -140,6 +146,15 @@ export default class MusicPlayer extends React.Component {
         );
     }
 
+    renderControls() {
+        if (this.state.loggedIn) {
+            return (
+                <Controls state={this.state} authed={this.state.loggedIn} audio_object={this.audio_object}
+                          stateChangeHandler={this.stateChangeHandler.bind(this)} setSong={this.setSong.bind(this)}/>
+            )
+        }
+    }
+
     render() {
         return (
             <div className="musicPlayer">
@@ -152,8 +167,7 @@ export default class MusicPlayer extends React.Component {
                 <div className='rightPanel'>
                     {this.rightPanelRouting()}
                 </div>
-                <Controls state={this.state} authed={this.state.loggedIn} audio_object={this.audio_object}
-                          stateChangeHandler={this.stateChangeHandler.bind(this)} setSong={this.setSong.bind(this)}/>
+                {this.renderControls()}
             </div>
         );
     }
