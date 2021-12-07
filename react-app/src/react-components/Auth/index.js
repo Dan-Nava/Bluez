@@ -24,6 +24,24 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
+        let token = Cookies.get('token');
+        let username = Cookies.get('username');
+        const body = {
+            'username': username,
+            'token': token,
+        };
+        if(token && username){
+            fetch(`${configs.SERVER_URL}/isLoggedIn`, constructRequest(body, 'POST')).then(res => res.json()).then(data=>{
+                if (data.accessLevel > 0) {
+                    this.stateChangeHandler('loggedIn', true);
+                    this.stateChangeHandler('adminAuthed', true);
+                    this.redirect('/admin');
+                } else {
+                    this.stateChangeHandler('loggedIn', true);
+                    this.redirect('/profile');
+                }
+            });
+        }
         this.setState({signInHelperText: "Please Login First"})
     }
 
@@ -49,11 +67,9 @@ class Login extends React.Component {
             if (data.accessLevel > 0) {
                 this.stateChangeHandler('loggedIn', true);
                 this.stateChangeHandler('adminAuthed', true);
-                this.stateChangeHandler('userId', 2);
                 this.redirect('/admin');
             } else {
                 this.stateChangeHandler('loggedIn', true);
-                this.stateChangeHandler('userId', 1);
                 this.redirect('/profile');
             }
         } else {

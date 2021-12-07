@@ -97,6 +97,7 @@ class Controls extends React.Component {
     }
 
     async userOrAdmin() {
+        this.tabValue = null;
         let token = Cookies.get('token');
         let data = await fetch(`${configs.SERVER_URL}/accessLevel?token=${token}`).then(res => res.json());
         if (data.accessLevel > 0) {
@@ -113,11 +114,23 @@ class Controls extends React.Component {
                     <Person/>
                 </Avatar>
                 <Box>
-                    <Tabs centered className="tabs">
-                        <Tab label="Album Art" onClick={() => this.redirect('/albumArt')}/>
-                        <Tab label="Video" onClick={() => this.redirect('/video')}/>
-                        <Tab label="Lyrics" onClick={() => this.redirect('/lyrics')}/>
-                        <Tab label="Chords" onClick={() => this.redirect('/musician')}/>
+                    <Tabs value={this.tabValue} centered className="tabs">
+                        <Tab label="Album Art" onClick={() => {
+                            this.redirect('/albumArt');
+                            this.tabValue = 0;
+                        }}/>
+                        <Tab label="Video" onClick={() => {
+                            this.redirect('/video');
+                            this.tabValue = 1;
+                        }}/>
+                        <Tab label="Lyrics" onClick={() => {
+                            this.redirect('/lyrics');
+                            this.tabValue = 2;
+                        }}/>
+                        <Tab label="Chords" onClick={() => {
+                            this.redirect('/musician');
+                            this.tabValue = 3;
+                        }}/>
                     </Tabs>
                 </Box>
                 <div className="controlBar">
@@ -148,7 +161,6 @@ class Controls extends React.Component {
                 </div>
             </div>
         )
-
     };
 }
 
