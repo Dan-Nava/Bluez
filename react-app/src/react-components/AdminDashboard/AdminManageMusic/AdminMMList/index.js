@@ -72,7 +72,8 @@ export default class AdminMMList extends React.Component {
                     </TableHead>
                     <TableBody>
                         {this.state.songList.map((music) => (
-                            <ListRow 
+                            <ListRow
+                                key={Math.random()}
                                 song={music} 
                                 deleteCallback={this.deleteCallback} 
                                 editCallback={this.props.editCallback}

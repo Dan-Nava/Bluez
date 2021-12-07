@@ -50,9 +50,13 @@ export default class AdminManageMusic extends React.Component {
     handleAddMusic = () => this.setState({currentView: 'ADD_SONG'});
 
     async componentDidMount () {
-        let token = Cookies.get('token');
-        let data = await fetch(`${configs.SERVER_URL}/info`).then(res => res.json());
-        console.log(data)
+        const data = await fetch(`${configs.SERVER_URL}/music/all`).then(res => res.json());
+        const songNames = data.names;
+        let songInfo = [];
+        for (let i=0; i < songNames.length; i++){
+            songInfo.push(await fetch(`${configs.SERVER_URL}/music/info?name=${songNames[i].name}`).then(res => res.json()))
+        }
+        console.log(songInfo)
         // this.setState({songData: data.users})
     }
 
