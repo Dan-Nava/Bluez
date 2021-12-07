@@ -2,13 +2,15 @@
   color: white;
   font-size: xx-large;
   font-size: 1.2em;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: Optima, Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-weight: bold;
   position: fixed;
   top: 4%;
   left: 12%;
   z-index: -1;
   line-height: 2em;
   text-align: left;
+  letter-spacing: 0.05em;
 }
 
 .lyric:nth-child(1) {
