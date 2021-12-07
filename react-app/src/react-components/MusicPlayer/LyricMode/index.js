@@ -2,16 +2,7 @@ import React from 'react';
 import configs from '../../../config';
 import Button from "@mui/material/Button";
 import {
-    CoverFlowerBoy,
-    CoverPureComedy,
-    CoverWhite,
-    pureComedLyrics,
-    CoverStayAndDecay,
-    stayAndDecayLyrics,
-    seeYouAgainLyrics,
-    //pureComedTimeStamps,
-    //stayAndDecayTimeStamps,
-    seeYouAgainTimeStamps,
+    CoverFlowerBoy
 } from '../../HardCodedData'
 
 import './styles.css'
@@ -19,35 +10,35 @@ import './styles.css'
 export default class LyricMode extends React.Component {
     constructor(props) {
 	super(props);
-	this.lyrics = null;
-	this.timestamps = null;
 	this.props.audio_object.ontimeupdate = this.pos_value.bind(this);
     }
 
     async get_data() {
 	let result = await fetch(`${configs.SERVER_URL}/music/lyrics?name=${this.props.song}`).then(res => res.json());
-	this.timestamps = result.timestamps.replaceAll("\\n", " ").split(" ").map(function(x) {
+	let timestamps = result.timestamps.replaceAll("\\n", " ").split(" ").map(function(x) {
 											return parseInt(x);
 										});
-	this.lyrics = result.lyrics.split("\\n");
+	let lyrics = result.lyrics.split("\\n");
+	this.props.stateChangeHandler("lyrics", lyrics);
+	this.props.stateChangeHandler("timestamps", timestamps);
     }
 
     componentDidUpdate(prevProps, prevState) {
-	if ((this.lyrics == null) || (prevProps.song != this.props.song)) {
+	if ((this.props.lyrics === null) || (prevProps.song !== this.props.song)) {
 		this.get_data();
 	}
     }
 
     componentDidMount() {
-	if (this.lyrics == null) {
+	if (this.props.lyrics === null) {
 		this.get_data();
 	}
     }
 
     pos_value() {
-	if ((this.props.audio_object) && (this.timestamps)) {
-	    for (let i = 0; i <(this.timestamps.length - 1); i++) {
-	        if ((this.props.audio_object.currentTime >= this.timestamps[i]) && (this.props.audio_object.currentTime < this.timestamps[i+1]) && (i != this.props.pos)) {
+	if ((this.props.audio_object) && (this.props.timestamps)) {
+	    for (let i = 0; i <(this.props.timestamps.length - 1); i++) {
+	        if ((this.props.audio_object.currentTime >= this.props.timestamps[i]) && (this.props.audio_object.currentTime < this.props.timestamps[i+1]) && (i !== this.props.pos)) {
 		    this.props.stateChangeHandler("pos", i);
 	        }
 	    }
@@ -61,20 +52,20 @@ export default class LyricMode extends React.Component {
     }
 
     scrollDown() {
-        if (this.props.pos < this.timestamps.length - 5) {
+        if (this.props.pos < this.props.timestamps.length - 5) {
             this.props.stateChangeHandler("pos", this.props.pos+1);
         }
     }
 
     loaded_lyrics() {
-	if (this.lyrics) {
+	if (this.props.lyrics) {
 		return (
 			<div className="lyrics">
-		    		<p className="lyric">{this.lyrics[this.props.pos]}</p>
-		    		<p className="lyric">{this.lyrics[this.props.pos + 1]}</p>
-		    		<p className="lyric">{this.lyrics[this.props.pos + 2]}</p>
-		    		<p className="lyric">{this.lyrics[this.props.pos + 3]}</p>
-     		    		<p className="lyric">{this.lyrics[this.props.pos + 4]}</p>
+		    		<p className="lyric">{this.props.lyrics[this.props.pos]}</p>
+		    		<p className="lyric">{this.props.lyrics[this.props.pos + 1]}</p>
+		    		<p className="lyric">{this.props.lyrics[this.props.pos + 2]}</p>
+		    		<p className="lyric">{this.props.lyrics[this.props.pos + 3]}</p>
+     		    		<p className="lyric">{this.props.lyrics[this.props.pos + 4]}</p>
 			</div>
 			);
 	} else {
@@ -82,7 +73,7 @@ export default class LyricMode extends React.Component {
 			<div className="lyrics">
 				<p className="lyric"></p>
 				<p className="lyric"></p>
-				<p className="lyric">Press Play To Start!</p>
+				<p className="lyric"></p>
 				<p className="lyric"></p>
 				<p className="lyric"></p>
 			</div>
