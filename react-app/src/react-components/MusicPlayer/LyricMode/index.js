@@ -1,9 +1,6 @@
 import React from 'react';
 import configs from '../../../config';
 import Button from "@mui/material/Button";
-import {
-    CoverFlowerBoy
-} from '../../HardCodedData'
 
 import './styles.css'
 
