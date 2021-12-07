@@ -1,37 +1,48 @@
-#controlButtons li{
-	border-radius: 50%;
-	list-style: none;
-	height: 50px;
-	width: 50px;
-	display: inline;
+#controlButtons li {
+    border-radius: 50%;
+    list-style: none;
+    height: 50px;
+    width: 50px;
+    display: inline;
 }
-#modeButtons li{
-	border-radius: 50%;
-	list-style: none;
-	height: 50px;
-	width: 50px;
-	display: inline;
+
+#modeButtons li {
+    border-radius: 50%;
+    list-style: none;
+    height: 50px;
+    width: 50px;
+    display: inline;
 }
-#modeButtons{
-	position: fixed;
-	top: 0;
+
+#modeButtons {
+    position: fixed;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
 }
-.controlBar{
-	background-color: darkgray;
+
+.controlBar {
+    background-color: darkgray;
 }
 
-.avatar {
-	float: right;
+.avatar-float {
+    float: right;
+    border-radius: 50%;
+    border: darkgray solid 0.2em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.25),
+    0 0.5em 0.5em rgba(0, 0, 0, 0.25);
+    margin: 1em;
+    width: 10em;
+    height: 10em;
 }
+
 .tabs {
-	position: absolute;
-	bottom: 4.5em;
-	left: 0;
-	right: 0;
-	width: auto;
-	margin: auto;
-	background-color: white;
+    position: absolute;
+    bottom: 4.5em;
+    left: 0;
+    right: 0;
+    width: auto;
+    margin: auto;
+    background-color: white;
 
 }

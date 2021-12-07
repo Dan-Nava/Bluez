@@ -10,28 +10,18 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import {withRouter} from 'react-router-dom';
 import './styles.css';
-import MusicVideoIcon from '@mui/icons-material/MusicVideo';
-import {
-    AccountCircle,
-    AdminPanelSettingsRounded, EmojiSymbols,
-    ForumRounded,
-    Loop,
-    PhotoAlbum,
-    TextSnippet
-} from "@mui/icons-material";
+import {Loop, Person,} from "@mui/icons-material";
 
 
-import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import Avatar from '@mui/material/Avatar';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
 import configs from '../../../config'
-import constructRequest from '../../../utils/requestConstructor'
+import Cookies from "js-cookie";
 
 
 // This component allows us to control playing music, pausing, fastforwarding, going back etc.
@@ -58,13 +48,13 @@ class Controls extends React.Component {
     }
 
     play(e) {
-	this.props.stateChangeHandler('playState', true);
-	this.props.audio_object.play();
-    } 
+        this.props.stateChangeHandler('playState', true);
+        this.props.audio_object.play();
+    }
 
     stop(e) {
-	this.props.stateChangeHandler('playState', false);
-	this.props.audio_object.pause();
+        this.props.stateChangeHandler('playState', false);
+        this.props.audio_object.pause();
     }
 
     clickIncreaseVol(e) {
@@ -106,25 +96,31 @@ class Controls extends React.Component {
         this.props.stateChangeHandler('redirect', true)
     }
 
-    userOrAdmin() {
-        // stuff for redirecting to user or admin
+    async userOrAdmin() {
+        let token = Cookies.get('token');
+        let data = await fetch(`${configs.SERVER_URL}/accessLevel?token=${token}`).then(res => res.json());
+        if (data.accessLevel > 0) {
+            this.redirect('/admin');
+        } else {
+            this.redirect('/profile');
+        }
     }
 
     render() {
         return (
             <div>
-                <Avatar onClick={() => this.userOrAdmin()} className="avatar">
-                    <AssignmentIcon />
+                <Avatar onClick={() => this.userOrAdmin()} className="avatar-float">
+                    <Person/>
                 </Avatar>
-                <Box> 
+                <Box>
                     <Tabs centered className="tabs">
-                        <Tab label="Album Art"  onClick={() => this.redirect('/albumArt')}/>
-                        <Tab label="Video"      onClick={() => this.redirect('/video')}/>
-                        <Tab label="Lyrics"     onClick={() => this.redirect('/lyrics')}/>
-                        <Tab label="Chords"     onClick={() => this.redirect('/musician')}/>
+                        <Tab label="Album Art" onClick={() => this.redirect('/albumArt')}/>
+                        <Tab label="Video" onClick={() => this.redirect('/video')}/>
+                        <Tab label="Lyrics" onClick={() => this.redirect('/lyrics')}/>
+                        <Tab label="Chords" onClick={() => this.redirect('/musician')}/>
                     </Tabs>
                 </Box>
-                <div className="controlBar">  
+                <div className="controlBar">
                     <div>
                         <LinearProgress variant="determinate" value={this.props.audio_object.currentTime}/>
                     </div>
@@ -136,9 +132,11 @@ class Controls extends React.Component {
                                         onClick={(e) => this.clickDecreaseVol(e)}/></li>
                             <li><Button variant="contained" color="primary" startIcon={<FastRewindIcon/>}
                                         onClick={(e) => this.clickBack(e)}/></li>
-                {this.props.state.playState 
-                            ? <li><Button variant="contained" color="primary" startIcon={<StopIcon/>} onClick={(e) => this.stop(e)}/></li>
-                : <li><Button variant="contained" color="primary" startIcon={<PlayArrowIcon/>} onClick={(e) => this.play(e)}/></li>}
+                            {this.props.state.playState
+                                ? <li><Button variant="contained" color="primary" startIcon={<StopIcon/>}
+                                              onClick={(e) => this.stop(e)}/></li>
+                                : <li><Button variant="contained" color="primary" startIcon={<PlayArrowIcon/>}
+                                              onClick={(e) => this.play(e)}/></li>}
                             <li><Button variant="contained" color="primary" startIcon={<FastForwardIcon/>}
                                         onClick={(e) => this.clickForward(e)}/></li>
                             <li><Button variant="contained" color="primary" startIcon={<VolumeUpIcon/>}
