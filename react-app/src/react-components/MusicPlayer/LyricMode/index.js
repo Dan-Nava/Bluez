@@ -1,6 +1,5 @@
 import React from 'react';
 import configs from '../../../config';
-import Button from "@mui/material/Button";
 
 import './styles.css'
 
@@ -98,15 +97,7 @@ export default class LyricMode extends React.Component {
         return (
             <div>
 		{this.loaded_lyrics()}
-            	<div className='settingButton'>
-                	<Button variant="contained" onClick={(e) => this.scrollUp()}>
-                    	Previous
-                	</Button>
-                	<Button variant="contained" onClick={(e) => this.scrollDown()}>
-                    	Next
-                	</Button>
-	    	</div>
-	    	{(this.props.albumArt) ? <div><img src={this.props.albumArt} className="back-cover" alt=""/></div> : <div></div>}
+	    	{(this.props.albumArt) ? <img src={this.props.albumArt} className="back-cover" alt=""/> : <div></div>}
 	    </div>
 		
     	)
