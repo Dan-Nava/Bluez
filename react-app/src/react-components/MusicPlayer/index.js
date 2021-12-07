@@ -6,7 +6,7 @@ import LyricMode from './LyricMode';
 import MusicianMode from './MusicianMode';
 import SocialMode from './SocialMode';
 import VideoMode from './VideoMode';
-
+import configs from '../../config';
 import Login from "../Auth";
 import {Redirect, Route, Switch} from "react-router-dom";
 import Profile from "../Profile";
@@ -24,8 +24,7 @@ export default class MusicPlayer extends React.Component {
         super(props);
         this.state = this.props.state;
         this.mode_comp = React.createRef();
-        this.setSong("See You Again");
-        this.audio_object = new Audio(process.env.PUBLIC_URL + "/" + this.state.song + ".mp3");
+        this.audio_object = new Audio(`${configs.SERVER_URL}/music/audio?name=${this.state.song}`);
         this.audio_object.addEventListener('ended', () => (function () {
             if (!this.audio_object.loop) {
                 const idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
@@ -42,10 +41,10 @@ export default class MusicPlayer extends React.Component {
     setSong(songName) {
         if (this.audio_object) {
             this.audio_object.pause();
-            this.audio_object.src = process.env.PUBLIC_URL + "/" + songName + ".mp3";
+            this.audio_object.src = `${configs.SERVER_URL}/music/audio?name=${this.state.song}`;
             this.audio_object.load();
         } else {
-            this.audio_object = new Audio(process.env.PUBLIC_URL + "/" + songName + ".mp3");
+            this.audio_object = new Audio(`${configs.SERVER_URL}/music/audio?name=${this.state.song}`);
         }
         this.stateChangeHandler('playState', false);
         this.stateChangeHandler('song', songName);
@@ -87,7 +86,7 @@ export default class MusicPlayer extends React.Component {
                               comp={<AlbumArtMode song={this.state.song}/>}/>
 
                 <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
-                              comp={<LyricMode song={this.state.song} pos={this.state.pos} stateChangeHandler={this.stateChangeHandler.bind(this)} audio_object={this.audio_object}/>}/>
+                              comp={<LyricMode song={this.state.song} pos={this.state.pos} playState={this.state.playState} stateChangeHandler={this.stateChangeHandler.bind(this)} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/musician' authed={this.state.loggedIn}
                               comp={<MusicianMode song={this.state.song}/>}/>
