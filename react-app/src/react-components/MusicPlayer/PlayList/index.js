@@ -33,16 +33,17 @@ export default class PlayList extends React.Component {
         this.setState({songList: songNames})
 
         //server call for favorites of user
-        this.getFavorites();
+        await this.getFavorites();
         let fav;
 
+        //server call for user's playlist
         this.getPlaylist(fav);
-
-
     }
 
     async getPlaylist(fav) {
-        const userPL = this.props.state.playlist;
+        const token = Cookies.get('token');
+        const data = await fetch(`${configs.SERVER_URL}/account/playlist?token=${token}`).then(res => res.json());
+        const userPL = JSON.parse(data.account.playlist);
         //populates playlist based on user's pre-existing playlist
         if (userPL) { //ie. if its not empty
             let currentPlaylist = [];
@@ -50,12 +51,20 @@ export default class PlayList extends React.Component {
             for (let i = 0; i < userPL.length; i++){
                 if (this.state.favorites && this.state.favorites.includes(userPL[i])){
                     fav = true;
-                } else { fav = false;}
+                } else {
+                    fav = false;
+                }
                 currentPlaylist.push({name: userPL[i], pID: pID, favorite: fav});
                 pID += 1;
-            }   
+            }
             this.setState({playlist: currentPlaylist, pID: pID})
         }
+    }
+
+    async updatePlaylist (pl) {
+        const token = Cookies.get('token');
+        const body = {token: token, newValues: {playlist: JSON.stringify(pl)}};
+        await fetch(`${configs.SERVER_URL}/account/update`, constructRequest(body, 'POST')).then(res => res.json());
     }
 
     async getFavorites () {
@@ -100,18 +109,25 @@ export default class PlayList extends React.Component {
 
     addToPlaylistCallback = async (songName) => {
         let fav;
-        if (this.state.favorites.length && this.state.favorites.includes(songName)){fav = true;} 
-        else {fav = false;}
+        if (this.state.favorites.length && this.state.favorites.includes(songName)){
+            fav = true;
+        } else {
+            fav = false;
+        }
+
         await this.setState({
             playlist: [...this.state.playlist, {name: songName, pID: this.state.pID, favorite: fav}],
             pID: this.state.pID + 1
         })
 
-        //updates app.js playlist state
         let songNames = [];
         for (let i = 0; i < this.state.playlist.length; i++) {
             songNames.push(this.state.playlist[i].name);
         }
+
+        //server call to update database playlist
+        this.updatePlaylist(songNames);
+        //updates app.js playlist state
         this.props.stateChangeHandler('playList', songNames);
     }
 
@@ -119,12 +135,14 @@ export default class PlayList extends React.Component {
         await this.setState({
             playlist:  this.state.playlist.filter((data) => data.songName !== songName && data.pID !== pID)
         })
-
         //updates app.js playlist state
         let songNames = [];
         for (let i = 0; i < this.state.playlist.length; i++) {
             songNames.push(this.state.playlist[i].name);
         }
+        //server call to update database playlist
+        this.updatePlaylist(songNames);
+        //updates app.js playlist state
         this.props.stateChangeHandler('playList', songNames);
     }
 
@@ -141,7 +159,6 @@ export default class PlayList extends React.Component {
         if (favorite){ //favoriting the song
             //non-empty favorites list and this song isnt already in it
             if (this.state.favorites.length > 0 && !this.state.favorites.includes(songName)){
-                console.log("in here", this.state.favorites.length)
                 this.setState({favorites: [...this.state.favorites, songName]});
             //empty favorites list
             } else if (this.state.favorites.length === 0){  
@@ -152,7 +169,6 @@ export default class PlayList extends React.Component {
         }
     
         //server call
-        console.log(this.state.favorites);
         this.updateFavorites(this.state.favorites);
         
     }
@@ -201,7 +217,6 @@ export default class PlayList extends React.Component {
     }
 
     render() {
-        console.log(this.state.favorites)
         return (
             <>  
                 {this.renderPlaylistSearch()}
