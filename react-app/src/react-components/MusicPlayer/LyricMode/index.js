@@ -81,6 +81,10 @@ export default class LyricMode extends React.Component {
 		return (
 			<div className="lyrics">
 				<p className="lyric"></p>
+				<p className="lyric"></p>
+				<p className="lyric">Press Play To Start!</p>
+				<p className="lyric"></p>
+				<p className="lyric"></p>
 			</div>
 			);
 	}		
