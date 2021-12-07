@@ -11,13 +11,12 @@ class App extends React.Component {
         playState: false,
 	    loop: false,
 	    changeTime: 0,
-        toggleButton: 'playButton',
         progress: 0,
         redirect: false,
         modeList: ["Video", "Lyric", "Musician", "Social"],
         favList: [],
-        playList: ["See You Again", "Pure Comedy", "Stay And Decay"],
-        song: "See You Again",
+        playList: ["After The Love Has Gone", "Woman", "How Deep Is Your Love"],
+        song: "After The Love Has Gone",
         songMap: (new Map())
     };
 
