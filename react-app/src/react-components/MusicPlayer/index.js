@@ -20,6 +20,7 @@ import InfoPanel from "./InfoPanel";
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
 export default class MusicPlayer extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = this.props.state;
@@ -52,6 +53,8 @@ export default class MusicPlayer extends React.Component {
         }
         this.stateChangeHandler('playState', false);
         this.stateChangeHandler('song', songName);
+	this.stateChangeHandler('progress', 0);
+	this.stateChangeHandler('pos', 0);
     }
 
     addSong(songName) {
@@ -100,7 +103,7 @@ export default class MusicPlayer extends React.Component {
                               comp={<MusicianMode song={this.state.song}/>}/>
 
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
-                              comp={<VideoMode state={this.state} audio_object={this.audio_object}/>}/>
+                              comp={<VideoMode song={this.state.song} playState={this.state.playState} changeTime={this.state.changeTime} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={<Admin/>}/>
             </Switch>
@@ -118,9 +121,9 @@ export default class MusicPlayer extends React.Component {
                 <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
                               comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)}/>)}/>
                 <PrivateRoute exact path='/musician' authed={this.state.loggedIn}
-                              comp={(<PlayList state={this.state} setSong={this.setSong.bind(this)}/>)}/>
+                              comp={(<PlayList playList={this.state.playList} setSong={this.setSong.bind(this)}/>)}/>
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
-                              comp={<PlayList state={this.state} setSong={this.setSong.bind(this)}/>}/>
+                              comp={<PlayList playList={this.state.playList} setSong={this.setSong.bind(this)}/>}/>
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={(<div/>)}/>
             </Switch>
         );
@@ -149,7 +152,7 @@ export default class MusicPlayer extends React.Component {
     renderControls() {
         if (this.state.loggedIn) {
             return (
-                <Controls state={this.state} authed={this.state.loggedIn} audio_object={this.audio_object}
+                <Controls state={this.state} authed={this.state.loggedIn} progress={this.state.progress} audio_object={this.audio_object}
                           stateChangeHandler={this.stateChangeHandler.bind(this)} setSong={this.setSong.bind(this)}/>
             )
         }

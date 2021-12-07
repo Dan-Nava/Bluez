@@ -27,7 +27,10 @@ import constructRequest from "../../../utils/requestConstructor";
 // This component allows us to control playing music, pausing, fastforwarding, going back etc.
 class Controls extends React.Component {
 
-    // This file should be taken from the server, for our purposes, we have saved it locally for phase1
+    constructor(props) {
+	super(props);
+	this.props.audio_object.ontimeupdate = (e) => {this.incrementProgress()};
+    }
 
     clickBack(e) {
         if ((this.props.audio_object.currentTime - 10) < 0) {
@@ -45,6 +48,22 @@ class Controls extends React.Component {
             this.props.audio_object.currentTime = this.props.audio_object.currentTime + 10;
             this.props.stateChangeHandler('changeTime', this.props.state.changeTime + 1);
         }
+    }
+
+    incrementProgress() {
+	if ((this.props.audio_object) && (this.props.state.timestamps)) {
+	    for (let i = 0; i <(this.props.state.timestamps.length - 1); i++) {
+	        if ((this.props.audio_object.currentTime >= this.props.state.timestamps[i]) && (this.props.audio_object.currentTime < this.props.state.timestamps[i+1]) && (i !== this.props.state.pos)) {
+		    this.props.stateChangeHandler("pos", i);
+	        }
+	    }
+        }
+	if (this.props.audio_object) {
+		let currentProgress = this.props.audio_object.currentTime * 100 / this.props.audio_object.duration;
+		if (Math.abs(currentProgress - this.props.progress) > 1) {
+			this.props.stateChangeHandler("progress", currentProgress);
+		}
+	}
     }
 
     play(e) {
@@ -74,20 +93,23 @@ class Controls extends React.Component {
     }
 
     clickMute(e) {
-        if (this.props.audio_object.muted === false) {
+        if (this.props.state.muted === false) {
             this.props.audio_object.muted = true;
+	    this.props.stateChangeHandler('muted', true);
 
         } else {
             this.props.audio_object.muted = false;
+	    this.props.stateChangeHandler('muted', false);
         }
     }
 
     clickLoop(e) {
-        if (this.props.audio_object.loop === false) {
+        if (this.props.state.loop === false) {
             this.props.audio_object.loop = true;
+	    this.props.stateChangeHandler('loop', true);
         } else {
             this.props.audio_object.loop = false;
-            this.props.stateChangeHandler('loop', !this.props.state.loop);
+            this.props.stateChangeHandler('loop', false);
         }
     }
 
@@ -132,7 +154,7 @@ class Controls extends React.Component {
                         <ExitToApp/>
                     </Avatar>
                 </div>
-            );
+	    );
         }
     }
 
@@ -140,7 +162,6 @@ class Controls extends React.Component {
         return (
             <div>
                 {this.renderIfLoggedIn()}
-
                 <Box>
                     <Tabs value={this.tabValue} centered className="tabs">
                         <Tab label="Album Art" onClick={() => {
@@ -163,12 +184,15 @@ class Controls extends React.Component {
                 </Box>
                 <div className="controlBar">
                     <div>
-                        <LinearProgress variant="determinate" value={this.props.audio_object.currentTime}/>
+                        <LinearProgress variant="determinate" value={this.props.progress}/>
                     </div>
                     <div>
                         <ul id="controlButtons">
-                            <li><Button variant="contained" color="primary" startIcon={<Loop/>}
-                                        onClick={(e) => this.clickLoop(e)}/></li>
+                            {this.props.state.loop
+                            	? <li><Button variant="contained" color="secondary" startIcon={<Loop/>} 
+						onClick={(e) => this.clickLoop(e)}/></li>
+			    	: <li><Button variant="contained" color="primary" startIcon={<Loop/>} 
+						onClick={(e) => this.clickLoop(e)}/></li>}
                             <li><Button variant="contained" color="primary" startIcon={<VolumeDownIcon/>}
                                         onClick={(e) => this.clickDecreaseVol(e)}/></li>
                             <li><Button variant="contained" color="primary" startIcon={<FastRewindIcon/>}
@@ -182,15 +206,15 @@ class Controls extends React.Component {
                                         onClick={(e) => this.clickForward(e)}/></li>
                             <li><Button variant="contained" color="primary" startIcon={<VolumeUpIcon/>}
                                         onClick={(e) => this.clickIncreaseVol(e)}/></li>
-                            <li><Button variant="contained" color="primary" startIcon={<VolumeOffIcon/>}
-                                        onClick={(e) => this.clickMute(e)}/></li>
+                            {this.props.state.muted
+                        	? <li><Button variant="contained" color="secondary" startIcon={<VolumeOffIcon/>} onClick={(e) => this.clickMute(e)}/></li>
+				: <li><Button variant="contained" color="primary" startIcon={<VolumeOffIcon/>} onClick={(e) => this.clickMute(e)}/></li>}
                         </ul>
                     </div>
                 </div>
             </div>
         )
     }
-    ;
 }
 
 export default withRouter(Controls);
