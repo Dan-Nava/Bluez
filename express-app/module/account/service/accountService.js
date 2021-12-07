@@ -56,7 +56,21 @@ async function getAccount(token, attributes) {
     }
 }
 
+async function updateAccount(token, newValues) {
+    let accountId = await getAccountId(token);
+    if (!accountId) {
+        return false;
+    }
+    await Accounts.update(newValues, {
+        where: {
+            account_id: accountId
+        }
+    });
+    return true;
+}
+
 module.exports = {
     getAccount: getAccount,
     createAccount: createAccount,
+    updateAccount: updateAccount,
 };

@@ -34,4 +34,21 @@ router.get('/:attr', async function (request, response) {
     }
 });
 
+router.post('/update', async function (request, response) {
+    /*
+    {
+        token:token,
+        newValues: {newValues}
+    }
+     */
+    let token = request.body.token;
+    let newValues = request.body.newValues;
+    let success = accountService.updateAccount(token, newValues);
+    if (!success) {
+        response.status(400).end(JSON.stringify({success: false}));
+    } else {
+        response.status(200).end(JSON.stringify({success: true}));
+    }
+});
+
 module.exports = router;
