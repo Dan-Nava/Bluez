@@ -41,6 +41,19 @@ router.get('/chords', async function (request, response) {
     }
 });
 
+router.get('/albumArt', async function (request, response) {
+    /*
+    /music/albumArt?name=name
+     */
+    let name = request.query.name;
+    let music = await musicService.getAlbumArt(name);
+    if (music === false) {
+        response.status(400).end(JSON.stringify({message: 'Invalid song name'}));
+    } else {
+        response.status(200).end(JSON.stringify({album_art: music.album_art}));
+    }
+});
+
 router.get('/audio', async function (request, response) {
     /*
     /music/audio?name=name
@@ -66,6 +79,8 @@ router.get('/video', async function (request, response) {
         response.status(200).sendFile(file);
     }
 });
+
+
 
 router.get('/all', async function (request, response) {
     /*

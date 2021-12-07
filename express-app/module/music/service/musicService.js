@@ -61,6 +61,21 @@ async function getChords(name) {
     }
 }
 
+async function getAlbumArt(name) {
+    name = name.toLowerCase();
+    let data = await Music.findAll({
+        attributes: ['album_art'],
+        where: {
+            name: name
+        }
+    });
+    if (data.length > 0) {
+        return data[0].get({plain: true});
+    } else {
+        return false;
+    }
+}
+
 async function getAudio(name) {
     name = name.toLowerCase();
     let data = await Music.findAll({
@@ -98,6 +113,7 @@ module.exports = {
     getInfo: getInfo,
     getLyrics: getLyrics,
     getChords: getChords,
+    getAlbumArt: getAlbumArt,
     getAudio: getAudio,
     getVideo: getVideo,
 };
