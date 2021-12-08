@@ -31,13 +31,13 @@ export default class AdminMMList extends React.Component {
                     case 'title':
                         return u.title.toLowerCase().includes(search);
                     case 'artist':
-                        return u.artist.toLowerCase().includes(search);
+                        return u.Artist.toLowerCase().includes(search);
                     case 'album':
-                        return u.album.toLowerCase().includes(search);
+                        return u.Album.toLowerCase().includes(search);
                     case 'genre':
-                        return u.genre.toLowerCase().includes(search);
+                        return u.Genres.toLowerCase().includes(search);
                     case 'year':
-                        return u.year.toLowerCase().includes(search);
+                        return u.Released.toLowerCase().includes(search);
                     default:
                         return null;
                 } 
@@ -72,8 +72,10 @@ export default class AdminMMList extends React.Component {
                     </TableHead>
                     <TableBody>
                         {this.state.songList.map((music) => (
-                            <ListRow 
-                                song={music} 
+                            <ListRow
+                                key={Math.random()}
+                                song={music}
+                                albumArt={this.props.albumArt[music.title]}
                                 deleteCallback={this.deleteCallback} 
                                 editCallback={this.props.editCallback}
                             />

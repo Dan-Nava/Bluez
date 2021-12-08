@@ -1,0 +1,16 @@
+#set-admin-button {
+    width: 11em;
+}
+
+#ban-button {
+    width: 5em;
+}
+
+.admin-user-table-cell-text {
+    width: 8em;
+}
+
+.admin-user-table-cell-image {
+    width: 3em;
+}
+

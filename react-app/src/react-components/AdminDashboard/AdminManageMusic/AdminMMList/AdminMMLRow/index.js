@@ -19,7 +19,7 @@ export default class AdminMMLRow extends React.Component {
             return <AlbumIcon/>
         }
         else{
-            return <img className='cover-art-admin-manage-music' alt='' src={this.props.song.coverArt}/>
+            return this.props.albumArt
         }
     }
 
@@ -31,10 +31,10 @@ export default class AdminMMLRow extends React.Component {
             <TableRow key={song.sID}>
                 <TableCell><Avatar variant="square">{this.addImage()}</Avatar></TableCell>
                 <TableCell className="music-edit-cell">{song.title}</TableCell>
-                <TableCell className="music-edit-cell">{song.artist}</TableCell>
-                <TableCell className="music-edit-cell">{song.album}</TableCell>
-                <TableCell className="music-edit-cell">{song.genre}</TableCell>
-                <TableCell className="music-edit-cell">{song.year}</TableCell>
+                <TableCell className="music-edit-cell">{song.Artist}</TableCell>
+                <TableCell className="music-edit-cell">{song.Album}</TableCell>
+                <TableCell className="music-edit-cell">{song.Genres}</TableCell>
+                <TableCell className="music-edit-cell">{song.Released}</TableCell>
                 <TableCell> 
                     <Button 
                         className='edit-button' 
