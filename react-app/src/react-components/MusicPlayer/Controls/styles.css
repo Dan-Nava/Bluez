@@ -22,7 +22,7 @@
 }
 
 .controlBar {
-    background-color: darkgray;
+    background-color: #0c1929;
 }
 
 .avatar-float {
@@ -43,6 +43,6 @@
     right: 0;
     width: auto;
     margin: auto;
-    background-color: white;
+    background-color: #0c1929;
 
 }
