@@ -117,6 +117,7 @@ class Login extends React.Component {
                 <div className="sign-up-container">
                     <form className="auth-form" ref={this.signUpForm} action="#">
                         <h1>Create Account</h1><br/>
+                        <h2>To an immersive listening experience</h2>
                         <TextField required label="Username" type="text" name={'username'}/><br/>
                         <TextField required label="Password" type="password" name={'password'}/><br/>
                         <TextField required label="Repeat Password" type="password" name={'password2'}/><br/>
@@ -126,10 +127,10 @@ class Login extends React.Component {
                 </div>
                 <div className="sign-in-container">
                     <form className="auth-form" ref={this.signInForm} action="#">
-                        <h1>Sign in</h1><br/>
+                        <h1>Sign in to <strong>BLUEZ</strong></h1><br/>
                         <TextField required label="Username" type="text" name={'username'}/><br/>
                         <TextField required label="Password" type="password" name={'password'}/>
-                        <a href="/">Forgot your password?</a>
+                        {/*<a href="/">Forgot your password?</a>*/}
                         <InputLabel id="helper">{this.state.signInHelperText}</InputLabel><br/>
                         <Button variant="outlined" onClick={() => this.signIn()}>Sign In</Button>
                     </form>

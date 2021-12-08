@@ -9,7 +9,9 @@ h1 {
     font-weight: bold;
     margin: 0;
 }
-
+strong{
+    font-size: 1.2em;
+}
 a {
     color: #282c34;
     font-size: 0.8em;
