@@ -7,12 +7,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import AlbumIcon from '@mui/icons-material/Album';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import configs from '../../../../config'
 
 import './styles.css'
 
