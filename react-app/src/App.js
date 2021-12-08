@@ -2,7 +2,13 @@ import './App.css';
 import React from 'react';
 import MusicPlayer from './react-components/MusicPlayer';
 import {BrowserRouter} from "react-router-dom";
-
+import {createTheme} from "@mui/material";
+import {ThemeProvider} from "@emotion/react";
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
 class App extends React.Component {
     state = {
         loggedIn: false,
@@ -31,11 +37,15 @@ class App extends React.Component {
 
     render() {
         return (
+
+            <ThemeProvider theme={darkTheme}>
             <div className="App">
                 <BrowserRouter>
                     <MusicPlayer state={this.state} stateChangeHandler={this.stateChangeHandler.bind(this)}/>
                 </BrowserRouter>
             </div>
+
+                </ThemeProvider>
         );
     }
 }
