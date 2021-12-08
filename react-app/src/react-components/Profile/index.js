@@ -72,7 +72,7 @@ class Profile extends React.Component {
                             <Button className="song_cover" variant="outlined"
                                     style={{backgroundImage: 'url(' + cover + ')'}}/>
                         </div>
-                        <Button variant="outlined">Add Friend</Button>
+                        {/*<Button variant="outlined">Add Friend</Button>*/}
                     </div>
                 </div>
             </div>
