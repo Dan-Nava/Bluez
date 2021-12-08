@@ -19,7 +19,8 @@ export default class PlayList extends React.Component {
             playlist: [], // ex: [{name: 'abc', pID: 0, favorite: false}, ...]
             pID: 0,
             songList: [], // ex: ['songname1', 'songname2', ...]
-            favorites: [] // ex: ['favorite1', 'favorite2', ...]
+            favorites: [], // ex: ['favorite1', 'favorite2', ...]
+            albumArt: {}
         }
     }
 
@@ -31,7 +32,7 @@ export default class PlayList extends React.Component {
             songNames.push(songData.names[i].name);
         }
         this.setState({songList: songNames})
-
+        await this.getArt(songNames);
         //server call for favorites of user
         await this.getFavorites();
         let fav;
@@ -59,6 +60,15 @@ export default class PlayList extends React.Component {
             }
             this.setState({playlist: currentPlaylist, pID: pID})
         }
+    }
+
+    async getArt (songs) {
+        let art = {};
+        for (let i = 0; i < songs.length; i++) {
+            const albumArt = await fetch(`${configs.SERVER_URL}/music/albumArt?name=${songs[i]}`).then(res => res.json());
+            art[songs[i]] = <img className='cover-art-admin-manage-music' alt='' src={albumArt.album_art}/>
+        }
+        this.setState({albumArt: art})
     }
 
     async updatePlaylist (pl) {
@@ -90,6 +100,7 @@ export default class PlayList extends React.Component {
                     key={Math.random()}
                     songName={this.state.playlist[i].name} //this will eventually change to songInfo
                     pID={this.state.playlist[i].pID}
+                    art={this.state.albumArt[this.state.playlist[i].name]}
                     favorite={this.state.playlist[i].favorite} 
                     searching={false} 
                     // extras={null} 
@@ -202,6 +213,7 @@ export default class PlayList extends React.Component {
                         <SongCell
                             key={Math.random()}
                             songName={song}
+                            art={this.state.albumArt[song]}
                             // pID={this.state.playlist[i].pID}
                             searching={true} 
                             extras={props}

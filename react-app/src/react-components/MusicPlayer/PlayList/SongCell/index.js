@@ -12,6 +12,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import configs from '../../../../config'
 
 import './styles.css'
 
@@ -22,10 +23,10 @@ export default class SongCell extends React.Component {
         this.state = {
             anchorElement: null,
             openOptionsMenu: false,
-            favorite: this.props.favorite
+            favorite: this.props.favorite,
+            albumArt: this.props.art
         }
     }
-
 
     handleOnClick = () => {
         if (this.props.searching) {
@@ -51,6 +52,7 @@ export default class SongCell extends React.Component {
     //'extras' only relevant to search popup, 
     // it lets autocomplete component know that an element has been clicked
     renderSongCell(songName, searching, extras) {
+        console.log();
         return (
             <div>
                 <Divider/>
@@ -60,7 +62,9 @@ export default class SongCell extends React.Component {
                     >
                         <Grid container direction='row' spacing={1} sx={{padding: 0 + 'em'}}>
                             <Grid item>
-                                <Avatar variant='square'><AlbumIcon/></Avatar>
+                                <Avatar variant='square'>
+                                    {this.state.albumArt}
+                                </Avatar>
                             </Grid>
                             <Grid item>
                                 <Grid container direction='column' spacing={1}>
