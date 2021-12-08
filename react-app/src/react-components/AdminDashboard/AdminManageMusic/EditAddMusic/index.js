@@ -17,10 +17,10 @@ export default class EditAddMusic extends React.Component {
         if(this.props.song !== null){
             this.state = {
                 title: this.props.song.title, 
-                artist: this.props.song.artist, 
-                album: this.props.song.album,
-                genre: this.props.song.genre, 
-                year: this.props.song.year,
+                artist: this.props.song.Artist, 
+                album: this.props.song.Album,
+                genre: this.props.song.Genres, 
+                year: this.props.song.Released,
                 musicFile: 'song.mp3',
                 lyricFile: 'lyrics.txt',
                 imageFile: <img className='cover-art-admin-edit' src={this.props.song.coverArt} alt='Cover Art'/>
