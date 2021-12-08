@@ -28,46 +28,30 @@ Backend will be on [http://localhost:5000](http://localhost:5000)
 # Application utilization instructions
 
 ### UI Description:
-The UI is divided into 3 main sections alongside the music player bar and the navigation bar
-on the bottom and top of the screen respectively.
+The UI is divided into 3 main sections: The left side is used to display the current playlist with a search bar to populate the playlist with new songs. The right side displays information about the current song that is playing if there is indeed a song playing at the moment. The center section is a multi-function display thart is used to show information based on what "mode" the user is in. 
 
-The center section is the main window which will change contents whenever a user navigates to another view using
-the navigation bar. The 2 panes flanking the main window show supporting information and have additional functionality
-based on the current view of the main window.
+The modes of the app can be navigated between once the user has logged into the application. The four modes are album art mode, where the user can simply view the album art that is play similar to the basic function of most streaming apps; video mode, which plays the music video of the currently playing song; lyric mode, where the user can view the lyrics scroll by in real time with the playing of the song; and chords mode, where the user can view the chords of the currently playing song so that they can play along on an instrument while the song is playing. Navigation between the modes is done by using the tabs with the respective names on the bottom bar of the screen.
 
-The 2 leftmost buttons on the navigation bar are account options, from left to right they are: user profile and the admin dashboard respectively.
-The next 5 buttons are for switching views, from left to right they are: Video mode, Social mode, Album Art mode, Lyric mode
-and Musician mode.
+The progress bar is located at the bottom of the screen and updates to show the user where they are in the song. Playback control buttons allow the user to play, pause, seek forwards and backwards, change the volume, and loop the current song. 
 
-The music player bar has 7 buttons, from left to right they are: loop current song, lower volume,
-reverse song by 10sec, play/pause, fast forward song by 10sec, increase volume and mute.
+The two buttons located at the top right of the screen show the log in and log out buttons. If the user logged in with "user" credentials, then the account button will take them to their profile. If the user logged in with "admin" options, then the same button will show them admin options. The log out button logs the user/admin out of the current session.
 
 ### On Startup:
-On startup users will be redirected to the login page. Only the default song can be played through the music
-player during this time, but no other functionality is accessible by users that are not logged in.
+On startup users will be redirected to the login page. Upon logging in with user credentials, the user will be allowed to perform all the functionalities as described above. Upon loggin in with admin credentials, admin functionality will be shown. 
 
 ### User Functionality:
 To log into a user account use: `USERNAME: user`, `PASSWORD: user`.
-Users will have access to all 5 views, their user profile and the music player.
-
-In the user profile, users will be able to change their profile picture, background image, description and current
-favourite songs. If a user is viewing another user's profile, they can instead send a friend request. the right and
-left panes will be empty in the user profile.
-
-In Video mode users can view the music video of the song they are currently listening to by using the music player
-buttons as usual. The left pane will include the current playlist of the user and a search bar in which the user can use to add more songs to their playlist. The right pane will have the info of the current song being played.
-
-In Social mode users can post anonymous comments in a message board-like window specific to the song they
-are currently listening to, whilst the background of the window is populated by a wave-visual representation of the
-song as it plays (The wave-visual has been disabled due to a difficult known bug that we have been unable to fully remove. More details on the bug can be found here https://bugs.chromium.org/p/chromium/issues/detail?id=429204. Our intentions are to still include this feature in our final product). The left pane will include the friends list of the user where they can see what each of their friends is currently listening to. The right pane will have the info of the current song being played. 
+Users will have access to all 4 views and their user profile which is accessible from the top right account button. 
 
 In Album Art mode users can enjoy a minimalist approach to listening to music, with the view being dedicated to
 just the cover art of the current song. The left pane and right panes here will be the same as in Video mode.
 
-In Lyric mode users can view the lyrics of the song they are currently listening to onscreen. By clicking on the
-'next' and 'previous' buttons, users can cycle through the lyrics of the entire song. The left pane and right panes here will be the same as in Video mode.
+In Video mode users can view the music video of the song they are currently listening to by using the music player
+buttons as usual. The left pane will include the current playlist of the user and a search bar in which the user can use to add more songs to their playlist. The right pane will have the info of the current song being played.
 
-In Musician Mode users can view the current chords of the song and they can transpose it to a key that they want to see the song in. The chords will update accordingly to reflect the key change. The left pane and right panes here will be the same as in Video mode.
+In Lyric mode users can view the lyrics of the song they are currently listening to onscreen and see it scroll across the screen synced to the speed of the song.
+
+In Musician Mode users can view the current chords of the song and see it scroll in real time with the song. 
 
 ### Admin Functionality:
 To log into an admin account use: `USERNAME: admin`, `PASSWORD: admin`. 
