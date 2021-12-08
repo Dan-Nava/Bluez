@@ -90,7 +90,7 @@ export default class MusicPlayer extends React.Component {
                     <SocialMode state={this.state} ref={this.mode_comp} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn}
-                              comp={<AlbumArtMode song={this.state.song}/>}/>
+                              comp={<AlbumArtMode song={this.state.song} stateChangeHandler={this.stateChangeHandler.bind(this)} albumArt={this.state.albumArt}/>}/>
 
                 <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
                               comp={<LyricMode song={this.state.song} pos={this.state.pos}
