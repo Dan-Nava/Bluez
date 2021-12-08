@@ -37,6 +37,7 @@
 }
 
 .tabs {
+    border-top: darkgray dotted;
     position: absolute;
     bottom: 4.5em;
     left: 0;
