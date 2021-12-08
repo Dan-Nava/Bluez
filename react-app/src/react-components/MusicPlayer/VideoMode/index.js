@@ -17,6 +17,9 @@ class VideoMode extends React.Component {
 		    await this.videoRef.load();
 		    this.videoRef.muted = true;
 		    this.videoRef.currentTime = this.props.audio_object.currentTime;
+		    if (this.props.audio_object.paused) {
+			await this.videoRef.pause();
+		    }
 		}
 	}
 
@@ -32,19 +35,18 @@ class VideoMode extends React.Component {
 		if (this.props.song !== prevProps.song) {
 			this.load();
 		}
-		if (this.props.changeTime !== prevProps.changeTime) {
-			this.videoRef.currentTime = this.props.audio_object.currentTime;
-		}
+		this.videoRef.currentTime = this.props.audio_object.currentTime;
+		
 		if (this.videoRef.duration < this.props.audio_object.duration) {
 			this.videoRef.loop = true;
 		} else {
 		    this.videoRef.loop = this.props.audio_object.loop;
 		}
-		if ((this.props.playState === false) && (this.props.playState !== prevProps.playState)) {
+		if (((this.props.playState === false) && (this.props.playState !== prevProps.playState)) || ((this.props.audio_object.paused) && (!this.videoRef.paused))) {
 			this.pause();
-		} else if ((this.props.playState === true) && (prevProps.PlayState !== this.props.playState)) {
+		} else if (((this.props.playState === true) && (prevProps.PlayState !== this.props.playState)) || ((!this.props.audio_object.paused) && (this.videoRef.paused))) {
 			this.play();
-		}
+		} 
 	}
 
 	render() {

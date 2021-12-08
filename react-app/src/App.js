@@ -25,6 +25,7 @@ class App extends React.Component {
         albumArt: null,
         lyrics: null,
         timestamps: null,
+	chords: null,
         pos: 0,
 	progress: 0,
         songMap: (new Map())

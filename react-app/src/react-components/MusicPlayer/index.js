@@ -33,7 +33,7 @@ export default class MusicPlayer extends React.Component {
     }
 
     incrementSong() {
-        if (!this.audio_object.loop) {
+        if ((!this.audio_object.loop) && (this.state.playList) && (this.state.playList.length !== 0) && (this.state.playList.indexOf(this.state.song) >= 0)) {
             let idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
             this.setSong(this.state.playList[idx]);
         }
@@ -90,7 +90,7 @@ export default class MusicPlayer extends React.Component {
                     <SocialMode state={this.state} ref={this.mode_comp} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/albumArt' authed={this.state.loggedIn}
-                              comp={<AlbumArtMode song={this.state.song}/>}/>
+                              comp={<AlbumArtMode song={this.state.song} stateChangeHandler={this.stateChangeHandler.bind(this)} albumArt={this.state.albumArt}/>}/>
 
                 <PrivateRoute exact path='/lyrics' authed={this.state.loggedIn}
                               comp={<LyricMode song={this.state.song} pos={this.state.pos}
