@@ -52,10 +52,9 @@
 
 .back-cover {
   height: 100%;
-  width: 80em;
+  width: 100%;
   position: fixed;
   object-fit: cover;
-  left: -25%;
   z-index: -10;
   opacity: 30%;
 }
