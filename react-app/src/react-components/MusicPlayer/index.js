@@ -33,7 +33,7 @@ export default class MusicPlayer extends React.Component {
     }
 
     incrementSong() {
-        if (!this.audio_object.loop) {
+        if ((!this.audio_object.loop) && (this.state.playList) && (this.state.playList.length !== 0) && (this.state.playList.indexOf(this.state.song) >= 0)) {
             let idx = (this.state.playList.indexOf(this.state.song) + 1) % this.state.playList.length;
             this.setSong(this.state.playList[idx]);
         }
