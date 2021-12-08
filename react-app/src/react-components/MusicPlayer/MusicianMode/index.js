@@ -22,7 +22,7 @@ export default class MusicianMode extends React.Component {
       });
 
     let lyrics = lyricResults.lyrics.split("\\n");
-    let chords = chordResults.lyrics.split("\\n"); //there is a misname here?
+    let chords = chordResults.chords.split("\\n"); 
 
     this.props.stateChangeHandler("lyrics", lyrics);
     this.props.stateChangeHandler("chords", chords);
