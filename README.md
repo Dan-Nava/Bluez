@@ -1,75 +1,29 @@
-# team39
+# Team39
 
-# Getting Started with Create React App
+This project utilizes React.js  (https://github.com/facebook/create-react-app). and Express.js(https://github.com/expressjs/express)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## To run the application
 
-## Available Scripts
+### Start the backend server
 
-In the project directory, you can run:
+`cd express-app`
 
-### `npm start`
+`npm install`
 
-Runs the app in the development mode.\
+`npm start`
+
+### Start the frontend
+
+`cd react-app`
+
+`npm install`
+
+`npm start`
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Backend will be on [http://localhost:5000](http://localhost:5000)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 # Application utilization instructions
 
@@ -129,3 +83,56 @@ unable to be logged into until the ban is reversed. Admins can also edit user ac
 For managing music admins will be able to look through their current database of songs and filter through them using the search bar.
 For existing songs admins can delete them which will completely remove them from the database, or edit them which will let admins change all the basic information of a song including the cover art.
 Admins can also add new songs by selecting the ADD SONG button, here they will be taken to a new menu where they must input all the basic information for the song and upload the cover art, sound file and lyric file.
+
+# Express Routes
+
+## Authentication
+
+`POST /login` takes in a JSON object with attributes `username` and `password`. i.e. `{username:string, password:string}`. Returns `{token:string}` upon successful login. The token will be used for user specific infomation access.
+
+`POST /logout` takes in  `{username:string, token:string}` to logout a user.
+
+`POST /isLoggedIn` takes in  `{username:string, token:string}` to check if a user is logged in.
+
+`GET /accessLevel?token=token` returns the access level of a user: -1:banned, 0:regular, 1:admin.
+
+## Registration
+
+`POST /register` takes in `{username:string, password:string}` to register a user. If the user name is already registered, `{message: 'Username already taken'}` will be returned with a status code of 4000.
+
+## Admin
+
+** For admin endpoints, the token provided must be associated with an admin account. i.e. Access level == 1 b**
+
+`GET /admin/users?token=token` returns all users. 
+
+`POST /admin/ban` takes in `{username:string, token:string}` to ban a user. i.e. change the access level of that user to -1
+
+`POST /admin/restore` takes in `{username:string, token:string}` to unban or downgrade an admin to a regular user.
+
+`POST /admin/add` takes in  `{username:string, token:string}` to make an user admin.
+
+## Account
+
+`GET /account/:attr` takes in one of the attributes: info, avatar, hero, playlist, favorites. Return the corresponding info.
+
+`POST /account/update` takes in `{token:string, newValues:{newValues}}` to update an account based on the provided newValues
+
+## Music
+
+`GET /music/all` return all music names
+
+`GET /music/info?name=name` return a music's info
+
+`GET /music/lyrics?name=name` return a music's lyrics
+
+`GET /music/chords?name=name` return a music's chords
+
+`GET /music/audio?name=name` return a music's audio
+
+`GET /music/video?name=name` return a music's video
+
+`GET /music/albumArt?name=name` return a music's albumArt
+
+
+
