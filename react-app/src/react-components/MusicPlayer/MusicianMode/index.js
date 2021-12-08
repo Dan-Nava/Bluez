@@ -4,11 +4,6 @@ import configs from "../../../config";
 import "./styles.css";
 
 export default class MusicianMode extends React.Component {
-  constructor(props) {
-    super(props);
-    this.data_url = null;
-    this.props.audio_object.ontimeupdate = this.pos_value.bind(this);
-  }
 
   async get_data() {
     let lyricResults = await fetch(
@@ -27,7 +22,7 @@ export default class MusicianMode extends React.Component {
       });
 
     let lyrics = lyricResults.lyrics.split("\\n");
-    let chords = chordResults.lyrics.split("\\n"); //there is a misname here?
+    let chords = chordResults.chords.split("\\n"); 
 
     this.props.stateChangeHandler("lyrics", lyrics);
     this.props.stateChangeHandler("chords", chords);
@@ -71,20 +66,6 @@ export default class MusicianMode extends React.Component {
       this.get_art();
     }
     
-  }
-
-  pos_value() {
-    if (this.props.audio_object && this.props.timestamps) {
-      for (let i = 0; i < this.props.timestamps.length - 1; i++) {
-        if (
-          this.props.audio_object.currentTime >= this.props.timestamps[i] &&
-          this.props.audio_object.currentTime < this.props.timestamps[i + 1] &&
-          i !== this.props.pos
-        ) {
-          this.props.stateChangeHandler("pos", i);
-        }
-      }
-    }
   }
 
   scrollUp() {

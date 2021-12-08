@@ -1,36 +1,35 @@
 import React from 'react'
-
+import configs from '../../../config';
 import "./styles.css";
+export default class AlbumArtMode extends React.Component {
 
-import {
-    CoverFlowerBoy,
-    CoverPureComedy,
-    CoverStayAndDecay
-} from '../../HardCodedData'
-
-export default function AlbumArtMode({song}) {
-
-    let albumArt = CoverFlowerBoy
-    // These album covers would be stored on an external database and retrieved properly
-    switch (song) {
-        case "See You Again":
-            albumArt = CoverFlowerBoy
-            break;
-        case "Pure Comedy":
-            albumArt = CoverPureComedy
-            break;
-        case "Stay And Decay":
-            albumArt = CoverStayAndDecay
-            break;
-        default:
-            albumArt = CoverPureComedy
-            break;
+    async get_art() {
+	let art = await fetch(`${configs.SERVER_URL}/music/albumArt?name=${this.props.song}`).then(res => res.json());
+	this.props.stateChangeHandler("albumArt", art.album_art);
     }
 
-    return (
-        <div>
-            <img src={albumArt} className="front-cover" alt=""/>
-            <img src={albumArt} className="back-cover" alt=""/>
-        </div>
-    )
+    componentDidMount() {
+	if (this.props.albumArt === null) {
+	    this.get_art();
+	}
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+	if (prevProps.song !== this.props.song) {
+		this.get_art();
+	}
+    }
+    
+    render() {
+    	return (
+        	<div>
+			{(this.props.albumArt) 
+			? <img src={this.props.albumArt} className="front-cover" alt=""/>
+            		: <div></div>}
+			{(this.props.albumArt) 
+			? <img src={this.props.albumArt} className="back-cover" alt=""/>
+            		: <div></div>}
+        	</div>
+    	);
+    }
 }
