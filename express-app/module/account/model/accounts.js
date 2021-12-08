@@ -7,6 +7,7 @@ const Accounts = db.define('accounts', {
             primaryKey: true
         },
         title: DataTypes.INTEGER,
+        name: DataTypes.INTEGER,
         description: DataTypes.INTEGER,
         favorites: DataTypes.INTEGER,
         playlist: DataTypes.INTEGER,

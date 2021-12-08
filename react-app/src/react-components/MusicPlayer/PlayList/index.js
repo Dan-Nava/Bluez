@@ -12,7 +12,7 @@ export default class PlayList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.playList = this.props.state.playList;
+        this.playList = this.props.playList;
     }
 
     playListPanel(songName) {

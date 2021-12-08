@@ -11,7 +11,7 @@ router.get('/:attr', async function (request, response) {
     let attributes = []
     switch (attr) {
         case 'info':
-            attributes = ['title', 'description'];
+            attributes = ['name', 'title', 'description'];
             break;
         case 'avatar':
             attributes = ['avatar'];
