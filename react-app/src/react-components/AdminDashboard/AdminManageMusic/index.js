@@ -13,7 +13,6 @@ import constructRequest from '../../../utils/requestConstructor';
 import Cookies from 'js-cookie';
 
 import './styles.css';
-import {songData} from "../../HardCodedData";
 
 /* Component for Admin's Music Edit view*/
 export default class AdminManageMusic extends React.Component {
@@ -21,21 +20,21 @@ export default class AdminManageMusic extends React.Component {
         super(props);
          
         this.state = {
-            songData: null,
+            songData: [],
             searchValue: '',
             currentView: 'DEFAULT', //possible views: DEFAULT, EDIT_SONG, ADD_SONG
             songToBeEdited: null,
             filterValue: 'title', //possible options: title, artist, album, genre, year
-            albumArt: null
+            albumArt: []
         }
     }
 
     async getAlbumArt() {
-        let songs = this.state.songData
         let art = {};
+        let songs = this.state.songData;
         for (let i = 0; i < songs.length; i++) {
-            const albumArt = await fetch(`${configs.SERVER_URL}/music/albumArt?name=${songs[i].name}`).then(res => res.json());
-            art[songs[i]] = <img className='cover-art-admin-manage-music' alt='' src={albumArt.album_art}/>
+            const albumArt = await fetch(`${configs.SERVER_URL}/music/albumArt?name=${songs[i].title}`).then(res => res.json());
+            art[songs[i].title] = <img className='cover-art-admin-manage-music' alt='' src={albumArt.album_art}/>
         }
         this.setState({albumArt: art})
     }
@@ -43,7 +42,6 @@ export default class AdminManageMusic extends React.Component {
     async componentDidMount () {
         await this.getSongData();
         await this.getAlbumArt();
-        // this.setState({songData: data.users})
     }
 
     async getSongData() {
@@ -56,7 +54,6 @@ export default class AdminManageMusic extends React.Component {
             songInfo[i]['title'] = songNames[i].name;
         }
         this.setState({songData: songInfo})
-        //go through the data and parse it so it matches with current codebase implemenation
     }
 
     //edit button callback
@@ -64,7 +61,6 @@ export default class AdminManageMusic extends React.Component {
         this.setState({songToBeEdited: song, currentView: 'EDIT_SONG'});
     }
 
-    //DATABASE CALL: deletes song from the database
     deleteCallback = (song) => {
         const newlist = this.state.songData.filter((s) => s !== song);
         this.setState({songData: newlist})
@@ -124,13 +120,16 @@ export default class AdminManageMusic extends React.Component {
                     </FormControl>
                 </div>
                 <div>
+                    {(this.state.songData.length !== 0 || this.state.albumArt.length !== 0) ?
                     <AdminMMList
+                        albumArt={this.state.albumArt}
                         songData={this.state.songData}
                         searchValue={this.state.searchValue}
                         filterValue={this.state.filterValue}
                         editCallback={this.editCallback}
                         deleteCallback={this.deleteCallback}
                     />
+                    : null}
                 </div>
             </>
         )
@@ -146,7 +145,7 @@ export default class AdminManageMusic extends React.Component {
 
         switch (this.state.currentView) {
             case 'DEFAULT':
-                view = this.state.songInfo ? this.defaultView() : null;
+                view = this.defaultView();
                 break;
             case 'EDIT_SONG':
                 view = this.EditAddMusic(this.state.songToBeEdited, true);
