@@ -32,13 +32,22 @@ class Login extends React.Component {
         };
         if(token && username){
             fetch(`${configs.SERVER_URL}/isLoggedIn`, constructRequest(body, 'POST')).then(res => res.json()).then(data=>{
-                if (data.accessLevel > 0) {
-                    this.stateChangeHandler('loggedIn', true);
-                    this.stateChangeHandler('adminAuthed', true);
-                    this.redirect('/admin');
+                console.log(data)
+                if (data.loggedIn) {
+                    fetch(`${configs.SERVER_URL}/accessLevel?token=${token}`).then(res => res.json()).then(data=>{
+                        if (data.accessLevel > 0) {
+                            this.stateChangeHandler('loggedIn', true);
+                            this.stateChangeHandler('adminAuthed', true);
+                            this.redirect('/admin');
+                        } else {
+                            this.stateChangeHandler('loggedIn', true);
+                            this.redirect('/profile');
+                        }
+                    });
                 } else {
-                    this.stateChangeHandler('loggedIn', true);
-                    this.redirect('/profile');
+                    this.stateChangeHandler('loggedIn', false);
+                    this.stateChangeHandler('adminAuthed', false);
+                    this.setState({signInHelperText: "Please Login First"})
                 }
             });
         }else{
