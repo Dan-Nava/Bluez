@@ -4,11 +4,6 @@ import configs from '../../../config';
 import './styles.css'
 
 export default class LyricMode extends React.Component {
-    constructor(props) {
-	super(props);
-	this.data_url = null;
-	this.props.audio_object.ontimeupdate = this.pos_value.bind(this);
-    }
 
     async get_data() {
 	let result = await fetch(`${configs.SERVER_URL}/music/lyrics?name=${this.props.song}`).then(res => res.json());
@@ -47,16 +42,6 @@ export default class LyricMode extends React.Component {
 	}
     }
 
-    pos_value() {
-	if ((this.props.audio_object) && (this.props.timestamps)) {
-	    for (let i = 0; i <(this.props.timestamps.length - 1); i++) {
-	        if ((this.props.audio_object.currentTime >= this.props.timestamps[i]) && (this.props.audio_object.currentTime < this.props.timestamps[i+1]) && (i !== this.props.pos)) {
-		    this.props.stateChangeHandler("pos", i);
-	        }
-	    }
-        }
-    }
-
     scrollUp() {
         if (this.props.pos > 0) {
             this.props.stateChangeHandler("pos", this.props.pos-1);
@@ -77,12 +62,22 @@ export default class LyricMode extends React.Component {
 		    		<p className="lyric">{this.props.lyrics[this.props.pos + 1]}</p>
 		    		<p className="lyric">{this.props.lyrics[this.props.pos + 2]}</p>
 		    		<p className="lyric">{this.props.lyrics[this.props.pos + 3]}</p>
-     		    		<p className="lyric">{this.props.lyrics[this.props.pos + 4]}</p>
+     		    	<p className="lyric">{this.props.lyrics[this.props.pos + 4]}</p>
+					<p className="lyric">{this.props.lyrics[this.props.pos + 5]}</p>
+		    		<p className="lyric">{this.props.lyrics[this.props.pos + 6]}</p>
+					<p className="lyric">{this.props.lyrics[this.props.pos + 7]}</p>
+     		    	<p className="lyric">{this.props.lyrics[this.props.pos + 8]}</p>
+					<p className="lyric">{this.props.lyrics[this.props.pos + 9]}</p>
 			</div>
 			);
 	} else {
 		return (
 			<div className="lyrics">
+				<p className="lyric"></p>
+				<p className="lyric"></p>
+				<p className="lyric"></p>
+				<p className="lyric"></p>
+				<p className="lyric"></p>
 				<p className="lyric"></p>
 				<p className="lyric"></p>
 				<p className="lyric"></p>

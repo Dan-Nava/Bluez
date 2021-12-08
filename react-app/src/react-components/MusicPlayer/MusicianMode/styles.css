@@ -1,12 +1,50 @@
 .chords {
   color: white;
   font-size: xx-large;
-  font-size: 1.5em;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 1.2em;
+  font-family: Optima, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-weight: bold;
+
   position: fixed;
   top: 0%;
   left: 12%;
   z-index: -1;
   line-height: 4.5em;
   text-align: left;
+  letter-spacing: 0.05em;
+}
+
+.musician-lyrics {
+  color: white;
+  font-size: xx-large;
+  font-size: 1.2em;
+  font-family: Optima, Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-weight: bold;
+  position: fixed;
+  top: 4%;
+  left: 12%;
+  z-index: -1;
+  line-height: 4.5em;
+  text-align: left;
+  letter-spacing: 0.05em;
+}
+
+.chord:nth-child(2) {
+  opacity: 100%;
+}
+
+.chord:nth-child(2) {
+  opacity: 80%;
+}
+
+.chord:nth-child(3) {
+  opacity: 70%;
+}
+
+.chord:nth-child(4) {
+  opacity: 60%;
+}
+
+.chord:nth-child(5) {
+  opacity: 50%;
 }

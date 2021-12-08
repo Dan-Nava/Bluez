@@ -8,9 +8,9 @@ class App extends React.Component {
         loggedIn: false,
         adminAuthed: false,
         playState: false,
-        loop: false,
-        changeTime: 0,
-        progress: 0,
+	loop: false,
+	changeTime: 0,
+	muted: false,
         redirect: false,
         modeList: ["Video", "Lyric", "Musician", "Social"],
         favList: [],
@@ -20,6 +20,7 @@ class App extends React.Component {
         lyrics: null,
         timestamps: null,
         pos: 0,
+	progress: 0,
         songMap: (new Map())
     };
 

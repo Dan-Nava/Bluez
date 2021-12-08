@@ -20,6 +20,7 @@ import InfoPanel from "./InfoPanel";
 // This component is the parent component that will be used to display whichever Music Player is suitable. 
 //I.E depending on the mode, the music player will change
 export default class MusicPlayer extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = this.props.state;
@@ -52,6 +53,8 @@ export default class MusicPlayer extends React.Component {
         }
         this.stateChangeHandler('playState', false);
         this.stateChangeHandler('song', songName);
+	this.stateChangeHandler('progress', 0);
+	this.stateChangeHandler('pos', 0);
     }
 
     addSong(songName) {
@@ -97,10 +100,10 @@ export default class MusicPlayer extends React.Component {
                                                audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/musician' authed={this.state.loggedIn}
-                              comp={<MusicianMode song={this.state.song}/>}/>
+                              comp={<MusicianMode song={this.state.song} pos={this.state.pos} albumArt={this.state.albumArt} chords = {this.state.chords} lyrics={this.state.lyrics} timestamps={this.state.timestamps} stateChangeHandler={this.stateChangeHandler.bind(this)} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/video' authed={this.state.loggedIn}
-                              comp={<VideoMode state={this.state} audio_object={this.audio_object}/>}/>
+                              comp={<VideoMode song={this.state.song} playState={this.state.playState} changeTime={this.state.changeTime} audio_object={this.audio_object}/>}/>
 
                 <PrivateRoute exact path='/admin' authed={this.state.adminAuthed} comp={<Admin/>}/>
             </Switch>
@@ -153,7 +156,7 @@ export default class MusicPlayer extends React.Component {
     renderControls() {
         if (this.state.loggedIn) {
             return (
-                <Controls state={this.state} authed={this.state.loggedIn} audio_object={this.audio_object}
+                <Controls state={this.state} authed={this.state.loggedIn} progress={this.state.progress} audio_object={this.audio_object}
                           stateChangeHandler={this.stateChangeHandler.bind(this)} setSong={this.setSong.bind(this)}/>
             )
         }
