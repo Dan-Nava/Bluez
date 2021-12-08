@@ -15,7 +15,6 @@ class VideoMode extends React.Component {
 		    await this.videoRef.pause();
 		    this.videoRef.src = `${configs.SERVER_URL}/music/video?name=${this.props.song}`;
 		    await this.videoRef.load();
-		    await this.videoRef.play();
 		    this.videoRef.muted = true;
 		    this.videoRef.currentTime = this.props.audio_object.currentTime;
 		}
