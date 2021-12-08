@@ -48,3 +48,15 @@
 .chord:nth-child(5) {
   opacity: 50%;
 }
+
+.back-cover {
+  height: 100%;
+  width: 80em;
+  position: fixed;
+  object-fit: cover;
+  left: -25%;
+  z-index: -10;
+  opacity: 30%;
+}
+
+
