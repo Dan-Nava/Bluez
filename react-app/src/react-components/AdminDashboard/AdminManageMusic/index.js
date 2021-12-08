@@ -21,12 +21,42 @@ export default class AdminManageMusic extends React.Component {
         super(props);
          
         this.state = {
-            songData: songData,
+            songData: null,
             searchValue: '',
             currentView: 'DEFAULT', //possible views: DEFAULT, EDIT_SONG, ADD_SONG
             songToBeEdited: null,
-            filterValue: 'title' //possible options: title, artist, album, genre, year
+            filterValue: 'title', //possible options: title, artist, album, genre, year
+            albumArt: null
         }
+    }
+
+    async getAlbumArt() {
+        let songs = this.state.songData
+        let art = {};
+        for (let i = 0; i < songs.length; i++) {
+            const albumArt = await fetch(`${configs.SERVER_URL}/music/albumArt?name=${songs[i].name}`).then(res => res.json());
+            art[songs[i]] = <img className='cover-art-admin-manage-music' alt='' src={albumArt.album_art}/>
+        }
+        this.setState({albumArt: art})
+    }
+
+    async componentDidMount () {
+        await this.getSongData();
+        await this.getAlbumArt();
+        // this.setState({songData: data.users})
+    }
+
+    async getSongData() {
+        const data = await fetch(`${configs.SERVER_URL}/music/all`).then(res => res.json());
+        const songNames = data.names;
+        let songInfo = [];
+        for (let i=0; i < songNames.length; i++){
+            let data = await fetch(`${configs.SERVER_URL}/music/info?name=${songNames[i].name}`).then(res => res.json())
+            songInfo.push(JSON.parse(data.info))
+            songInfo[i]['title'] = songNames[i].name;
+        }
+        this.setState({songData: songInfo})
+        //go through the data and parse it so it matches with current codebase implemenation
     }
 
     //edit button callback
@@ -48,17 +78,6 @@ export default class AdminManageMusic extends React.Component {
 
     //add music button handler
     handleAddMusic = () => this.setState({currentView: 'ADD_SONG'});
-
-    async componentDidMount () {
-        const data = await fetch(`${configs.SERVER_URL}/music/all`).then(res => res.json());
-        const songNames = data.names;
-        let songInfo = [];
-        for (let i=0; i < songNames.length; i++){
-            songInfo.push(await fetch(`${configs.SERVER_URL}/music/info?name=${songNames[i].name}`).then(res => res.json()))
-        }
-        console.log(songInfo)
-        // this.setState({songData: data.users})
-    }
 
     //default view of the MANAGE MUSIC menu
     defaultView() {
@@ -127,7 +146,7 @@ export default class AdminManageMusic extends React.Component {
 
         switch (this.state.currentView) {
             case 'DEFAULT':
-                view = this.defaultView();
+                view = this.state.songInfo ? this.defaultView() : null;
                 break;
             case 'EDIT_SONG':
                 view = this.EditAddMusic(this.state.songToBeEdited, true);
