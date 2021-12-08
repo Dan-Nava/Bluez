@@ -17,6 +17,9 @@ class VideoMode extends React.Component {
 		    await this.videoRef.load();
 		    this.videoRef.muted = true;
 		    this.videoRef.currentTime = this.props.audio_object.currentTime;
+		    if (this.props.audio_object.paused) {
+			await this.videoRef.pause();
+		    }
 		}
 	}
 
