@@ -1,6 +1,3 @@
-# Team39
-
-This project utilizes React.js  (https://github.com/facebook/create-react-app). and Express.js(https://github.com/expressjs/express)
 
 ## To run the application
 
