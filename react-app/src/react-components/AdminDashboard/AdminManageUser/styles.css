@@ -1,0 +1,21 @@
+.user-search-bar{
+    margin: auto;
+    width: 20em;
+}
+
+.admin-user-edit-header{
+    display: flex;
+    justify-content:space-around;
+    margin: auto;
+    margin-top: 4em;
+    margin-bottom: 0.5em;
+}
+
+.return-button{
+    left: 10em;
+}
+
+
+
+
+

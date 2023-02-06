@@ -1,0 +1,16 @@
+.user-list{
+    max-width: 50em;  
+    margin: auto;
+    overflow-y: auto;
+    max-height: 34.5em;
+    margin-bottom: 0.5em;
+}
+
+#admin-user-table-head{
+    position: sticky;
+    top: 0;
+    background-color: #041E3D;
+    z-index: 100;
+    width: 5em;
+}
+  

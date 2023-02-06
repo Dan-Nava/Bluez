@@ -1,0 +1,38 @@
+.auth-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 2em;
+    height: 100%;
+    text-align: center;
+}
+
+.auth-container {
+    background-color: #041E3D;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.sign-in-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 50%;
+    border-right: darkgray dotted;
+}
+
+.sign-up-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    right: 0;
+    width: 50%;
+}
+
+#helper {
+    color: red;
+}

@@ -1,0 +1,45 @@
+.musicPlayer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.mediaPlayer {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  margin: auto;
+  width: 60%;
+  height: 90%;
+  background-color: #041E3D;
+}
+
+.controlBar {
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  bottom: 0;
+}
+
+.leftPanel {
+  position: absolute;
+  background-color: #041E3D;
+  left: 0;
+  width: 20%;
+  height: 90%;
+}
+
+.rightPanel {
+  position: absolute;
+  background-color: #041E3D;
+  right: 0;
+  width: 20%;
+  height: 90%;
+}
+
+.settingButton {
+  position: absolute;
+  width: 100%;
+  bottom: 3em;
+}

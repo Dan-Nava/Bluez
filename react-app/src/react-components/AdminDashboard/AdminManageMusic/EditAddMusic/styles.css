@@ -1,0 +1,59 @@
+.add-music-input {
+    max-width: 15em;
+}
+
+#add-music-grid{
+    margin-top: 3em;
+    margin-left: 15%;
+}
+
+#add-music-image{
+    width: 10em;
+    height: 10em;
+}
+
+#add-music-placeholder{
+    transform: scale(6);
+}
+
+#upload-image-file{
+    display: none;
+}
+
+#upload-music-file{
+    display: none;
+}
+
+#upload-lyric-file{
+    display: none;
+}
+
+#add-music-button{
+    width: 10.5em;
+}
+
+.stack-row-upload{
+    align-items: center;
+}
+
+#music-upload-stack{
+    align-items: center;
+}
+
+#stack-confirmation-buttons{
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+}
+
+.upload-file-string{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 15em;
+}
+
+.cover-art-admin-edit{
+    height: 10em;
+    width: 10em;
+}

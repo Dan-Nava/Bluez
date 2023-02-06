@@ -1,0 +1,30 @@
+#play-list-container {
+    background-color: #041E3D;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#play-list{
+    position: relative;
+    height: 100%;
+    max-height: 35em;
+    width: 100%;
+    padding-top: 0em;
+}
+
+#playlist-search-div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    align-items: center;
+}
+
+#playlist-search-autocomplete {
+    width: 14em;
+}
+

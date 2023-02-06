@@ -1,0 +1,62 @@
+.lyrics {
+  color: white;
+  font-size: xx-large;
+  font-size: 1.2em;
+  font-family: Optima, Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-weight: bold;
+  position: fixed;
+  top: 4%;
+  left: 12%;
+  z-index: -1;
+  line-height: 2em;
+  text-align: left;
+  letter-spacing: 0.05em;
+}
+
+.lyric:nth-child(1) {
+  opacity: 100%;
+}
+
+
+.lyric:nth-child(2) {
+  opacity: 80%;
+}
+
+.lyric:nth-child(3) {
+  opacity: 70%;
+}
+
+.lyric:nth-child(4) {
+  opacity: 60%;
+}
+
+.lyric:nth-child(5) {
+  opacity: 50%;
+}
+
+.lyric:nth-child(6) {
+  opacity: 40%;
+}
+.lyric:nth-child(7) {
+  opacity: 30%;
+}
+.lyric:nth-child(8) {
+  opacity: 30%;
+}
+.lyric:nth-child(9) {
+  opacity: 30%;
+}
+.lyric:nth-child(10) {
+  opacity: 30%;
+}
+
+.back-cover {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  object-fit: cover;
+  z-index: -10;
+  opacity: 30%;
+}
+
+

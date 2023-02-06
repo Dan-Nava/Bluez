@@ -1,0 +1,10 @@
+.commentBox {
+    padding: 1em;
+    margin: 2em;
+    max-width: 30%;
+    border-radius: 10%;
+    border: darkgray solid 0.1em;
+    background-color: #041E3D;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.25),
+    0 0.5em 0.5em rgba(0, 0, 0, 0.25);
+}
